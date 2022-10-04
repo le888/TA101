@@ -44,7 +44,8 @@ Material:
     - _Smooth: 0.366
     - _Width: 0.12
     m_Colors:
-    - _BaseColor: {r: 0.06425768, g: 0.35871935, b: 0.7169812, a: 0.68235296}
+    - _BaseColor: {r: 0.06425766, g: 0.35871932, b: 0.7169812, a: 0.68235296}
+    - _CicleColor: {r: 0.32941177, g: 1.1450981, b: 2.6352942, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
-    - _MeshColor: {r: 0.18422925, g: 0.323832, b: 0.8679245, a: 1}
+    - _MeshColor: {r: 0.18422922, g: 0.32383198, b: 0.8679245, a: 1}
   m_BuildTextureStacks: []

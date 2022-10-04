@@ -35,12 +35,16 @@ Material:
     m_Ints: []
     m_Floats:
     - _AlphaCutoff: 0.5
+    - _Float0: 0.01
+    - _Float1: 1.66
     - _QueueControl: 0
     - _QueueOffset: 0
     - _time: 1.02
     - _timeScale: 2
     m_Colors:
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
+    - _LineColor: {r: 1.7335051, g: 7.2136183, b: 14.259478, a: 0}
+    - _StepValue: {r: 0, g: 0, b: 0, a: 0}
     - _Vector0: {r: 0.55, g: 0, b: 0, a: 0}
-    - _Width: {r: 0.1, g: 0, b: 0, a: 0}
+    - _Width: {r: 0.01, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
