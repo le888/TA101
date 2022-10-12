@@ -48,6 +48,7 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Scale: 3
+    - _TimeScale: 0.6
     m_Colors:
     - _BaseColor: {r: 0.022516914, g: 0.1013951, b: 0.4339623, a: 1}
     - _Color0: {r: 0.1880115, g: 0.30208838, b: 0.6132076, a: 0.68235296}
