@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+guid: faa1edac141900b4bbfc78143d72585c
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures:
+  - _vecteezy_hexagonalseamlesspatternbackgroundtexturepaperfor_6428571: {fileID: 2800000,
+      guid: 7b067ac8442eda24390f74be5cc647b4, type: 3}
+  nonModifiableTextures: []
+  preprocessorOverride: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
