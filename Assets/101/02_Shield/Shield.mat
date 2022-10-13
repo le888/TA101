@@ -43,17 +43,27 @@ Material:
     m_Ints: []
     m_Floats:
     - _AlphaCutoff: 0.5
-    - _Distance: 0.1
-    - _Float0: 0.2
+    - _Distance: 4.3
+    - _Exp: 2.44
+    - _Float0: 0
     - _Float1: 0.28
+    - _HitSize: 2
+    - _HitTime: 0
+    - _NoiseScale: 53.31
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _TimeScale: 0.133
+    - _stepValue: 0.66
+    - _width: 0.04
     m_Colors:
-    - _BaseColor: {r: 0.17359349, g: 0.48998398, b: 0.7830188, a: 0.6117647}
+    - _BaseColor: {r: 0, g: 0.33240128, b: 1, a: 0.6117647}
     - _Color1: {r: 0.17359376, g: 0.48998398, b: 0.7830188, a: 0.36078432}
     - _Color2: {r: 1, g: 0, b: 0, a: 0}
-    - _DepthColor: {r: 19.037523, g: 19.037523, b: 19.037523, a: 0}
+    - _DepthColor: {r: 11.984314, g: 0.8156863, b: 0, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
-    - _FreshelColor: {r: 0, g: 1.0624709, b: 2.6701572, a: 0}
-    - _honeColor: {r: 18.178007, g: 4.7048965, b: 0, a: 0}
+    - _FreshelColor: {r: 4, g: 4, b: 4, a: 0}
+    - _HitColor: {r: 48.502926, g: 4.548589, b: 0, a: 0}
+    - _HitPoint: {r: 1.5788008, g: 4.8007393, b: -10.147785, a: 0}
+    - _Vector0: {r: 0, g: 0, b: 0, a: 0}
+    - _honeColor: {r: 0, g: 7.027451, b: 47.937256, a: 0}
   m_BuildTextureStacks: []
