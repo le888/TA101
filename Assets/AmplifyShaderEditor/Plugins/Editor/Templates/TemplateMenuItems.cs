@@ -21,11 +21,6 @@ namespace AmplifyShaderEditor
 		{
 			AmplifyShaderEditorWindow.CreateConfirmationTemplateShader( "0f8ba0101102bb14ebf021ddadce9b49" );
 		}
-		[MenuItem( "Assets/Create/Amplify Shader/Legacy/Default UI", false, 85 )]
-		public static void ApplyTemplateLegacyDefaultUI()
-		{
-			AmplifyShaderEditorWindow.CreateConfirmationTemplateShader( "5056123faa0c79b47ab6ad7e8bf059a4" );
-		}
 		[MenuItem( "Assets/Create/Amplify Shader/Legacy/Image Effect", false, 85 )]
 		public static void ApplyTemplateLegacyImageEffect()
 		{
@@ -65,6 +60,16 @@ namespace AmplifyShaderEditor
 		public static void ApplyTemplateTemplatesLegacyDefaultUnlit()
 		{
 			AmplifyShaderEditorWindow.CreateConfirmationTemplateShader( "6e114a916ca3e4b4bb51972669d463bf" );
+		}
+		[MenuItem( "Assets/Create/Amplify Shader/Templates/UI-Default", false, 85 )]
+		public static void ApplyTemplateTemplatesUIDefault()
+		{
+			AmplifyShaderEditorWindow.CreateConfirmationTemplateShader( "2c87d3a62926792459f56571a6aa6ffc" );
+		}
+		[MenuItem( "Assets/Create/Amplify Shader/UI/Default", false, 85 )]
+		public static void ApplyTemplateUIDefault()
+		{
+			AmplifyShaderEditorWindow.CreateConfirmationTemplateShader( "5056123faa0c79b47ab6ad7e8bf059a4" );
 		}
 		[MenuItem( "Assets/Create/Amplify Shader/Universal/2D Custom Lit", false, 85 )]
 		public static void ApplyTemplateUniversal2DCustomLit()
