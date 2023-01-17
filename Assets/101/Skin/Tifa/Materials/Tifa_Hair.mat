@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Tifa_Hair
+  m_Shader: {fileID: 4800000, guid: d165bc6eaa4c60c44a63861c284000b3, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _AOTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BaseColorTex:
+        m_Texture: {fileID: 2800000, guid: 9d8028f9aa9b1b440a387ea3c8077810, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _HairShiftTex:
+        m_Texture: {fileID: 2800000, guid: 55d0429b0751a324f9a553049d594ebc, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalTex:
+        m_Texture: {fileID: 2800000, guid: cd9d46dbd4810b24dbcd0dfe48b7e9cd, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - DualPassTransparent: 0.5
+    - _AlphaClip: 0.4
+    - _AnisotropicPowerScale: 0.1
+    - _AnisotropicPowerValue: 561.12
+    - _BackLightPowerScale: 5
+    - _BackLightPowerValue: 5
+    - _BackLightSSSValue: 6.7
+    - _Diffuse_Max: 5.25
+    - _Diffuse_Min: 1.5
+    - _Diifuse_Min: 0
+    - _DualPassTransparent: 1
+    - _First_AnisotropicPowerScale: 0.4
+    - _First_AnisotropicPowerValue: 662.55
+    - _First_ShiftTangent: -0.15
+    - _HairShiftTexScale: 10
+    - _NormalMapInteisty: 0.32
+    - _SH: 1
+    - _SHLighting: 1
+    - _SHLightingIntensty: 3
+    - _Second_AnisotropicPowerScale: 0.2
+    - _Second_AnisotropicPowerValue: 788.9
+    - _Second_ShiftTangent: 0.01
+    - _Shift: 0.5
+    - _ShiftTangent: 0.181
+    m_Colors:
+    - _First_HairColor: {r: 1, g: 0.9209957, b: 0.89218324, a: 1}
+    - _Second_HairColor: {r: 0.735849, g: 0.6633779, b: 0.58709246, a: 1}
+    - _TransColor: {r: 1, g: 0.8124637, b: 0.8072776, a: 1}
+  m_BuildTextureStacks: []

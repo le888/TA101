@@ -1,0 +1,118 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Tifa_Skin_Body 1
+  m_Shader: {fileID: 4800000, guid: 4605e298e158fce4ea4dcfd393daaba8, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _AOTex:
+        m_Texture: {fileID: 2800000, guid: 1ea4016352b4b5b4ca3eb147166165bc, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BRDFLUTTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BaseColorTex:
+        m_Texture: {fileID: 2800000, guid: 31ca82af441941444a9220108b9e0dab, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BlurNormalTex:
+        m_Texture: {fileID: 2800000, guid: 5f318a4dccc106a49b52880bdbbeb105, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BlurWSNormalTex:
+        m_Texture: {fileID: 2800000, guid: 85295132d80712940b9eed89af9ecc0b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _CurvatureTex:
+        m_Texture: {fileID: 2800000, guid: 7b6e7471ac81aff44871a060f9f6ba10, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAOTex:
+        m_Texture: {fileID: 2800000, guid: 1ea4016352b4b5b4ca3eb147166165bc, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalTex:
+        m_Texture: {fileID: 2800000, guid: 0139fb8fcf1996f4a879f2601e44be71, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EnvCubeMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicTex:
+        m_Texture: {fileID: 2800000, guid: e45ffa5044add5344b34b58d38c4a401, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MixTex:
+        m_Texture: {fileID: 2800000, guid: 53f1f14c0e18c2348bd8a9e5533805bc, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalTex:
+        m_Texture: {fileID: 2800000, guid: 68faae236aa064b4da4204e3430527a4, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _RoughnessTex:
+        m_Texture: {fileID: 2800000, guid: 5e869c59de896524692d76d8329892ef, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SkinLut:
+        m_Texture: {fileID: 2800000, guid: 2cc989b5e1ae86040bf72ec9d3d0e6f1, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SkinSHLut:
+        m_Texture: {fileID: 2800000, guid: e0ad886b49bb96b4a8a611b116d44a87, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ThicknessTex:
+        m_Texture: {fileID: 2800000, guid: 872c361cc3f516f4cb4f0256edb83297, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _BackTranslucencyDam: 0.31
+    - _BackTranslucencyLighten: 1.2
+    - _BackTranslucencyWidth: 0.15
+    - _BlurNormaBlend: 0.378
+    - _DetailNorma: 1
+    - _DetailNormaBlend: 0.152
+    - _DetailNormalScale: 40
+    - _Metallic: 0.5
+    - _Roughness: 0.5
+    - _RoughnessScale: 6
+    - _SHSSSScale: 1
+    - _SHSSSWidth: 10
+    - _SSSWidth: 1
+    - _ScatterB: 1
+    - _ScatterG: 1
+    - _ScatterR: 1
+    - _ShadowSSSHigh: 1
+    - _ShadowSSSLow: 0
+    - _ShadowSSSWidth: 0.96
+    - _SpecularScale: 1.34
+    - _TransDam: 114.37
+    - _TransLighten: 0.5
+    - _TranslucencyDam: 7
+    - _TranslucencyLighten: 0.5
+    - _TranslucencyWidth: 0.23
+    m_Colors:
+    - _BaseColor: {r: 0.9528302, g: 0.9194426, b: 0.9033909, a: 1}
+  m_BuildTextureStacks: []

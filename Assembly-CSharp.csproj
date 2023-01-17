@@ -49,49 +49,117 @@
      <None Include="Assets\101\TestOne\Rotate.shader" />
      <Folder Include="Assets\101\01_1_Dissolve\Modle" />
      <Folder Include="Assets\Settings" />
+     <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Preview Scene\RL_Amplify_PreviewGradientSkyboxShader.shader" />
+     <Folder Include="Assets\101\Skin\Tifa" />
+     <Folder Include="Assets\101\Skin" />
      <None Include="Assets\101\01_1_Dissolve\Dissolve.shader" />
      <Folder Include="Assets\101\01_3_BaseLight" />
+     <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\Tessellation\RL_Amplify_CorneaShaderParallax_URP_Tessellation.shader" />
+     <Folder Include="Assets\101\Skin\Tifa\EyeCubeMap" />
      <Folder Include="Assets\Resources" />
+     <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\RL_Amplify_Lit_AlphaClipped_URP.shader" />
+     <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\RL_Amplify_SkinShader_Variants_URP.shader" />
      <Folder Include="Assets\101\Map\red_brick_03_1k.blend\textures" />
+     <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\Tessellation\RL_Amplify_HairShader_Baked_URP_Tessellation.shader" />
+     <Folder Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP" />
+     <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\RL_Amplify_TongueShader_URP.shader" />
      <None Include="Assets\101\PBR\ImageBRDFLut.shader" />
+     <Folder Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Material Templates\Amplify\Tessellation" />
+     <Folder Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders" />
      <None Include="Assets\101\Map\red_brick_03_1k.blend\textures\Test.shader" />
+     <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\RL_Amplify_CorneaShaderParallax_URP.shader" />
+     <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\Tessellation\RL_Amplify_Lit_AlphaBlend_URP_Tessellation.shader" />
+     <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\RL_Amplify_Lit_Opaque_DblSided_URP.shader" />
      <Folder Include="Assets\101\01_1_Dissolve" />
+     <Folder Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Material Templates" />
      <Folder Include="Assets\101\TestOne\Universe" />
+     <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\package.json" />
      <Folder Include="Assets\101\02_Shield" />
      <Folder Include="Assets\101\PBR\Cerberus_by_Andrew_Maximov\Textures\Raw" />
+     <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\RL_Amplify_Lit_Opaque_URP.shader" />
+     <Folder Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Material Templates\Tessellation" />
+     <Folder Include="Assets\101\Skin\Tifa\SP" />
      <Folder Include="Assets\101\Map\textures" />
      <None Include="Assets\101\01_3_BaseLight\SampleLit.shader" />
      <None Include="Assets\101\01_2_Holographic\Cone.shader" />
+     <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\Tessellation\RL_Amplify_SkinShader_Variants_URP_Tessellation.shader" />
+     <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\RL_Amplify_HairShader_Coverage_URP.shader" />
+     <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\RL_Amplify_HairShader_1st_Pass_Variants_URP.shader" />
+     <Folder Include="Packages\cc_unity_tools_URP-1.4.3.URP12\Packages" />
+     <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\RL_Amplify_HairShader_2nd_Pass_Variants_URP.shader" />
+     <Folder Include="Packages\cc_unity_tools_URP-1.4.3.URP12\Textures" />
+     <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\RL_Amplify_Lit_AlphaBlendRefractive_URP.shader" />
      <Folder Include="Assets\101\PBR\Cerberus_by_Andrew_Maximov\Textures" />
      <Folder Include="Assets\101\Map" />
+     <Folder Include="Assets\101\Skin\Tifa\Textures\Variation" />
      <None Include="Assets\101\TestOne\BallLight.shader" />
+     <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Material Templates\notes.txt" />
+     <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\RL_Amplify_CorneaShaderParallax_Baked_URP.shader" />
+     <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\Tessellation\RL_Amplify_Lit_Opaque_URP_Tessellation.shader" />
      <Folder Include="Assets\101" />
      <Folder Include="Assets\101\02_Shield\Shield" />
      <Folder Include="Assets\101\TestOne\rock_moss_set_01_1k.blend\textures" />
+     <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\RL_Amplify_Lit_SSS_URP.shader" />
      <Folder Include="Assets\101\Floor" />
+     <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\RL_Amplify_TeethShader_URP.shader" />
      <Folder Include="Assets\101\FS007" />
      <None Include="Assets\New Amplify Shader.shader" />
+     <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\Tessellation\RL_Amplify_HairShader_Coverage_Baked_URP_Tessellation.shader" />
+     <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\Tessellation\RL_Amplify_Lit_AlphaBlendRefractive_URP_Tessellation.shader" />
      <None Include="Assets\101\01_2_Holographic\Line.shader" />
      <Folder Include="Assets\TutorialInfo\Scripts" />
+     <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\Tessellation\RL_Amplify_HairShader_1st_Pass_Baked_URP_Tessellation.shader" />
      <Folder Include="Assets\TutorialInfo\Icons" />
      <Folder Include="Assets\TutorialInfo" />
      <Folder Include="Assets\101\PBR" />
      <None Include="Assets\101\02_Shield\Shield.shader" />
+     <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\Tessellation\RL_Amplify_HairShader_2nd_Pass_Variants_URP_Tessellation.shader" />
      <None Include="Assets\101\01_2_Holographic\Sphere.shader" />
      <None Include="Assets\101\TestOne\Rock.shader" />
+     <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\Tessellation\RL_Amplify_TongueShader_URP_Tessellation.shader" />
+     <Folder Include="Assets\101\Skin\Tifa\Materials" />
+     <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\Tessellation\RL_Amplify_CorneaShaderParallax_Baked_URP_Tessellation.shader" />
      <Folder Include="Assets\101\PBR\PBR" />
      <None Include="Assets\101\PBR\SWIMPBR.shader" />
+     <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\RL_Amplify_HairShader_Baked_URP.shader" />
+     <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\Tessellation\RL_Amplify_Lit_AlphaClipped_URP_Tessellation.shader" />
      <Folder Include="Assets\101\PBR\Cerberus_by_Andrew_Maximov" />
      <None Include="Assets\101\PBR\Cerberus_by_Andrew_Maximov\Textures\UnityPBR.shader" />
+     <Folder Include="Assets\101\Skin\Tifa\Textures" />
      <None Include="Assets\101\01_2_Holographic\Cicle.shader" />
      <Folder Include="Assets\101\FS007\Images" />
+     <Folder Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\Tessellation" />
      <None Include="Assets\101\PBR\Cerberus_by_Andrew_Maximov\Disclaimer.txt" />
      <Folder Include="Assets\101\01_2_Holographic" />
+     <Folder Include="Packages\cc_unity_tools_URP-1.4.3.URP12" />
+     <Folder Include="Assets\101\Skin\Tifa\Meshes" />
+     <None Include="Assets\101\Skin\ApproximatedLut.shader" />
+     <Folder Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Material Templates\Amplify" />
+     <Folder Include="Packages\cc_unity_tools_URP-1.4.3.URP12\Icons" />
+     <Folder Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify" />
+     <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\Tessellation\RL_Amplify_Lit_AlphaBlend_DblSided_URP_Tessellation.shader" />
      <Folder Include="Assets\101\01_3_BaseLight\baselight" />
+     <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\Tessellation\RL_Amplify_HairShader_2nd_Pass_Baked_URP_Tessellation.shader" />
      <Folder Include="Assets\Scenes" />
+     <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\RL_Amplify_HairShader_2nd_Pass_Baked_URP.shader" />
+     <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\Tessellation\RL_Amplify_Lit_Opaque_DblSided_URP_Tessellation.shader" />
+     <Folder Include="Assets\101\Skin\Tifa\ExtractMaterials" />
+     <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\Tessellation\RL_Amplify_HairShader_1st_Pass_Variants_URP_Tessellation.shader" />
+     <Folder Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Preview Scene" />
      <Folder Include="Assets\101\TestOne\rock_moss_set_01_1k.blend" />
+     <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\Tessellation\RL_Amplify_Lit_SSS_URP_Tessellation.shader" />
      <None Include="Assets\101\01_2_Holographic\Land.shader" />
+     <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\RL_Amplify_HairShader_Coverage_Baked_URP.shader" />
+     <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\RL_Amplify_HairShader_Variants_URP.shader" />
      <Folder Include="Assets\101\TestOne" />
+     <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\RL_Amplify_HairShader_1st_Pass_Baked_URP.shader" />
+     <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\RL_Amplify_Lit_AlphaBlend_URP.shader" />
+     <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\Tessellation\RL_Amplify_HairShader_Variants_URP_Tessellation.shader" />
+     <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\Tessellation\RL_Amplify_HairShader_Coverage_URP_Tessellation.shader" />
+     <None Include="Assets\101\Skin\orenNayarDiffuse.shader" />
+     <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\Tessellation\RL_Amplify_TeethShader_URP_Tessellation.shader" />
+     <None Include="Assets\101\Skin\TASkin.shader" />
+     <Folder Include="Assets\101\Skin\Standard" />
      <Folder Include="Assets\101\Map\red_brick_03_1k.blend" />
      <Reference Include="UnityEngine">
      <HintPath>C:\Program Files\Unity\Hub\Editor\2021.3.11f1c2\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
@@ -867,6 +935,14 @@
     <ProjectReference Include="AmplifyShaderEditor.csproj">
       <Project>{026e4baf-68b2-465b-45dc-6ee7334e4c75}</Project>
       <Name>AmplifyShaderEditor</Name>
+    </ProjectReference>
+    <ProjectReference Include="soupday.cc3_unity_tools.runtime.csproj">
+      <Project>{417a649c-2ca5-7193-a48f-a024a9c93719}</Project>
+      <Name>soupday.cc3_unity_tools.runtime</Name>
+    </ProjectReference>
+    <ProjectReference Include="soupday.cc3_unity_tools.editor.csproj">
+      <Project>{1dce22d6-4cd2-937c-7e06-155f7c45faf3}</Project>
+      <Name>soupday.cc3_unity_tools.editor</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
