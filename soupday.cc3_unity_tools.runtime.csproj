@@ -41,9 +41,9 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Packages\cc_unity_tools_URP-1.4.3.URP12\Runtime\WeightMapper.cs" />
-     <Compile Include="Packages\cc_unity_tools_URP-1.4.3.URP12\Runtime\ColliderManager.cs" />
      <Compile Include="Packages\cc_unity_tools_URP-1.4.3.URP12\Runtime\PhysicsSettingsStore.cs" />
+     <Compile Include="Packages\cc_unity_tools_URP-1.4.3.URP12\Runtime\ColliderManager.cs" />
+     <Compile Include="Packages\cc_unity_tools_URP-1.4.3.URP12\Runtime\WeightMapper.cs" />
      <Folder Include="Packages\cc_unity_tools_URP-1.4.3.URP12\Runtime" />
      <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\Runtime\com.soupday.cc3_unity_tools.runtime.asmdef" />
      <Reference Include="UnityEngine">

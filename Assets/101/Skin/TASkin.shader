@@ -142,7 +142,8 @@ Shader "TASkin"
                 {
                     float3 h = L + V; // Unnormalized half-way vector
                     float3 H = normalize(h);
-                    float ndoth = dot(N, H);
+                    
+                    float ndoth = saturate(dot(N, H));
                     // float PH = pow(2.0 * tex2D(beckmannTex, float2(ndoth, m)), 10.0);
                     float PH = pow(2.0 * KSTextureCompute(float2(ndoth, m)), 10.0);
                     // float F = fresnelReflectance(N, V, 0.028);
@@ -350,8 +351,8 @@ Shader "TASkin"
                 half3 inDiffuse = SampleSH(meshNormal) * albedo;
                 
                 
-                 half Roughness = tex2D(_RoughnessMap,data.uv) * _Roughness;
-                
+                 half Roughness = max(tex2D(_RoughnessMap,data.uv) * _Roughness,0.000001);
+                // half Roughness =  tex2D(_RoughnessMap,data.uv) * _Roughness;
                 float  specular = KS_Skin_Specular(N,l,v,Roughness,1,F);
                 
                 float3 finalColor = directLightDiffuse + inDiffuse + specular;
