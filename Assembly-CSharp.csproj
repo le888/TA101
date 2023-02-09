@@ -160,6 +160,7 @@
      <Folder Include="Assets\101\Skin\Tifa\Materials" />
      <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\Tessellation\RL_Amplify_CorneaShaderParallax_Baked_URP_Tessellation.shader" />
      <Folder Include="Assets\101\PBR\PBR" />
+     <None Include="Assets\101\Skin\TearShader.shader" />
      <None Include="Assets\101\PBR\SWIMPBR.shader" />
      <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\RL_Amplify_HairShader_Baked_URP.shader" />
      <Folder Include="Assets\101\PBR\clothTest\textures\cloth\CC_Base_Eye\CC_Base_Eye\Std_Eye_R" />
@@ -188,6 +189,7 @@
      <Folder Include="Assets\101\PBR\clothTest\textures\cloth\cloth\CC_Base_Body\Std_Skin_Body" />
      <Folder Include="Assets\101\PBR\clothTest\textures\cloth\cloth\CC_Base_Tongue" />
      <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\RL_Amplify_HairShader_2nd_Pass_Baked_URP.shader" />
+     <None Include="Assets\101\Skin\TAEye.shader" />
      <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\Tessellation\RL_Amplify_Lit_Opaque_DblSided_URP_Tessellation.shader" />
      <Folder Include="Assets\101\Skin\Tifa\ExtractMaterials" />
      <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\Tessellation\RL_Amplify_HairShader_1st_Pass_Variants_URP_Tessellation.shader" />
