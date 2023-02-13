@@ -36,6 +36,7 @@ Shader "TA/Eye"
         Pass
         {
             Blend[_SrcBlendMode][_DstBlendMode]
+            ZWrite On
             // The HLSL code block. Unity SRP uses the HLSL language.
             HLSLPROGRAM
             #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/EntityLighting.hlsl"
@@ -416,6 +417,7 @@ Shader "TA/Eye"
                 else
                 {
                     // return cubeColor;
+                    finalColor.rgb = float3(1,1,1);
                     finalColor.rgb = float4((kD * difuse) * nl * radiance, 1.0) + ambient;
                 }
 
