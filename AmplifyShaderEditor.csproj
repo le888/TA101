@@ -717,10 +717,10 @@
      <None Include="Assets\AmplifyShaderEditor\Plugins\EditorResources\Previews\Preview_UnpackScaleNormalNode.shader" />
      <None Include="Assets\AmplifyShaderEditor\Plugins\EditorResources\Previews\Preview_ClampOpNode.shader" />
      <None Include="Assets\AmplifyShaderEditor\Plugins\EditorResources\Previews\Preview_DecodeDepthNormalNode.shader" />
+     <None Include="Assets\AmplifyShaderEditor\Plugins\EditorResources\Templates\UI\UI-Default.shader" />
      <None Include="Assets\AmplifyShaderEditor\Plugins\EditorResources\Previews\Preview_ReflectOpNode.shader" />
      <None Include="Assets\AmplifyShaderEditor\Plugins\EditorResources\Previews\Preview_LengthOpNode.shader" />
      <None Include="Assets\AmplifyShaderEditor\Plugins\EditorResources\Previews\Preview_StepOpNode.shader" />
-     <None Include="Assets\AmplifyShaderEditor\Plugins\EditorResources\Templates\UI\UI-Default.shader" />
      <Folder Include="Assets\AmplifyShaderEditor\Plugins\Editor\Nodes\Constants\ShaderVariables\Transform" />
      <None Include="Assets\AmplifyShaderEditor\Examples\README Samples.txt" />
      <None Include="Assets\AmplifyShaderEditor\Plugins\EditorResources\Previews\Preview_TFHCIf.shader" />

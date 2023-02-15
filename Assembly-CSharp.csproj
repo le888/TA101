@@ -46,6 +46,7 @@
      <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
      <Compile Include="Assets\101\02_Shield\ForceShieldShootBall.cs" />
      <Folder Include="Assets" />
+     <None Include="Assets\101\Skin\TAHair.shader" />
      <None Include="Assets\101\TestOne\Rotate.shader" />
      <Folder Include="Assets\101\PBR\clothTest\textures\cloth\Side_part_wavy" />
      <Folder Include="Assets\101\01_1_Dissolve\Modle" />
@@ -125,6 +126,7 @@
      <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\Tessellation\RL_Amplify_Lit_Opaque_URP_Tessellation.shader" />
      <Folder Include="Assets\101" />
      <Folder Include="Assets\101\PBR\clothTest\textures\cloth\CC_Base_TearLine\CC_Base_TearLine" />
+     <Folder Include="Assets\101\Skin\HLSL" />
      <Folder Include="Assets\101\02_Shield\Shield" />
      <Folder Include="Assets\101\TestOne\rock_moss_set_01_1k.blend\textures" />
      <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\RL_Amplify_Lit_SSS_URP.shader" />
@@ -142,6 +144,7 @@
      <None Include="Assets\New Amplify Shader.shader" />
      <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\Tessellation\RL_Amplify_HairShader_Coverage_Baked_URP_Tessellation.shader" />
      <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\Tessellation\RL_Amplify_Lit_AlphaBlendRefractive_URP_Tessellation.shader" />
+     <None Include="Assets\101\Skin\HLSL\TAHair.hlsl" />
      <None Include="Assets\101\01_2_Holographic\Line.shader" />
      <Folder Include="Assets\TutorialInfo\Scripts" />
      <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\Tessellation\RL_Amplify_HairShader_1st_Pass_Baked_URP_Tessellation.shader" />
