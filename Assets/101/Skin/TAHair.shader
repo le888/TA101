@@ -31,13 +31,25 @@ Shader "TAHair"
         // a pass is executed.
         Tags
         {
-            "RenderType" = "Transparent" "RenderPipeline" = "UniversalPipeline"
+            "RenderPipeline"="UniversalPipeline" "RenderType"="Transparent" "Queue"="Transparent"
         }
+        ZWrite On
+        ZTest LEqual
+        Cull Off
+
         Pass
         {
-            Cull OFF
-            ZWrite On
-            Blend SrcAlpha OneMinusSrcAlpha
+            Tags
+            {
+                "LightMode" = "DepthPeelingPass"
+            }
+            //            Cull OFF
+            //            ZWrite On
+            //            Blend SrcAlpha OneMinusSrcAlpha
+
+            Blend SrcAlpha OneMinusSrcAlpha, One OneMinusSrcAlpha
+            ColorMask RGBA
+
             // The HLSL code block. Unity SRP uses the HLSL language.
             HLSLPROGRAM
             #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/EntityLighting.hlsl"
@@ -53,19 +65,21 @@ Shader "TAHair"
             // sampler2D _MetallicMap;
             sampler2D _RoughnessMap;
             float _Roughness;
-            sampler2D _ShiftTex;
-            float _Shift1;
-            float _Shift2;
-            float4 _SpecularColor1;
-            float _SpecularExponent1;
-            float4 _SpecularColor2;
-            float _SpecularExponent2;
-            
-            
+            // sampler2D _ShiftTex;
+            // float _Shift1;
+            // float _Shift2;
+            // float4 _SpecularColor1;
+            // float _SpecularExponent1;
+            // float4 _SpecularColor2;
+            // float _SpecularExponent2;
+
+
             // float _Metallic;
             sampler2D _MacoNormalMap;
             float4 _MacoNormalMap_ST;
             float _MacoNormalWeight;
+            int _DepthPeelingPassCount; //当前第几层
+            sampler2D _MaxDepth;
             //Physically based Shading
             //Cook-Torrance BRDF
 
@@ -307,6 +321,7 @@ Shader "TAHair"
                 float3 positionWS : TEXCOORD1;
                 float2 uv : TEXCOORD2;
                 float3 tangentWS : TEXCOORD3;
+                float4 screenPos : TEXCOORD5;
                 // float3 bitangentWS : TEXCOORD4;
             };
 
@@ -325,14 +340,22 @@ Shader "TAHair"
                 OUT.positionWS = positionWS;
                 OUT.tangentWS = TransformObjectToWorldDir(IN.tangentOS);
                 OUT.uv = IN.uv;
+                OUT.screenPos = ComputeScreenPos(OUT.positionHCS);
                 return OUT;
             }
 
-            // The fragment shader definition.
-            half4 frag(Varyings data, bool isFont : SV_IsFrontFace) : SV_Target
+            struct DepthPeelingOutput
             {
+                float4 color:SV_TARGET0;
+                float4 depth:SV_TARGET1;
+            };
+
+
+            // The fragment shader definition.
+            DepthPeelingOutput frag(Varyings data, bool isFont : SV_IsFrontFace) : SV_Target
+            {
+                DepthPeelingOutput output;
                 Light light = GetMainLight();
-                float3 l = SafeNormalize(light.direction);
                 float3 meshNormal = SafeNormalize(data.normalWS);
                 float3 T = SafeNormalize(data.tangentWS);
                 float3 B = cross(meshNormal, T);
@@ -342,121 +365,39 @@ Shader "TAHair"
                 float3 detailNormalTS = SafeNormalize(
                     UnpackNormal(tex2D(_MacoNormalMap, data.uv * _MacoNormalMap_ST.xy + _MacoNormalMap_ST.zw)));
                 float3 MacoNormal = SafeNormalize(detailNormalTS);
-                // return detailNormalTS.xyzz;
                 normalTS = lerp(normalTS, BlendNormalRNM(normalTS, MacoNormal), _MacoNormalWeight);
                 normalTS = SafeNormalize(normalTS);
                 float3 N = mul(normalTS, TBN);
-                // return  N.xyzz;
-                float3 v = SafeNormalize(_WorldSpaceCameraPos.xyz - data.positionWS);
-                float3 h = SafeNormalize(l + v);
-                float nv = saturate(dot(N, v));
-                float nlNotClamped = dot(meshNormal, l);
-                float nl01 = mad(nlNotClamped, 0.5, 0.5);
-                float nl = saturate(nlNotClamped);
+                float3 V = SafeNormalize(_WorldSpaceCameraPos.xyz - data.positionWS);
+                float nv = saturate(dot(N, V));
+
 
                 float4 albedo = tex2D(_BaseColorMap, data.uv) * _BaseColor;
 
-                //shift tangents
-                float shiftValue = tex2D(_ShiftTex, data.uv) - 0.5;
-                float3 t1 = ShiftTangent(B, N, _Shift1.xxx + shiftValue);
-                float3 t2 = ShiftTangent(B, N, _Shift2.xxx + shiftValue);
 
-                //diffuse lighting : the lerp shifts the shadow boundary for a softer look
-                float3 diffuse = saturate(lerp(0,1.0,dot(N,l)));
-                diffuse*= albedo.rgb;
-
-
-                 //specular lighting
-                 float3 specular = _SpecularColor1 * StrandSpecular(t1,v,l,_SpecularExponent1);
-                 specular += _SpecularColor2 * StrandSpecular(t2,v,l,_SpecularExponent2);
-
-                float radiance = light.color* light.distanceAttenuation* light.shadowAttenuation;
-                float3 finalColor = (diffuse + specular)*radiance * nl;
-
-
-                half Roughness = max(tex2D(_RoughnessMap,data.uv) * _Roughness,0.000001);
-                
+                float3 finalColor = HairLighting(T, N, V, data.uv, albedo, light);
+                half Roughness = max(tex2D(_RoughnessMap, data.uv) * _Roughness, 0.000001);
                 half3 F0 = half3(0.04, 0.04, 0.04);
-                 half3 inKs = fresnelSchlickRoughness(nv, F0, Roughness);
+                half3 inKs = fresnelSchlickRoughness(nv, F0, Roughness);
                 half3 inKD = 1 - inKs;
-                half3 inDiffuse = SampleSH(N) * albedo * inKD;///PI;
-                return float4(finalColor.xyz+ inDiffuse,albedo.a);
-                // /////直接光照////////////////
-                // ////diffuse
-                //
-                // float3 albedo = tex2D(_BaseColorMap, data.uv) * _BaseColor.rgb;
-                // float curvalue = 0.01 * length(fwidth(N)) / length(fwidth(data.positionWS));
-                // curvalue = saturate(curvalue);
-                // float curvalueMapValue = tex2D(_CurvatureMap, data.uv).r;
-                // float3 lutbrdf = PreIntegratedSkinWithCurveApprox(nl01, curvalueMapValue);
-                // float3 directLightDiffuse = lutbrdf * light.color * albedo * light.distanceAttenuation * light.
-                //     shadowAttenuation;
-                // float F =  fresnelReflectance(N, v, 0.028);//皮肤的高光项，0.028 经验值
-                // directLightDiffuse *= (1-F);
-                // // return F.xxxx;
-                // half3 inDiffuse = SampleSH(meshNormal) * albedo;
-                //
-                //
-                //  half Roughness = max(tex2D(_RoughnessMap,data.uv) * _Roughness,0.000001);
-                // // half Roughness =  tex2D(_RoughnessMap,data.uv) * _Roughness;
-                // float  specular = KS_Skin_Specular(N,l,v,Roughness,1,F);
-                //
-                // float3 finalColor = directLightDiffuse + inDiffuse + specular;
+                half3 inDiffuse = SampleSH(N) * albedo * inKD; ///PI;
+                output.color = float4(finalColor.xyz + inDiffuse, albedo.a);
+                output.depth = data.positionHCS.z;
+                if (_DepthPeelingPassCount == 0) //第一次直接渲染
+                {
+                    return output;
+                }
+                // return float4(finalColor.xyz + inDiffuse, albedo.a);
 
-                // if (isFont)
-                // {
-                //     return float4(1,0,0,1);
-                // }
-                // else
-                // {
-                //     return float4(0,1,0,1);
-                // }
-                // return finalColor.xyzz;
+                float2 screenUV = data.screenPos.xy / data.screenPos.w;
 
-
-                // return float4(specular.xxx,1);
-                // half3 F0 = half3(0.04, 0.04, 0.04);
-                // _Metallic = tex2D(_MetallicMap,data.uv) * _Metallic;
-                // F0 = lerp(F0, albedo, _Metallic);
-                //
-                // half Roughness = tex2D(_RoughnessMap,data.uv) * _Roughness;
-                // //cook-torrance brdf
-                // float D = D_GGX(n,h,Roughness);
-                // float G = GeometrySmith(n, v, l, Roughness);
-                // float3 F = F_Schlickss(F0,n,v);
-                // // return F.xyzz;
-                // float3 kS = F;
-                // float3 kD = 1.0 - kS;
-                // kD *= 1.0 - _Metallic;
-                // float3 nominator   = D * G * F;
-                // float denominator = 4.0 * (nl * nv);
-                // float3 specular = nominator / max(denominator, 0.001);
-                //
-                //
-                // float radiance = light.color* light.distanceAttenuation* light.shadowAttenuation;
-                // float3 difuse = albedo / PI ;
-                //  // float3 difuse = albedo;
-                // float4 directColor = float4((kD * difuse + specular) * nl * radiance, 1.0);
-                // // return directColor;
-                //
-                // //间接光照,SampleSH 球谐函数/////////////////////////////////////////////////////////////////////////////
-                // half3 inKs = fresnelSchlickRoughness(nv, F0, Roughness);
-                // half3 inKD = 1 - inKs;
-                // inKD *= 1 - _Metallic;
-                // half3 inDiffuse = SampleSH(n) * albedo * inKD;///PI;
-                // // return  inDiffuse.xyzz;
-                // //间接高光，split sum approximation   一部分和diffuse一样加了对环境贴图卷积，不过这次用粗糙度区分了mipmap
-                //  half mip = PerceptualRoughnessToMipmapLevel(Roughness);
-                //  half3 reflectVector = reflect(-v, n);
-                //  half4 encodedIrradiance = half4(SAMPLE_TEXTURECUBE_LOD(unity_SpecCube0, samplerunity_SpecCube0, reflectVector, mip));
-                //  real3 inspecPart1 = DecodeHDREnvironment(encodedIrradiance, unity_SpecCube0_HDR);
-                //  float2 brdf = tex2D(_BRDF, float2(nv, Roughness)).rg;
-                // // float2 brdf = EnvBRDFApprox(Roughness, nv);
-                //  half3 inspectPart2 = (inKs * brdf.x + brdf.y);
-                //  half3 inspect =inspecPart1 * inspectPart2;
-                // float3 ambient = (inDiffuse + inspect);
-                // float3 finalColor = ambient + directColor.xyz;
-                // return (finalColor).xyzz;; 
+                float lastDepth = tex2D(_MaxDepth, screenUV).r;
+                float pixelDepth = data.positionHCS.z;
+                if (pixelDepth <= lastDepth)
+                {
+                    discard;
+                }
+                return output;
             }
             ENDHLSL
         }

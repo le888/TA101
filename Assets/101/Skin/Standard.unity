@@ -173,7 +173,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1
+  m_Intensity: 1.5
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -230,14 +230,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 203844586}
-  m_LocalRotation: {x: 0.17914312, y: 0.9837112, z: 0.0026578454, w: 0.014594768}
+  m_LocalRotation: {x: -0.17648691, y: -0.9691254, z: -0.030849475, w: -0.16940072}
   m_LocalPosition: {x: 0.345, y: 2.421, z: -0.598}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: -541.7, z: 20.642}
+  m_LocalEulerAnglesHint: {x: 0, y: -199.83, z: 20.642}
 --- !u!1001 &310487484
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -268,7 +268,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 3a59fedacb7434d4d90cf3578ea43b4d,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.94969916
+      value: 0.9969106
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3a59fedacb7434d4d90cf3578ea43b4d,
         type: 3}
@@ -278,7 +278,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 3a59fedacb7434d4d90cf3578ea43b4d,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.31316373
+      value: -0.07854601
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3a59fedacb7434d4d90cf3578ea43b4d,
         type: 3}
@@ -293,7 +293,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 3a59fedacb7434d4d90cf3578ea43b4d,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -36.5
+      value: -729.01
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3a59fedacb7434d4d90cf3578ea43b4d,
         type: 3}
@@ -330,6 +330,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[12]
       value: 
       objectReference: {fileID: 2100000, guid: c4283b44f364e7c46ac5bb359c8f2e58, type: 2}
+    - target: {fileID: -1987262685336520426, guid: 3a59fedacb7434d4d90cf3578ea43b4d,
+        type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: -1673080289670171404, guid: 3a59fedacb7434d4d90cf3578ea43b4d,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -708,7 +713,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 23.9
+  field of view: 34.6
   orthographic: 0
   orthographic size: 5
   m_Depth: -1

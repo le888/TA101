@@ -45,6 +45,7 @@
      <Compile Include="Assets\101\TestOne\InstanceTest.cs" />
      <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
      <Compile Include="Assets\101\02_Shield\ForceShieldShootBall.cs" />
+     <Compile Include="Assets\101\Skin\OITFeature.cs" />
      <Folder Include="Assets" />
      <None Include="Assets\101\Skin\TAHair.shader" />
      <None Include="Assets\101\TestOne\Rotate.shader" />
@@ -174,6 +175,7 @@
      <None Include="Assets\101\01_2_Holographic\Cicle.shader" />
      <Folder Include="Assets\101\FS007\Images" />
      <Folder Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\Tessellation" />
+     <None Include="Assets\101\Skin\DepthPeelingBlend.shader" />
      <None Include="Assets\101\PBR\Cerberus_by_Andrew_Maximov\Disclaimer.txt" />
      <Folder Include="Assets\101\PBR\clothTest\textures\cloth\Knee_length_skirt\Knee_length_skirt\Knee_length_skirt" />
      <Folder Include="Assets\101\01_2_Holographic" />
@@ -216,6 +218,7 @@
      <None Include="Assets\101\Skin\orenNayarDiffuse.shader" />
      <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\Tessellation\RL_Amplify_TeethShader_URP_Tessellation.shader" />
      <Folder Include="Assets\101\PBR\clothTest\textures\cloth\cloth\CC_Base_Tongue\Std_Tongue" />
+     <None Include="Assets\101\Skin\testtt.shader" />
      <None Include="Assets\101\Skin\Eyelashes.shader" />
      <None Include="Assets\101\Skin\TASkin.shader" />
      <None Include="Assets\101\Skin\NV3\Cloth.shader" />
