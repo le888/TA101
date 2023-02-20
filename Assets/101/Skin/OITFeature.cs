@@ -58,10 +58,10 @@ public class OITFeature : ScriptableRendererFeature
             var filteringSettings = new FilteringSettings(RenderQueueRange.transparent);
             
             var cmd = CommandBufferPool.Get("OITFeature");
-            //using (new ProfilingSample(cmd, "OITFeature"))
+            using (new ProfilingSample(cmd, "OITFeature"))
             {
-                // context.ExecuteCommandBuffer(cmd);
-                // cmd.Clear();
+                context.ExecuteCommandBuffer(cmd);
+                cmd.Clear();
                 List<int> colorRTs = new List<int>(DepthPeelingPass);
                 List<int> depthRTs = new List<int>(DepthPeelingPass);
                 for (int i = 0; i < DepthPeelingPass; i++)
@@ -94,16 +94,19 @@ public class OITFeature : ScriptableRendererFeature
                     if (i == DepthPeelingPass - 1)
                         pass = 1;
                     
-                    cmd.Blit(colorRTs[i], renderingData.cameraData.renderer.cameraColorTarget, DepthPeelingBlendMaterial, pass);
+                    cmd.Blit(colorRTs[i], renderingData.cameraData.renderer.cameraColorTarget, GetDepthPeelingBlendMaterial(), pass);
                 
                     cmd.ReleaseTemporaryRT(depthRTs[i]);
                     cmd.ReleaseTemporaryRT(colorRTs[i]);
                 }
-                
                 context.ExecuteCommandBuffer(cmd);
-                CommandBufferPool.Release(cmd);
                 cmd.Clear();
+               
             }
+            
+            context.ExecuteCommandBuffer(cmd);
+            CommandBufferPool.Release(cmd);
+            cmd.Clear();
             
         }
 

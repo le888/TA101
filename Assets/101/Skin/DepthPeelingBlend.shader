@@ -51,7 +51,7 @@ Shader "Hidden/DepthPeelingBlend"
                 if(cameraDepth>depth)discard;
                 //不是头发的 背景颜色部分
                 if(depth==0)discard;
-                
+                // return float4(color.aaa,1);
                 return color;
             }
         ENDCG

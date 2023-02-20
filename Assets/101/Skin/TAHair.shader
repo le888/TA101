@@ -22,6 +22,7 @@ Shader "TAHair"
         [Normal]_MacoNormalMap("MacoNormal (RGB)", 2D) = "bump" {}
         _MacoNormalWeight("MacoNormalWeight", Range(0,1)) = 0.5
         _BRDF("BRDF", 2d) = "white" {}
+        _AlphaClip("AlphaClip", Range(0,1)) = 0.014
     }
 
     // The SubShader block containing the Shader code.
@@ -33,9 +34,6 @@ Shader "TAHair"
         {
             "RenderPipeline"="UniversalPipeline" "RenderType"="Transparent" "Queue"="Transparent"
         }
-        ZWrite On
-        ZTest LEqual
-        Cull Off
 
         Pass
         {
@@ -43,12 +41,13 @@ Shader "TAHair"
             {
                 "LightMode" = "DepthPeelingPass"
             }
-            //            Cull OFF
-            //            ZWrite On
-            //            Blend SrcAlpha OneMinusSrcAlpha
-
-            Blend SrcAlpha OneMinusSrcAlpha, One OneMinusSrcAlpha
-            ColorMask RGBA
+         
+            ZWrite On
+            ZTest LEqual
+            Cull Off
+            Blend Off
+//            Blend SrcAlpha OneMinusSrcAlpha, One OneMinusSrcAlpha
+//            ColorMask RGBA
 
             // The HLSL code block. Unity SRP uses the HLSL language.
             HLSLPROGRAM
@@ -316,7 +315,7 @@ Shader "TAHair"
             struct Varyings
             {
                 // The positions in this struct must have the SV_POSITION semantic.
-                float4 positionHCS : SV_POSITION;
+                float4 positionCS : SV_POSITION;
                 float3 normalWS : TEXCOORD0;
                 float3 positionWS : TEXCOORD1;
                 float2 uv : TEXCOORD2;
@@ -333,14 +332,14 @@ Shader "TAHair"
             {
                 // Declaring the output object (OUT) with the Varyings struct.
                 Varyings OUT;
-                OUT.positionHCS = TransformObjectToHClip(IN.positionOS.xyz);
+                OUT.positionCS = TransformObjectToHClip(IN.positionOS.xyz);
                 OUT.normalWS = TransformObjectToWorldNormal(IN.normalOS);
 
                 float3 positionWS = TransformObjectToWorld(IN.positionOS.xyz);
                 OUT.positionWS = positionWS;
                 OUT.tangentWS = TransformObjectToWorldDir(IN.tangentOS);
                 OUT.uv = IN.uv;
-                OUT.screenPos = ComputeScreenPos(OUT.positionHCS);
+                OUT.screenPos = ComputeScreenPos(OUT.positionCS);
                 return OUT;
             }
 
@@ -374,15 +373,20 @@ Shader "TAHair"
 
                 float4 albedo = tex2D(_BaseColorMap, data.uv) * _BaseColor;
 
+                if (!isFont)
+                {
+                    N = -N;
+                }
 
-                float3 finalColor = HairLighting(T, N, V, data.uv, albedo, light);
+                float3 finalColor = HairLighting(B, N, V, data.uv, albedo, light);
                 half Roughness = max(tex2D(_RoughnessMap, data.uv) * _Roughness, 0.000001);
                 half3 F0 = half3(0.04, 0.04, 0.04);
                 half3 inKs = fresnelSchlickRoughness(nv, F0, Roughness);
                 half3 inKD = 1 - inKs;
-                half3 inDiffuse = SampleSH(N) * albedo * inKD; ///PI;
+                half3 inDiffuse = SampleSH(N)* albedo * inKD; ///PI;
                 output.color = float4(finalColor.xyz + inDiffuse, albedo.a);
-                output.depth = data.positionHCS.z;
+                // output.color = float4(finalColor.xyz, albedo.a);
+                output.depth = data.positionCS.z;
                 if (_DepthPeelingPassCount == 0) //第一次直接渲染
                 {
                     return output;
@@ -392,13 +396,43 @@ Shader "TAHair"
                 float2 screenUV = data.screenPos.xy / data.screenPos.w;
 
                 float lastDepth = tex2D(_MaxDepth, screenUV).r;
-                float pixelDepth = data.positionHCS.z;
-                if (pixelDepth <= lastDepth)
+                float pixelDepth = data.positionCS.z;
+                if (pixelDepth >= lastDepth)
                 {
                     discard;
                 }
                 return output;
             }
+            ENDHLSL
+        }
+        
+         Pass
+        {
+            Name "DepthOnly"
+            Tags{"LightMode" = "DepthOnly"}
+
+            ZWrite On
+            ColorMask 0
+            Cull[_Cull]
+
+            HLSLPROGRAM
+            #pragma only_renderers gles gles3 glcore d3d11
+            #pragma target 2.0
+
+            //--------------------------------------
+            // GPU Instancing
+            #pragma multi_compile_instancing
+
+            #pragma vertex DepthOnlyVertex
+            #pragma fragment DepthOnlyFragment
+
+            // -------------------------------------
+            // Material Keywords
+            #pragma shader_feature_local_fragment _ALPHATEST_ON
+            #pragma shader_feature_local_fragment _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
+
+            #include "Packages/com.unity.render-pipelines.universal/Shaders/LitInput.hlsl"
+            #include "Packages/com.unity.render-pipelines.universal/Shaders/DepthOnlyPass.hlsl"
             ENDHLSL
         }
     }

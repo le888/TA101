@@ -8,11 +8,11 @@ Shader "TASkin"
         _BaseColor("Color", Color) = (1,1,1,1)
         _BaseColorMap("Base (RGB)", 2D) = "white" {}
         [Normal]_NormalMap("Normal (RGB)", 2D) = "bump" {}
-//        _MetallicMap("Metallic (R)", 2D) = "white" {}
+        //        _MetallicMap("Metallic (R)", 2D) = "white" {}
         _RoughnessMap("Roughness (R)", 2D) = "white" {}
         _Roughness("Roughness", Range(0,1)) = 0.5
         _CurvatureMap("Curvature (R)", 2D) = "white" {}
-//        _Metallic("Metallic", Range(0,1)) = 0.5
+        //        _Metallic("Metallic", Range(0,1)) = 0.5
         [Normal]_MacoNormalMap("MacoNormal (RGB)", 2D) = "bump" {}
         _MacoNormalWeight("MacoNormalWeight", Range(0,1)) = 0.5
         _BRDF("BRDF", 2d) = "white" {}
@@ -29,6 +29,8 @@ Shader "TASkin"
         }
         Pass
         {
+            ZWrite On
+            ZTest LEqual
             // The HLSL code block. Unity SRP uses the HLSL language.
             HLSLPROGRAM
             #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/EntityLighting.hlsl"
@@ -118,7 +120,7 @@ Shader "TASkin"
                 return 0.5 * pow(PHBeckmann(tex.x, tex.y), 0.1);
             }
 
-            
+
             //Schlick Fresnel
             float3 fresnelReflectance(float3 N, float3 V, float3 F0)
             {
@@ -131,10 +133,10 @@ Shader "TASkin"
                 float3 L, // Points to light
                 float3 V, // Points to eye
                 float m, // Roughness
-                float rho_s,// Specular brightness
+                float rho_s, // Specular brightness
                 float F
                 //sampler2D beckmannTex
-                )
+            )
             {
                 float result = 0.0;
                 float ndotl = dot(N, L);
@@ -142,7 +144,7 @@ Shader "TASkin"
                 {
                     float3 h = L + V; // Unnormalized half-way vector
                     float3 H = normalize(h);
-                    
+
                     float ndoth = saturate(dot(N, H));
                     // float PH = pow(2.0 * tex2D(beckmannTex, float2(ndoth, m)), 10.0);
                     float PH = pow(2.0 * KSTextureCompute(float2(ndoth, m)), 10.0);
@@ -152,6 +154,7 @@ Shader "TASkin"
                 }
                 return result;
             }
+
             //////////////////////////////////////////////////benckman end///////////////////////////////////////////
 
             float3 fresnelSchlickRoughness(float cosTheta, float3 F0, float roughness)
@@ -255,7 +258,6 @@ Shader "TASkin"
                 return brdf;
             }
 
-            
 
             /////////////////END DFG/////////////////////
             // This line defines the name of the vertex shader.
@@ -312,7 +314,7 @@ Shader "TASkin"
             }
 
             // The fragment shader definition.
-            half4 frag(Varyings data) : SV_Target
+            half4 frag(Varyings data,out float outputDepth:SV_Depth) : SV_Target
             {
                 Light light = GetMainLight();
                 float3 l = SafeNormalize(light.direction);
@@ -322,10 +324,11 @@ Shader "TASkin"
                 float3x3 TBN = float3x3(T, B, meshNormal);
 
                 float3 normalTS = SafeNormalize(UnpackNormal(tex2D(_NormalMap, data.uv)));
-                float3 detailNormalTS = SafeNormalize(UnpackNormal(tex2D(_MacoNormalMap,data.uv*_MacoNormalMap_ST.xy+ _MacoNormalMap_ST.zw)));
+                float3 detailNormalTS = SafeNormalize(
+                    UnpackNormal(tex2D(_MacoNormalMap, data.uv * _MacoNormalMap_ST.xy + _MacoNormalMap_ST.zw)));
                 float3 MacoNormal = SafeNormalize(detailNormalTS);
                 // return detailNormalTS.xyzz;
-                normalTS = lerp(normalTS,BlendNormalRNM(normalTS,MacoNormal),_MacoNormalWeight);
+                normalTS = lerp(normalTS, BlendNormalRNM(normalTS, MacoNormal), _MacoNormalWeight);
                 normalTS = SafeNormalize(normalTS);
                 float3 N = mul(normalTS, TBN);
                 // return  N.xyzz;
@@ -345,62 +348,52 @@ Shader "TASkin"
                 float3 lutbrdf = PreIntegratedSkinWithCurveApprox(nl01, curvalueMapValue);
                 float3 directLightDiffuse = lutbrdf * light.color * albedo * light.distanceAttenuation * light.
                     shadowAttenuation;
-                float F =  fresnelReflectance(N, v, 0.028);//皮肤的高光项，0.028 经验值
-                directLightDiffuse *= (1-F);
+                float F = fresnelReflectance(N, v, 0.028); //皮肤的高光项，0.028 经验值
+                directLightDiffuse *= (1 - F);
                 // return F.xxxx;
                 half3 inDiffuse = SampleSH(meshNormal) * albedo;
-                
-                
-                 half Roughness = max(tex2D(_RoughnessMap,data.uv) * _Roughness,0.000001);
+
+
+                half Roughness = max(tex2D(_RoughnessMap, data.uv) * _Roughness, 0.000001);
                 // half Roughness =  tex2D(_RoughnessMap,data.uv) * _Roughness;
-                float  specular = KS_Skin_Specular(N,l,v,Roughness,1,F);
-                
+                float specular = KS_Skin_Specular(N, l, v, Roughness, 1, F);
+
                 float3 finalColor = directLightDiffuse + inDiffuse + specular;
+                outputDepth = data.positionHCS.z;
                 return finalColor.xyzz;
-                // return float4(specular.xxx,1);
-                // half3 F0 = half3(0.04, 0.04, 0.04);
-                // _Metallic = tex2D(_MetallicMap,data.uv) * _Metallic;
-                // F0 = lerp(F0, albedo, _Metallic);
-                //
-                // half Roughness = tex2D(_RoughnessMap,data.uv) * _Roughness;
-                // //cook-torrance brdf
-                // float D = D_GGX(n,h,Roughness);
-                // float G = GeometrySmith(n, v, l, Roughness);
-                // float3 F = F_Schlickss(F0,n,v);
-                // // return F.xyzz;
-                // float3 kS = F;
-                // float3 kD = 1.0 - kS;
-                // kD *= 1.0 - _Metallic;
-                // float3 nominator   = D * G * F;
-                // float denominator = 4.0 * (nl * nv);
-                // float3 specular = nominator / max(denominator, 0.001);
-                //
-                //
-                // float radiance = light.color* light.distanceAttenuation* light.shadowAttenuation;
-                // float3 difuse = albedo / PI ;
-                //  // float3 difuse = albedo;
-                // float4 directColor = float4((kD * difuse + specular) * nl * radiance, 1.0);
-                // // return directColor;
-                //
-                // //间接光照,SampleSH 球谐函数/////////////////////////////////////////////////////////////////////////////
-                // half3 inKs = fresnelSchlickRoughness(nv, F0, Roughness);
-                // half3 inKD = 1 - inKs;
-                // inKD *= 1 - _Metallic;
-                // half3 inDiffuse = SampleSH(n) * albedo * inKD;///PI;
-                // // return  inDiffuse.xyzz;
-                // //间接高光，split sum approximation   一部分和diffuse一样加了对环境贴图卷积，不过这次用粗糙度区分了mipmap
-                //  half mip = PerceptualRoughnessToMipmapLevel(Roughness);
-                //  half3 reflectVector = reflect(-v, n);
-                //  half4 encodedIrradiance = half4(SAMPLE_TEXTURECUBE_LOD(unity_SpecCube0, samplerunity_SpecCube0, reflectVector, mip));
-                //  real3 inspecPart1 = DecodeHDREnvironment(encodedIrradiance, unity_SpecCube0_HDR);
-                //  float2 brdf = tex2D(_BRDF, float2(nv, Roughness)).rg;
-                // // float2 brdf = EnvBRDFApprox(Roughness, nv);
-                //  half3 inspectPart2 = (inKs * brdf.x + brdf.y);
-                //  half3 inspect =inspecPart1 * inspectPart2;
-                // float3 ambient = (inDiffuse + inspect);
-                // float3 finalColor = ambient + directColor.xyz;
-                // return (finalColor).xyzz;; 
             }
+            ENDHLSL
+        }
+        Pass
+        {
+            Name "DepthOnly"
+            Tags
+            {
+                "LightMode" = "DepthOnly"
+            }
+
+            ZWrite On
+            ColorMask 0
+            Cull[_Cull]
+
+            HLSLPROGRAM
+            #pragma only_renderers gles gles3 glcore d3d11
+            #pragma target 2.0
+
+            //--------------------------------------
+            // GPU Instancing
+            #pragma multi_compile_instancing
+
+            #pragma vertex DepthOnlyVertex
+            #pragma fragment DepthOnlyFragment
+
+            // -------------------------------------
+            // Material Keywords
+            #pragma shader_feature_local_fragment _ALPHATEST_ON
+            #pragma shader_feature_local_fragment _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
+
+            #include "Packages/com.unity.render-pipelines.universal/Shaders/LitInput.hlsl"
+            #include "Packages/com.unity.render-pipelines.universal/Shaders/DepthOnlyPass.hlsl"
             ENDHLSL
         }
     }

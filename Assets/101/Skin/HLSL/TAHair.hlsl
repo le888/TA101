@@ -23,6 +23,7 @@ float4 _SpecularColor1;
 float _SpecularExponent1;
 float4 _SpecularColor2;
 float _SpecularExponent2;
+float _AlphaClip;
 
 float4 HairLighting(float3 tangent,float3 normal,float3 viewVec,float2 uv,float4 albedo,Light light)
 {
@@ -47,6 +48,7 @@ float4 HairLighting(float3 tangent,float3 normal,float3 viewVec,float2 uv,float4
 
     float radiance = light.color* light.distanceAttenuation* light.shadowAttenuation;
     color.rgb = (diffuse + specular)* radiance ;
+    clip(albedo.a -_AlphaClip);
     // color.rgb * ambOcc;
     return color;
 }
