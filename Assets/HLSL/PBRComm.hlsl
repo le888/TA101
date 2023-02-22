@@ -1,5 +1,28 @@
 #ifndef _PBRCOMM_
 #define _PBRCOMM_
+
+/////////////////////diffuse//////////////////
+float OrenNayarDiffuse(
+    float3 lightDirection,
+    float3 viewDirection,
+    float3 surfaceNormal,
+    float roughness,
+    float albedo)
+{
+    float LdotV = dot(lightDirection, viewDirection);
+    float NdotL = dot(lightDirection, surfaceNormal);
+    float NdotV = dot(surfaceNormal, viewDirection);
+
+    float s = LdotV - NdotL * NdotV;
+    float t = lerp(1.0, max(NdotL, NdotV), step(0.0, s));
+
+    float sigma2 = roughness * roughness;
+    float A = 1.0 + sigma2 * (albedo / (sigma2 + 0.13) + 0.5 / (sigma2 + 0.33));
+    float B = 0.45 * sigma2 / (sigma2 + 0.09);
+
+    return albedo * max(0.0, NdotL) * (A + B * s / t) / PI;
+}
+
 /////////////////DFG/////////////////////
 //Cook-Torrance BRDF
 #ifndef PI
@@ -28,12 +51,12 @@ float D_GGX(float3 N, float3 H, float Roughness)
     return nom / max(denom, 0.001); //防止分母为0
 }
 
-float D_GGXAniso( float ax, float ay, float NoH, float3 H, float3 X, float3 Y )
+float D_GGXAniso(float ax, float ay, float NoH, float3 H, float3 X, float3 Y)
 {
-    float XoH = dot( X, H );
-    float YoH = dot( Y, H );
-    float d = XoH*XoH / (ax*ax) + YoH*YoH / (ay*ay) + NoH*NoH;
-    return 1 / ( PI * ax*ay * d*d );
+    float XoH = dot(X, H);
+    float YoH = dot(Y, H);
+    float d = XoH * XoH / (ax * ax) + YoH * YoH / (ay * ay) + NoH * NoH;
+    return 1 / (PI * ax * ay * d * d);
 }
 
 //Schlick Fresnel
@@ -59,9 +82,9 @@ float2 EnvBRDFApprox(float Roughness, float NV)
 float GeometrySchlickGGX(float NdotV, float roughness)
 {
     float r = (roughness + 1.0);
-    float k = (r*r) / 8.0;
+    float k = (r * r) / 8.0;
 
-    float nom   = NdotV;
+    float nom = NdotV;
     float denom = NdotV * (1.0 - k) + k;
 
     return nom / denom;
@@ -90,7 +113,7 @@ float GeometrySchlickGGXInderect(float NdotV, float roughness)
     float a = roughness;
     float k = (a * a) / 2.0;
 
-    float nom   = NdotV;
+    float nom = NdotV;
     float denom = NdotV * (1.0 - k) + k;
 
     return nom / denom;

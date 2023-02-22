@@ -131,10 +131,8 @@
      <Folder Include="Assets\101\PBR\clothTest\textures\cloth\Rolled_sleeves_shirt" />
      <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\RL_Amplify_CorneaShaderParallax_Baked_URP.shader" />
      <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\Tessellation\RL_Amplify_Lit_Opaque_URP_Tessellation.shader" />
-     <Folder Include="Assets\101\PBR\HLSL" />
      <Folder Include="Assets\101" />
      <Folder Include="Assets\101\PBR\clothTest\textures\cloth\CC_Base_TearLine\CC_Base_TearLine" />
-     <Folder Include="Assets\101\Skin\HLSL" />
      <Folder Include="Assets\101\02_Shield\Shield" />
      <Folder Include="Assets\101\TestOne\rock_moss_set_01_1k.blend\textures" />
      <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\RL_Amplify_Lit_SSS_URP.shader" />
