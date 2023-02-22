@@ -1,5 +1,5 @@
 // This shader fills the mesh shape with a color predefined in the code.
-Shader "TASkin"
+Shader "TASkinSSSS"
 {
     // The properties block of the Unity shader. In this example this block is empty
     // because the output color is predefined in the fragment shader code.
@@ -38,8 +38,7 @@ Shader "TASkin"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/RealtimeLights.hlsl"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/BRDF.hlsl"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/GlobalIllumination.hlsl"
-            #include "Assets/HLSL/PBRComm.hlsl"
-            #include "Assets/HLSL/SkinComm.hlsl"
+
             float4 _BaseColor;
             sampler2D _BRDF;
             sampler2D _BaseColorMap;
@@ -54,11 +53,176 @@ Shader "TASkin"
             float _MacoNormalWeight;
             //Physically based Shading
             //Cook-Torrance BRDF
-            
 
-           
+            /////////////////DFG/////////////////////
 
-            
+            //D
+            float D_DistributionGGX(float3 N, float3 H, float Roughness)
+            {
+                // outBRDFData.roughness           = max(PerceptualRoughnessToRoughness(outBRDFData.perceptualRoughness), HALF_MIN_SQRT);
+                //  outBRDFData.roughness2          = max(outBRDFData.roughness * outBRDFData.roughness, HALF_MIN);
+
+                float a = max(Roughness * Roughness,HALF_MIN_SQRT);
+                float a2 = max(a * a,HALF_MIN);
+                float NH = saturate(dot(N, H));
+                float NH2 = NH * NH;
+                float nominator = a2;
+                float denominator = (NH2 * (a2 - 1.0) + 1.0);
+                denominator = PI * denominator * denominator;
+                return nominator / max(denominator, 0.001); //防止分母为0
+            }
+
+            float DistributionGGX(float3 N, float3 H, float roughness)
+            {
+                float a = roughness * roughness;
+                float a2 = a * a;
+                float NdotH = max(dot(N, H), 0.0);
+                float NdotH2 = NdotH * NdotH;
+
+                float nom = a2;
+                float denom = (NdotH2 * (a2 - 1.0) + 1.0);
+                denom = PI * denom * denom;
+
+                return nom / denom;
+            }
+
+            //Trowbridge-Reitz GGX
+            float D_GGX(float3 N, float3 H, float Roughness)
+            {
+                float a = max(0.001, Roughness * Roughness);
+                float a2 = a * a;
+                float NdotH = saturate(dot(N, H));
+                float NdotH2 = NdotH * NdotH;
+                float nom = a2;
+                float denom = (NdotH2 * (a2 - 1.0) + 1.0);
+                denom = PI * denom * denom;
+                return nom / denom;
+            }
+
+            //Schlick Fresnel
+            float3 F_Schlickss(float3 F0, float3 N, float3 V)
+            {
+                float VdotH = saturate(dot(V, N));
+                return F0 + (1.0 - F0) * pow(1.0 - VdotH, 5.0);
+            }
+
+            //////////////////////////////////////////////////benckman///////////////////////////////////////////
+            float PHBeckmann(float ndoth, float m)
+            {
+                float alpha = acos(ndoth);
+                float ta = tan(alpha);
+                float val = 1.0 / (m * m * pow(ndoth, 4.0)) * exp(-(ta * ta) / (m * m));
+                return val;
+            } // Render a screen-aligned quad to precompute a 512x512 texture.
+            float KSTextureCompute(float2 tex : TEXCOORD0)
+            {
+                // Scale the value to fit within [0,1] – invert upon lookup.
+                return 0.5 * pow(PHBeckmann(tex.x, tex.y), 0.1);
+            }
+
+
+            //Schlick Fresnel
+            float3 fresnelReflectance(float3 N, float3 V, float3 F0)
+            {
+                float VdotH = saturate(dot(V, N));
+                return F0 + (1.0 - F0) * pow(1.0 - VdotH, 5.0);
+            }
+
+            float KS_Skin_Specular(
+                float3 N, // Bumped surface normal
+                float3 L, // Points to light
+                float3 V, // Points to eye
+                float m, // Roughness
+                float rho_s, // Specular brightness
+                float F
+                //sampler2D beckmannTex
+            )
+            {
+                float result = 0.0;
+                float ndotl = dot(N, L);
+                if (ndotl > 0.0)
+                {
+                    float3 h = L + V; // Unnormalized half-way vector
+                    float3 H = normalize(h);
+
+                    float ndoth = saturate(dot(N, H));
+                    // float PH = pow(2.0 * tex2D(beckmannTex, float2(ndoth, m)), 10.0);
+                    float PH = pow(2.0 * KSTextureCompute(float2(ndoth, m)), 10.0);
+                    // float F = fresnelReflectance(N, V, 0.028);
+                    float frSpec = max(PH * F / dot(h, h), 0);
+                    result = ndotl * rho_s * frSpec; // BRDF * dot(N,L) * rho_s
+                }
+                return result;
+            }
+
+            //////////////////////////////////////////////////benckman end///////////////////////////////////////////
+
+            float3 fresnelSchlickRoughness(float cosTheta, float3 F0, float roughness)
+            {
+                float r = 1.0 - roughness;
+                return F0 + (max(r.xxx, F0) - F0) * pow(1.0 - cosTheta, 5.0);
+            }
+
+
+            //UE4 Black Ops II modify version
+            float2 EnvBRDFApprox(float Roughness, float NV)
+            {
+                // [ Lazarov 2013, "Getting More Physical in Call of Duty: Black Ops II" ]
+                // Adaptation to fit our G term.
+                const float4 c0 = {-1, -0.0275, -0.572, 0.022};
+                const float4 c1 = {1, 0.0425, 1.04, -0.04};
+                float4 r = Roughness * c0 + c1;
+                float a004 = min(r.x * r.x, exp2(-9.28 * NV)) * r.x + r.y;
+                float2 AB = float2(-1.04, 1.04) * a004 + r.zw;
+                return AB;
+            }
+
+            float GeometrySchlickGGX(float NdotV, float roughness)
+            {
+                float r = (roughness + 1.0);
+                float k = (r * r) / 8.0;
+
+                float nom = NdotV;
+                float denom = NdotV * (1.0 - k) + k;
+
+                return nom / denom;
+            }
+
+            float GeometrySmith(float3 N, float3 V, float3 L, float roughness)
+            {
+                float NdotV = max(dot(N, V), 0.0);
+                float NdotL = max(dot(N, L), 0.0);
+                float ggx1 = GeometrySchlickGGX(NdotV, roughness);
+                float ggx2 = GeometrySchlickGGX(NdotL, roughness);
+
+                return ggx1 * ggx2;
+            }
+
+
+            /////////////////
+            float GeometrySchlickGGXInderect(float NdotV, float roughness)
+            {
+                float a = roughness;
+                float k = (a * a) / 2.0;
+
+                float nom = NdotV;
+                float denom = NdotV * (1.0 - k) + k;
+
+                return nom / denom;
+            }
+
+            // ----------------------------------------------------------------------------
+            float GeometrySmithInderect(float N, float V, float L, float roughness)
+            {
+                float NdotV = max(dot(N, V), 0.0);
+                float NdotL = max(dot(N, L), 0.0);
+                float ggx2 = GeometrySchlickGGXInderect(NdotV, roughness);
+                float ggx1 = GeometrySchlickGGXInderect(NdotL, roughness);
+
+                return ggx1 * ggx2;
+            }
+
+
             float3 PreIntegratedSkinWithCurveApprox(half NdotL, half curvature)
             {
                 // NdotL = mad(NdotL, 0.5, 0.5); // map to 0 to 1 range
@@ -184,7 +348,7 @@ Shader "TASkin"
                 float3 lutbrdf = PreIntegratedSkinWithCurveApprox(nl01, curvalueMapValue);
                 float3 directLightDiffuse = lutbrdf * light.color * albedo * light.distanceAttenuation * light.
                     shadowAttenuation;
-                float F = F_Schlickss(0.028,N, v); //皮肤的高光项，0.028 经验值
+                float F = fresnelReflectance(N, v, 0.028); //皮肤的高光项，0.028 经验值
                 directLightDiffuse *= (1 - F);
                 // return F.xxxx;
                 half3 inDiffuse = SampleSH(meshNormal) * albedo;

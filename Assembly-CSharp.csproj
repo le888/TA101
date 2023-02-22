@@ -43,6 +43,7 @@
   <ItemGroup>
      <Compile Include="Assets\101\02_Shield\Detection.cs" />
      <Compile Include="Assets\101\TestOne\InstanceTest.cs" />
+     <Compile Include="Assets\101\Skin\SSSS\SeparableSSSLibrary.cs" />
      <Compile Include="Assets\101\Skin\OITFeature.cs" />
      <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
      <Compile Include="Assets\101\02_Shield\ForceShieldShootBall.cs" />
@@ -61,8 +62,10 @@
      <None Include="Assets\101\01_1_Dissolve\Dissolve.shader" />
      <Folder Include="Assets\101\PBR\clothTest\textures\cloth\Camila_Brow\Camila_Brow" />
      <Folder Include="Assets\101\PBR\clothTest\textures\cloth\cloth\CC_Base_Body\Std_Eyelash" />
+     <None Include="Assets\HLSL\SkinComm.hlsl" />
      <Folder Include="Assets\101\01_3_BaseLight" />
      <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\Tessellation\RL_Amplify_CorneaShaderParallax_URP_Tessellation.shader" />
+     <Folder Include="Assets\101\Skin\SSSS" />
      <Folder Include="Assets\101\Skin\Tifa\EyeCubeMap" />
      <Folder Include="Assets\Resources" />
      <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\RL_Amplify_Lit_AlphaClipped_URP.shader" />
@@ -74,6 +77,7 @@
      <Folder Include="Assets\101\PBR\clothTest\textures\cloth\Rolled_sleeves_shirt\Rolled_sleeves_shirt\Rolled_sleeves_shirt" />
      <None Include="Assets\101\PBR\ImageBRDFLut.shader" />
      <Folder Include="Assets\101\Skin\NV3\textures" />
+     <None Include="Assets\HLSL\PBRComm.hlsl" />
      <Folder Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Material Templates\Amplify\Tessellation" />
      <Folder Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders" />
      <None Include="Assets\101\Map\red_brick_03_1k.blend\textures\Test.shader" />
@@ -95,6 +99,7 @@
      <Folder Include="Assets\101\PBR\clothTest\cloth.fbm" />
      <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\RL_Amplify_Lit_Opaque_URP.shader" />
      <Folder Include="Assets\101\PBR\clothTest\textures\cloth\cloth\CC_Base_Body\Std_Skin_Head" />
+     <Folder Include="Assets\HLSL" />
      <Folder Include="Assets\101\PBR\clothTest\textures\cloth\CC_Base_EyeOcclusion\CC_Base_EyeOcclusion\Std_Eye_Occlusion_L" />
      <Folder Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Material Templates\Tessellation" />
      <Folder Include="Assets\101\Skin\Tifa\SP" />
@@ -115,6 +120,7 @@
      <Folder Include="Packages\cc_unity_tools_URP-1.4.3.URP12\Textures" />
      <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\RL_Amplify_Lit_AlphaBlendRefractive_URP.shader" />
      <Folder Include="Assets\101\PBR\clothTest\textures\cloth\CC_Base_Teeth\CC_Base_Teeth\Std_Upper_Teeth" />
+     <None Include="Assets\101\Skin\SSSS\TASkinSSSS.shader" />
      <Folder Include="Assets\101\PBR\Cerberus_by_Andrew_Maximov\Textures" />
      <Folder Include="Assets\101\PBR\clothTest\textures\cloth\CC_Base_Teeth" />
      <Folder Include="Assets\101\Map" />
@@ -125,6 +131,7 @@
      <Folder Include="Assets\101\PBR\clothTest\textures\cloth\Rolled_sleeves_shirt" />
      <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\RL_Amplify_CorneaShaderParallax_Baked_URP.shader" />
      <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\Tessellation\RL_Amplify_Lit_Opaque_URP_Tessellation.shader" />
+     <Folder Include="Assets\101\PBR\HLSL" />
      <Folder Include="Assets\101" />
      <Folder Include="Assets\101\PBR\clothTest\textures\cloth\CC_Base_TearLine\CC_Base_TearLine" />
      <Folder Include="Assets\101\Skin\HLSL" />
@@ -145,7 +152,7 @@
      <None Include="Assets\New Amplify Shader.shader" />
      <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\Tessellation\RL_Amplify_HairShader_Coverage_Baked_URP_Tessellation.shader" />
      <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\Tessellation\RL_Amplify_Lit_AlphaBlendRefractive_URP_Tessellation.shader" />
-     <None Include="Assets\101\Skin\HLSL\TAHair.hlsl" />
+     <None Include="Assets\HLSL\HairComm.hlsl" />
      <None Include="Assets\101\01_2_Holographic\Line.shader" />
      <Folder Include="Assets\TutorialInfo\Scripts" />
      <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\Tessellation\RL_Amplify_HairShader_1st_Pass_Baked_URP_Tessellation.shader" />
@@ -179,6 +186,7 @@
      <None Include="Assets\101\PBR\Cerberus_by_Andrew_Maximov\Disclaimer.txt" />
      <Folder Include="Assets\101\PBR\clothTest\textures\cloth\Knee_length_skirt\Knee_length_skirt\Knee_length_skirt" />
      <Folder Include="Assets\101\01_2_Holographic" />
+     <None Include="Assets\101\Skin\SSSS\SeparableSubsurfaceScatter.shader" />
      <Folder Include="Packages\cc_unity_tools_URP-1.4.3.URP12" />
      <Folder Include="Assets\101\Skin\Tifa\Meshes" />
      <None Include="Assets\101\Skin\ApproximatedLut.shader" />
@@ -211,6 +219,7 @@
      <Folder Include="Assets\101\PBR\clothTest\textures\cloth\CC_Base_Eye\CC_Base_Eye" />
      <Folder Include="Assets\101\PBR\clothTest\textures\cloth\CC_Base_TearLine\CC_Base_TearLine\Std_Tearline_L" />
      <Folder Include="Assets\101\TestOne" />
+     <None Include="Assets\101\Skin\SSSS\SeparableSubsurfaceScatterCommon.hlsl" />
      <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\RL_Amplify_HairShader_1st_Pass_Baked_URP.shader" />
      <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\RL_Amplify_Lit_AlphaBlend_URP.shader" />
      <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\Tessellation\RL_Amplify_HairShader_Variants_URP_Tessellation.shader" />
