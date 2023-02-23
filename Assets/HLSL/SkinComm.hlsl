@@ -1,6 +1,7 @@
 #ifndef _TASKIN_
 #define _TASKIN_
 
+#include "PBRComm.hlsl"
 //////////////////////////////////////////////////benckman///////////////////////////////////////////
 float PHBeckmann(float ndoth, float m)
 {
@@ -21,8 +22,7 @@ float KS_Skin_Specular(
     float3 L, // Points to light
     float3 V, // Points to eye
     float m, // Roughness
-    float rho_s, // Specular brightness
-    float F
+    float rho_s// Specular brightness
     //sampler2D beckmannTex
 )
 {
@@ -36,7 +36,7 @@ float KS_Skin_Specular(
         float ndoth = saturate(dot(N, H));
         // float PH = pow(2.0 * tex2D(beckmannTex, float2(ndoth, m)), 10.0);
         float PH = pow(2.0 * KSTextureCompute(float2(ndoth, m)), 10.0);
-        // float F = fresnelReflectance(N, V, 0.028);
+        float F = F_Schlickss(0.028,N, V);
         float frSpec = max(PH * F / dot(h, h), 0);
         result = ndotl * rho_s * frSpec; // BRDF * dot(N,L) * rho_s
     }

@@ -54,13 +54,6 @@ Shader "TASkin"
             float _MacoNormalWeight;
             //Physically based Shading
             //Cook-Torrance BRDF
-            
-
-           
-
-            
-            
-
 
             /////////////////END DFG/////////////////////
             // This line defines the name of the vertex shader.
@@ -117,7 +110,7 @@ Shader "TASkin"
             }
 
             // The fragment shader definition.
-            half4 frag(Varyings data,out float outputDepth:SV_Depth) : SV_Target
+            half4 frag(Varyings data) : SV_Target
             {
                 Light light = GetMainLight();
                 float3 l = SafeNormalize(light.direction);
@@ -159,10 +152,9 @@ Shader "TASkin"
 
                 half Roughness = max(tex2D(_RoughnessMap, data.uv) * _Roughness, 0.000001);
                 // half Roughness =  tex2D(_RoughnessMap,data.uv) * _Roughness;
-                float specular = KS_Skin_Specular(N, l, v, Roughness, 1, F);
+                float specular = KS_Skin_Specular(N, l, v, Roughness, 1);
 
                 float3 finalColor = directLightDiffuse + inDiffuse + specular;
-                outputDepth = data.positionHCS.z;
                 return finalColor.xyzz;
             }
             ENDHLSL
