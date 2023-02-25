@@ -143,7 +143,7 @@ Shader "TASkinSSSS"
                 // ////diffuse
 
 
-                float3 directLightDiffuse = nl * light.color * light.distanceAttenuation * light.shadowAttenuation;
+                float3 directLightDiffuse = nl * light.color *  light.shadowAttenuation * light.distanceAttenuation;
 
                 half3 inDiffuse = SampleSH(meshNormal);
 

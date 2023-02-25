@@ -92,6 +92,7 @@ public class SeparableSSSS : ScriptableRendererFeature
             context.DrawRenderers(renderingData.cullResults, ref drawingSettings, ref filteringSettings);
             //2 blur x
             cmd.Blit(ID_DiffuseColor, ID_BlurTemp, blurMaterial, 0);
+            // cmd.Blit(ID_BlurTemp, ID_DiffuseColor);
             cmd.Blit(ID_BlurTemp, ID_DiffuseColor, blurMaterial, 1);
             
             context.ExecuteCommandBuffer(cmd);

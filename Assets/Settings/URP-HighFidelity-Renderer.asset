@@ -17,7 +17,7 @@ MonoBehaviour:
     DebugSkin: 0
     DisableSkinShLighting: 0
     SubsurfaceScaler: 5
-    SubsurfaceColor: {r: 0.764151, g: 0.1477839, b: 0.1477839, a: 1}
+    SubsurfaceColor: {r: 1, g: 1, b: 1, a: 1}
     SubsurfaceFalloff: {r: 1, g: 0, b: 0, a: 0}
     MaxDistance: 10
 --- !u!114 &-1878332245247344467
@@ -117,4 +117,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Active: 1
   setting:
-    DepthPeelingPass: 11
+    DepthPeelingPass: 6
