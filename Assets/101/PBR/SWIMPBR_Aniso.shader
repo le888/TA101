@@ -56,133 +56,7 @@ Shader "SWIMPBR_Aniso"
             //Physically based Shading
             //Cook-Torrance BRDF
             
-             /////////////////DFG/////////////////////
-
-             //D
-            float D_DistributionGGX(float3 N,float3 H,float Roughness)
-            {
-                // outBRDFData.roughness           = max(PerceptualRoughnessToRoughness(outBRDFData.perceptualRoughness), HALF_MIN_SQRT);
-                //  outBRDFData.roughness2          = max(outBRDFData.roughness * outBRDFData.roughness, HALF_MIN);
-                
-                float a             = max(Roughness*Roughness,HALF_MIN_SQRT) ;
-                float a2            = max(a*a,HALF_MIN) ;
-                float NH            = saturate(dot(N,H));
-                float NH2           = NH*NH;
-                float nominator     = a2;
-                float denominator   = (NH2*(a2-1.0)+1.0);
-                denominator         = PI * denominator*denominator;
-                return              nominator/ max(denominator,0.001) ;//防止分母为0
-            }
-
-            float DistributionGGX(float3 N, float3 H, float roughness)
-            {
-                float a      = roughness*roughness;
-                float a2     = a*a;
-                float NdotH  = max(dot(N, H), 0.0);
-                float NdotH2 = NdotH*NdotH;
-
-                float nom   = a2;
-                float denom = (NdotH2 * (a2 - 1.0) + 1.0);
-                denom = PI * denom * denom;
-
-                return nom / denom;
-            }
-            
-            //Trowbridge-Reitz GGX
-            float D_GGX(float3 N,float3 H,float Roughness)
-            {
-                float a = max(0.001,Roughness * Roughness);
-                float a2 = a * a;
-                float NdotH = saturate(dot(N, H));
-                float NdotH2 = NdotH * NdotH;
-                float nom = a2;
-                float denom = (NdotH2 * (a2 - 1.0) + 1.0);
-                denom = PI * denom * denom;
-                return nom / denom;
-            }
-
-            float D_GGXaniso( float ax, float ay, float NoH, float3 H, float3 X, float3 Y )
-            {
-	            float XoH = dot( X, H );
-	            float YoH = dot( Y, H );
-	            float d = XoH*XoH / (ax*ax) + YoH*YoH / (ay*ay) + NoH*NoH;
-	            return 1 / ( PI * ax*ay * d*d );
-            }
-            
-            //Schlick Fresnel
-            float3 F_Schlickss(float3 F0, float3 N, float3 V)
-            {
-                float VdotH = saturate(dot(V, N));
-                return F0 + (1.0 - F0) * pow(1.0 - VdotH, 5.0);
-            }
-
-            float3 fresnelSchlickRoughness(float cosTheta, float3 F0, float roughness)
-            {
-                float r = 1.0 - roughness;
-                return F0 + (max(r.xxx, F0) - F0) * pow(1.0 - cosTheta, 5.0);
-            }
-            
-
-            //UE4 Black Ops II modify version
-            float2 EnvBRDFApprox(float Roughness, float NV )
-            {
-                // [ Lazarov 2013, "Getting More Physical in Call of Duty: Black Ops II" ]
-                // Adaptation to fit our G term.
-                const float4 c0 = { -1, -0.0275, -0.572, 0.022 };
-                const float4 c1 = { 1, 0.0425, 1.04, -0.04 };
-                float4 r = Roughness * c0 + c1;
-                float a004 = min( r.x * r.x, exp2( -9.28 * NV ) ) * r.x + r.y;
-                float2 AB = float2( -1.04, 1.04 ) * a004 + r.zw;
-                return AB;
-            }
-
-            float GeometrySchlickGGX(float NdotV, float roughness)
-            {
-                float r = (roughness + 1.0);
-                float k = (r*r) / 8.0;
-
-                float nom   = NdotV;
-                float denom = NdotV * (1.0 - k) + k;
-
-                return nom / denom;
-            }
-
-            float GeometrySmith(float3 N, float3 V, float3 L, float roughness)
-            {
-                float NdotV = max(dot(N, V), 0.0);
-                float NdotL = max(dot(N, L), 0.0);
-                float ggx1 = GeometrySchlickGGX(NdotV, roughness);
-                float ggx2 = GeometrySchlickGGX(NdotL, roughness);
-
-                return ggx1 * ggx2;
-            }
-
-
-            /////////////////
-            float GeometrySchlickGGXInderect(float NdotV, float roughness)
-            {
-                float a = roughness;
-                float k = (a * a) / 2.0;
-
-                float nom   = NdotV;
-                float denom = NdotV * (1.0 - k) + k;
-
-                return nom / denom;
-            }
-            // ----------------------------------------------------------------------------
-            float GeometrySmithInderect(float N, float V, float L, float roughness)
-            {
-                float NdotV = max(dot(N, V), 0.0);
-                float NdotL = max(dot(N, L), 0.0);
-                float ggx2 = GeometrySchlickGGXInderect(NdotV, roughness);
-                float ggx1 = GeometrySchlickGGXInderect(NdotL, roughness);
-
-                return ggx1 * ggx2;
-            }  
-            
-
-            
-            /////////////////END DFG/////////////////////
+           
             // This line defines the name of the vertex shader.
             #pragma vertex vert
             // This line defines the name of the fragment shader.
@@ -192,7 +66,8 @@ Shader "SWIMPBR_Aniso"
             // macros and functions, and also contains #include references to other
             // HLSL files (for example, Common.hlsl, SpaceTransforms.hlsl, etc.).
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
-
+            #include "Assets/HLSL/PBRComm.hlsl"
+            
             // The structure definition defines which variables it contains.
             // This example uses the Attributes structure as an input structure in
             // the vertex shader.
@@ -278,9 +153,9 @@ Shader "SWIMPBR_Aniso"
                 float Gs, Gs2;
                 float3 X = T;
                 float3 Y = B;
-                Gs  = D_GGXaniso(ax, ay, dot(n,h),h, X, Y);
+                Gs  = D_GGXAniso(ax, ay, dot(n,h),h, X, Y);
                 // Gs *= Gs;
-                Gs2 = D_GGXaniso(ax2, ay2, dot(n,h),h, X, Y);
+                Gs2 = D_GGXAniso(ax2, ay2, dot(n,h),h, X, Y);
                 Gs = max(Gs, Gs2);
                 // return Gs.xxxx;
                 //cook-torrance brdf
