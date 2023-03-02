@@ -38,7 +38,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _CubeMap:
-        m_Texture: {fileID: 8900000, guid: 541ccc3168a4813498effc0bba211367, type: 3}
+        m_Texture: {fileID: 8900000, guid: 513d0b405b7ff704da6342dae6615924, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -128,7 +128,7 @@ Material:
     - _Parallax: 0.02
     - _QueueOffset: 0
     - _ReceiveShadows: 0
-    - _ReflectionCubeRot: 12.5
+    - _ReflectionCubeRot: 17.5
     - _Roughness: 0.177
     - _Smoothness: 0
     - _SmoothnessTextureChannel: 0
