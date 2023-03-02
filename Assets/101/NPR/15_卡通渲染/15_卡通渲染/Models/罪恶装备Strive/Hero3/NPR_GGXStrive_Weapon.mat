@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: NPR_GGXStrive_Weapon
+  m_Shader: {fileID: 4800000, guid: 6b422938383b1f248a07d69d091b8e90, type: 3}
+  m_ShaderKeywords: _SHADOWMODE_SHADOWMULBASE _TESTMODE_NONE _TESTMODE_VERTEXCOLOR
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BaseMap:
+        m_Texture: {fileID: 2800000, guid: 04cef84cea64b594e862472ab8959171, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _LightMap:
+        m_Texture: {fileID: 2800000, guid: fb31f60bc25a76641b4d349d9ac081dc, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _LineMap:
+        m_Texture: {fileID: 2800000, guid: 67f9b22dac18a6a4ca4a59f2469db060, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MixMap:
+        m_Texture: {fileID: 2800000, guid: 323e9c1c022eed345914d780c1e88703, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ShadowMap:
+        m_Texture: {fileID: 2800000, guid: 4cf9bfcd336d8fb4aa6926ae1a95024c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ShadowRamp:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _DiffuseThreshold: 0
+    - _Factor: 0.5
+    - _LightThreshold: 0.5
+    - _Outline: 0.01
+    - _RampOffset: 0
+    - _ShadowMode: 1
+    - _ShadowRange: 0.5
+    - _ShadowSmooth: 0.2
+    - _SpecularPowerValue: 1
+    - _SpecularScale: 1
+    - _TestMode: 0
+    m_Colors:
+    - _OutColor: {r: 0, g: 0, b: 0, a: 0}
+    - _ShadowColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 0.2}
+    - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
+  m_BuildTextureStacks: []

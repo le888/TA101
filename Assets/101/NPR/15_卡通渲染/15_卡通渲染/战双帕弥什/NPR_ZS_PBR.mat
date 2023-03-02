@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: NPR_ZS_PBR
+  m_Shader: {fileID: 4800000, guid: 2d795bef66a952749a521d3d0e6c4995, type: 3}
+  m_ShaderKeywords: _SPECSHIFT_BLINPHONG _SPECSHIFT_ON _USESECONDSTEPLIGHT_NONE
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _LightMap:
+        m_Texture: {fileID: 2800000, guid: e8abce18150bf8a44a5df12693fcc51b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: e566a1d4241aa824a83d6defba19caf4, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MixMap:
+        m_Texture: {fileID: 2800000, guid: 26db012c8b3fff74a8990ff40b1e1184, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalMap:
+        m_Texture: {fileID: 2800000, guid: 2bf6d6554754f8d43940021cb8f5f2fe, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _PBRMixMap:
+        m_Texture: {fileID: 2800000, guid: 26db012c8b3fff74a8990ff40b1e1184, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _BrightIntensity: 1
+    - _BrightIntensity2: 1
+    - _DarkIntensity: 0.5
+    - _DarkIntensity2: 0.5
+    - _Gloss: 12.16
+    - _MaskTest: 1
+    - _MetallicScale: 1
+    - _RampOffset: 0
+    - _RampOffset2: 0.21
+    - _RimExp: 0.55
+    - _RimIntensity: 5.27
+    - _RimStep: 0.28
+    - _RimWdith: 0.2
+    - _RoughnessScale: 1
+    - _Shininess: 1.38
+    - _SpecShift: 2
+    - _SpecShift1: 0
+    - _SpecShiftIntensity: 0.03
+    - _SpecularIntensity: 1
+    - _Threshold: 0.63
+    - _UseSecondStepLight: 0
+    - _UseSpecular: 0
+    - __dirty: 0
+    m_Colors: []
+  m_BuildTextureStacks: []

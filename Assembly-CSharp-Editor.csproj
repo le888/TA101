@@ -42,6 +42,9 @@
   </PropertyGroup>
   <ItemGroup>
      <Compile Include="Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs" />
+     <Compile Include="Assets\101\NPR\15_卡通渲染\15_卡通渲染\Script\Editor\NPRUtilityEditor.cs" />
+     <Compile Include="Assets\101\NPR\15_卡通渲染\15_卡通渲染\Script\Editor\ImportRenderDocData.cs" />
+     <Folder Include="Assets\101\NPR\15_卡通渲染\15_卡通渲染\Script\Editor" />
      <Folder Include="Assets\TutorialInfo\Scripts\Editor" />
      <Reference Include="UnityEngine">
      <HintPath>C:\Program Files\Unity\Hub\Editor\2021.3.11f1c2\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>

@@ -1,0 +1,11 @@
+fileFormatVersion: 2
+guid: bb02f021b3c09a84b8115a1ecc09665e
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures:
+  - _Decal: {fileID: 2800000, guid: b1c28fa310c921f4c83b622f152d3087, type: 3}
+  nonModifiableTextures: []
+  preprocessorOverride: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
