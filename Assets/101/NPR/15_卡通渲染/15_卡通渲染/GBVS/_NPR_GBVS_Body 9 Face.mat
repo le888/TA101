@@ -1,0 +1,273 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: _NPR_GBVS_Body 9 Face
+  m_Shader: {fileID: 4800000, guid: 6061f4813d9db3d4885bcfa60ae8c16f, type: 3}
+  m_ShaderKeywords: _LAYER10_HASRIM _LAYER10_HASVIEWLIGHT _LAYER1_HASSPECULAR _LAYER8_HASRIM
+    _LAYER8_HASSPECULAR _TESTMODELAYER__LAYER1 _TESTMODE_BASE_A _TESTMODE_LIGHTMAP_G
+    _TESTMODE_NONE
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _DecalMap:
+        m_Texture: {fileID: 2800000, guid: 04d4b10a489b720418afde31360ebb31, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _LightMap:
+        m_Texture: {fileID: 2800000, guid: 319e0e74943b4154fbfe3523f7a65cd6, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: 7f5af838aa7719d46811b40611bb6d7a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ShadowMap:
+        m_Texture: {fileID: 2800000, guid: 3486a06ff9d7e184e841910e3ade777f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _BrightIntensity: 1
+    - _DarkIntensity: 1
+    - _DebugMode: 0
+    - _DecalLerp: 0.3
+    - _Layer1: 0
+    - _Layer10: 0
+    - _Layer10_HasRim: 1
+    - _Layer10_HasSpecular: 0
+    - _Layer10_HasStepSpecular: 0
+    - _Layer10_HasTwoSide: 0
+    - _Layer10_HasViewLight: 1
+    - _Layer10_RampOffset2: 0.15
+    - _Layer10_RimType: 0
+    - _Layer10_Rim_Exp: 1
+    - _Layer10_Rim_Intensity: 4
+    - _Layer10_Rim_Width: 0.2
+    - _Layer10_SpecularExp: 2
+    - _Layer10_SpecularIntensity: 1
+    - _Layer10_StepSpecularType: 0
+    - _Layer10_StepSpecular_Exp: 1
+    - _Layer10_StepSpecular_Intensity: 1
+    - _Layer10_StepSpecular_Width: 0.1
+    - _Layer10_ViewLight_Exp: 1
+    - _Layer10_ViewLight_Intensity: 1
+    - _Layer11: 0
+    - _Layer11_HasRim: 0
+    - _Layer11_HasSpecular: 0
+    - _Layer11_HasStepSpecular: 0
+    - _Layer11_HasTwoSide: 0
+    - _Layer11_HasViewLight: 0
+    - _Layer11_RampOffset2: 0.15
+    - _Layer11_RimType: 0
+    - _Layer11_Rim_Exp: 1
+    - _Layer11_Rim_Intensity: 1
+    - _Layer11_Rim_Width: 1
+    - _Layer11_SpecularExp: 2
+    - _Layer11_SpecularIntensity: 1
+    - _Layer11_StepSpecularType: 0
+    - _Layer11_StepSpecular_Exp: 1
+    - _Layer11_StepSpecular_Intensity: 1
+    - _Layer11_StepSpecular_Width: 0.1
+    - _Layer11_ViewLight_Exp: 1
+    - _Layer11_ViewLight_Intensity: 1
+    - _Layer1_HasRim: 0
+    - _Layer1_HasSpecular: 1
+    - _Layer1_HasStepSpecular: 0
+    - _Layer1_HasTwoSide: 0
+    - _Layer1_HasViewLight: 0
+    - _Layer1_RampOffset2: 0.15
+    - _Layer1_RimType: 0
+    - _Layer1_Rim_Exp: 1
+    - _Layer1_Rim_Intensity: 1
+    - _Layer1_Rim_Width: 1
+    - _Layer1_SpecularExp: 2
+    - _Layer1_SpecularIntensity: 1
+    - _Layer1_StepSpecularType: 0
+    - _Layer1_StepSpecular_Exp: 1
+    - _Layer1_StepSpecular_Intensity: 1
+    - _Layer1_StepSpecular_Width: 0.1
+    - _Layer1_ViewLight_Exp: 1
+    - _Layer1_ViewLight_Intensity: 1
+    - _Layer2: 0
+    - _Layer2_HasRim: 0
+    - _Layer2_HasSpecular: 0
+    - _Layer2_HasStepSpecular: 0
+    - _Layer2_HasTwoSide: 0
+    - _Layer2_HasViewLight: 0
+    - _Layer2_RampOffset2: 0.15
+    - _Layer2_RimType: 0
+    - _Layer2_Rim_Exp: 1
+    - _Layer2_Rim_Intensity: 1
+    - _Layer2_Rim_Width: 1
+    - _Layer2_SpecularExp: 2
+    - _Layer2_SpecularIntensity: 1
+    - _Layer2_StepSpecularType: 0
+    - _Layer2_StepSpecular_Exp: 1
+    - _Layer2_StepSpecular_Intensity: 1
+    - _Layer2_StepSpecular_Width: 0.1
+    - _Layer2_ViewLight_Exp: 1
+    - _Layer2_ViewLight_Intensity: 1
+    - _Layer3: 0
+    - _Layer3_HasRim: 0
+    - _Layer3_HasSpecular: 0
+    - _Layer3_HasStepSpecular: 0
+    - _Layer3_HasTwoSide: 0
+    - _Layer3_HasViewLight: 0
+    - _Layer3_RampOffset2: 0.15
+    - _Layer3_RimType: 0
+    - _Layer3_Rim_Exp: 1
+    - _Layer3_Rim_Intensity: 1
+    - _Layer3_Rim_Width: 1
+    - _Layer3_SpecularExp: 2
+    - _Layer3_SpecularIntensity: 1
+    - _Layer3_StepSpecularType: 0
+    - _Layer3_StepSpecular_Exp: 1
+    - _Layer3_StepSpecular_Intensity: 1
+    - _Layer3_StepSpecular_Width: 0.1
+    - _Layer3_ViewLight_Exp: 1
+    - _Layer3_ViewLight_Intensity: 1
+    - _Layer4: 0
+    - _Layer4_HasRim: 0
+    - _Layer4_HasSpecular: 0
+    - _Layer4_HasStepSpecular: 0
+    - _Layer4_HasTwoSide: 0
+    - _Layer4_HasViewLight: 0
+    - _Layer4_RampOffset2: 0.15
+    - _Layer4_RimType: 0
+    - _Layer4_Rim_Exp: 1
+    - _Layer4_Rim_Intensity: 1
+    - _Layer4_Rim_Width: 1
+    - _Layer4_SpecularExp: 2
+    - _Layer4_SpecularIntensity: 1
+    - _Layer4_StepSpecularType: 0
+    - _Layer4_StepSpecular_Exp: 1
+    - _Layer4_StepSpecular_Intensity: 1
+    - _Layer4_StepSpecular_Width: 0.1
+    - _Layer4_ViewLight_Exp: 1
+    - _Layer4_ViewLight_Intensity: 1
+    - _Layer5: 0
+    - _Layer5_HasRim: 0
+    - _Layer5_HasSpecular: 0
+    - _Layer5_HasStepSpecular: 0
+    - _Layer5_HasTwoSide: 0
+    - _Layer5_HasViewLight: 0
+    - _Layer5_RampOffset2: 0.15
+    - _Layer5_RimType: 0
+    - _Layer5_Rim_Exp: 1
+    - _Layer5_Rim_Intensity: 1
+    - _Layer5_Rim_Width: 1
+    - _Layer5_SpecularExp: 2
+    - _Layer5_SpecularIntensity: 1
+    - _Layer5_StepSpecularType: 0
+    - _Layer5_StepSpecular_Exp: 1
+    - _Layer5_StepSpecular_Intensity: 1
+    - _Layer5_StepSpecular_Width: 0.1
+    - _Layer5_ViewLight_Exp: 1
+    - _Layer5_ViewLight_Intensity: 1
+    - _Layer6: 0
+    - _Layer6_HasRim: 0
+    - _Layer6_HasSpecular: 0
+    - _Layer6_HasStepSpecular: 0
+    - _Layer6_HasTwoSide: 0
+    - _Layer6_HasViewLight: 0
+    - _Layer6_RampOffset2: 0.15
+    - _Layer6_RimType: 0
+    - _Layer6_Rim_Exp: 1
+    - _Layer6_Rim_Intensity: 1
+    - _Layer6_Rim_Width: 1
+    - _Layer6_SpecularExp: 2
+    - _Layer6_SpecularIntensity: 1
+    - _Layer6_StepSpecularType: 0
+    - _Layer6_StepSpecular_Exp: 1
+    - _Layer6_StepSpecular_Intensity: 1
+    - _Layer6_StepSpecular_Width: 0.1
+    - _Layer6_ViewLight_Exp: 1
+    - _Layer6_ViewLight_Intensity: 1
+    - _Layer7: 0
+    - _Layer7_HasRim: 0
+    - _Layer7_HasSpecular: 0
+    - _Layer7_HasStepSpecular: 0
+    - _Layer7_HasTwoSide: 0
+    - _Layer7_HasViewLight: 0
+    - _Layer7_RampOffset2: 0.15
+    - _Layer7_RimType: 0
+    - _Layer7_Rim_Exp: 1
+    - _Layer7_Rim_Intensity: 1
+    - _Layer7_Rim_Width: 1
+    - _Layer7_SpecularExp: 2
+    - _Layer7_SpecularIntensity: 1
+    - _Layer7_StepSpecularType: 0
+    - _Layer7_StepSpecular_Exp: 1
+    - _Layer7_StepSpecular_Intensity: 1
+    - _Layer7_StepSpecular_Width: 0.1
+    - _Layer7_ViewLight_Exp: 1
+    - _Layer7_ViewLight_Intensity: 1
+    - _Layer8: 0
+    - _Layer8_HasRim: 1
+    - _Layer8_HasSpecular: 1
+    - _Layer8_HasStepSpecular: 0
+    - _Layer8_HasTwoSide: 0
+    - _Layer8_HasViewLight: 0
+    - _Layer8_RampOffset2: 0.15
+    - _Layer8_RimType: 0
+    - _Layer8_Rim_Exp: 1
+    - _Layer8_Rim_Intensity: 1
+    - _Layer8_Rim_Width: 0.2
+    - _Layer8_SpecularExp: 2
+    - _Layer8_SpecularIntensity: 2.15
+    - _Layer8_StepSpecularType: 0
+    - _Layer8_StepSpecular_Exp: 1
+    - _Layer8_StepSpecular_Intensity: 1
+    - _Layer8_StepSpecular_Width: 0.1
+    - _Layer8_ViewLight_Exp: 1
+    - _Layer8_ViewLight_Intensity: 1
+    - _Layer9: 0
+    - _Layer9_HasRim: 0
+    - _Layer9_HasSpecular: 0
+    - _Layer9_HasStepSpecular: 0
+    - _Layer9_HasTwoSide: 0
+    - _Layer9_HasViewLight: 0
+    - _Layer9_RampOffset2: 0.15
+    - _Layer9_RimType: 0
+    - _Layer9_Rim_Exp: 1
+    - _Layer9_Rim_Intensity: 1
+    - _Layer9_Rim_Width: 1
+    - _Layer9_SpecularExp: 2
+    - _Layer9_SpecularIntensity: 1
+    - _Layer9_StepSpecularType: 0
+    - _Layer9_StepSpecular_Exp: 1
+    - _Layer9_StepSpecular_Intensity: 1
+    - _Layer9_StepSpecular_Width: 0.1
+    - _Layer9_ViewLight_Exp: 1
+    - _Layer9_ViewLight_Intensity: 1
+    - _LayerStep: 0.77
+    - _LayerThreshold: 0
+    - _LightThreshold: 0.5
+    - _Metallic2_Exp: 1
+    - _Metallic2_Intensity: 1
+    - _Metallic2_Width: 1
+    - _NVExp: 10.62
+    - _NVRange: 0.95
+    - _OulineScale: 0.1
+    - _RampOffset: 1
+    - _RampOffset2: 0
+    - _RangeValue: 0.8
+    - _SpecularExp: 1
+    - _SpecularIntensity: 1
+    - _TestMode: 0
+    - _TestModeLayer: 1
+    - _UseDebug: 0
+    m_Colors:
+    - _OutlineColor: {r: 0, g: 0, b: 0, a: 0}
+  m_BuildTextureStacks: []

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 69cb4bed7b6d47f4883f3b3e2d741bfc
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures:
+  - _TintMap: {fileID: 2800000, guid: 7a0d04bb4a942764e884428417fd22ae, type: 3}
+  - _BaseMap: {fileID: 2800000, guid: 8b085225b0d188240acc40e0aa152fe1, type: 3}
+  - _MaskMap: {fileID: 2800000, guid: 6d1c10fc03e1b0344b8a78a5fc5aa25e, type: 3}
+  - _Decal: {fileID: 2800000, guid: b1c28fa310c921f4c83b622f152d3087, type: 3}
+  nonModifiableTextures: []
+  preprocessorOverride: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

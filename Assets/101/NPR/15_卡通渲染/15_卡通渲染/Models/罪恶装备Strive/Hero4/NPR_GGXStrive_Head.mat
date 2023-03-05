@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: NPR_GGXStrive_Head
+  m_Shader: {fileID: 4800000, guid: 6b422938383b1f248a07d69d091b8e90, type: 3}
+  m_ShaderKeywords: _TESTMODE_NONE
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BaseMap:
+        m_Texture: {fileID: 2800000, guid: a3493fd4058c24b488c0f417577dcd03, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _LightMap:
+        m_Texture: {fileID: 2800000, guid: ae531bfa704be3943ab60d458cb0002e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _LineMap:
+        m_Texture: {fileID: 2800000, guid: 52ff1639e64a5da4884fa15e9c023a88, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MixMap:
+        m_Texture: {fileID: 2800000, guid: c3bcdf841656438469c0075e49952bd7, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ShadowMap:
+        m_Texture: {fileID: 2800000, guid: 91dfadcc8f565f44093af1339dfae8bd, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ShadowRamp:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _DiffuseThreshold: 0
+    - _Factor: 0.5
+    - _LightThreshold: 0.5
+    - _Outline: 0.01
+    - _RampOffset: 0
+    - _ShadowRange: 0.5
+    - _ShadowSmooth: 0.2
+    - _SpecularPowerValue: 1
+    - _SpecularScale: 1
+    - _TestMode: 0
+    m_Colors:
+    - _OutColor: {r: 0, g: 0, b: 0, a: 0}
+    - _ShadowColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 0.2}
+    - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
+  m_BuildTextureStacks: []
