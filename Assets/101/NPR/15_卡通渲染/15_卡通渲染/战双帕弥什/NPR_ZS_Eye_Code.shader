@@ -9,7 +9,7 @@ Shader "NPR/NPR_ZS_Eye_Code"
     }
     SubShader
     {
-        Tags { "RenderType"="Opaque" "LightMode"="ForwardBase"}
+        Tags { "RenderType"="Opaque" }
 
         Pass
         {

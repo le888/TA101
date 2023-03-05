@@ -128,7 +128,7 @@ Material:
     - _Parallax: 0.02
     - _QueueOffset: 0
     - _ReceiveShadows: 0
-    - _ReflectionCubeRot: 12.5
+    - _ReflectionCubeRot: 12.7
     - _Roughness: 0.177
     - _Smoothness: 0
     - _SmoothnessTextureChannel: 0

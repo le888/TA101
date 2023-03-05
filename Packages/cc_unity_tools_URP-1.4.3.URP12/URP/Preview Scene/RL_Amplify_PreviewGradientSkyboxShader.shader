@@ -38,7 +38,7 @@ Shader "Reallusion/Skybox/Preview Gradient Skybox"
 		Pass
 		{
 			Name "Unlit"
-			Tags { "LightMode"="ForwardBase" }
+			Tags {  }
 			CGPROGRAM
 
 			

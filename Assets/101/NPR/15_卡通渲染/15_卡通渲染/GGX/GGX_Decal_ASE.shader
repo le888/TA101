@@ -34,7 +34,7 @@ Shader "GGX_Decal_ASE"
 		Pass
 		{
 			Name "Unlit"
-			Tags { "LightMode"="ForwardBase" }
+			Tags {  }
 			CGPROGRAM
 
 			

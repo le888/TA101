@@ -26,7 +26,7 @@ Shader "NPR/NPR_ZS_Cloth_Code"
     {
         Tags
         {
-            "RenderType"="Opaque" "LightMode"="ForwardBase"
+            "RenderType"="Opaque" 
         }
 
         Pass

@@ -41,6 +41,8 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+     <Compile Include="Assets\101\NPR\15_卡通渲染\15_卡通渲染\Script\HeroRotate.cs" />
+     <Compile Include="Assets\101\NPR\15_卡通渲染\15_卡通渲染\Script\NPRUtility.cs" />
      <Compile Include="Assets\101\02_Shield\Detection.cs" />
      <Compile Include="Assets\101\TestOne\InstanceTest.cs" />
      <Compile Include="Assets\101\Skin\SSSS\SeparableSSSLibrary.cs" />
@@ -48,8 +50,6 @@
      <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
      <Compile Include="Assets\101\02_Shield\ForceShieldShootBall.cs" />
      <Compile Include="Assets\101\Skin\SSSS\SeparableSSSS.cs" />
-     <Compile Include="Assets\101\NPR\15_卡通渲染\15_卡通渲染\Script\NPRUtility.cs" />
-     <Compile Include="Assets\101\NPR\15_卡通渲染\15_卡通渲染\Script\HeroRotate.cs" />
      <Folder Include="Assets" />
      <None Include="Assets\101\Skin\TAHair.shader" />
      <None Include="Assets\101\TestOne\Rotate.shader" />
@@ -256,6 +256,7 @@
      <None Include="Assets\101\Skin\DepthPeelingBlend.shader" />
      <None Include="Assets\101\PBR\Cerberus_by_Andrew_Maximov\Disclaimer.txt" />
      <Folder Include="Assets\101\PBR\clothTest\textures\cloth\Knee_length_skirt\Knee_length_skirt\Knee_length_skirt" />
+     <Folder Include="Assets\101\NPR\15_卡通渲染\15_卡通渲染\15_卡通渲染_罪恶装备Strive" />
      <Folder Include="Assets\101\01_2_Holographic" />
      <None Include="Assets\101\Skin\SSSS\SeparableSubsurfaceScatter.shader" />
      <Folder Include="Packages\cc_unity_tools_URP-1.4.3.URP12" />
@@ -278,6 +279,7 @@
      <Folder Include="Assets\101\PBR\clothTest\textures\cloth\cloth\CC_Base_Tongue" />
      <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\RL_Amplify_HairShader_2nd_Pass_Baked_URP.shader" />
      <None Include="Assets\101\NPR\15_卡通渲染\15_卡通渲染\战双帕弥什\NPR_ZS_PBR_Code.shader" />
+     <Folder Include="Assets\101\NPR\15_卡通渲染\15_卡通渲染\15_卡通渲染_战双" />
      <None Include="Assets\101\Skin\TAEye.shader" />
      <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\Tessellation\RL_Amplify_Lit_Opaque_DblSided_URP_Tessellation.shader" />
      <Folder Include="Assets\101\Skin\Tifa\ExtractMaterials" />

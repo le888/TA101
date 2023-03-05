@@ -13,7 +13,7 @@ Shader "NPR/GGX_Body"
     {
         Tags
         {
-            "RenderType"="Opaque" "LightMode"="ForwardBase" "Queue" = "Geometry"
+            "RenderType"="Opaque"  "Queue" = "Geometry"
         }
 
         /*

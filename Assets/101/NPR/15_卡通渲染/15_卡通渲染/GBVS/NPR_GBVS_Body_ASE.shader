@@ -65,7 +65,7 @@ Shader "NPR/NPR_GBVS_ASE"
 		Pass
 		{
 			Name "Unlit"
-			Tags { "LightMode"="ForwardBase" }
+			Tags {  }
 			CGPROGRAM
 
 			

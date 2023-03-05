@@ -20,7 +20,7 @@ Shader /*ase_name*/ "Hidden/Templates/Legacy/Multi Pass Unlit" /*end*/
 		{
 			/*ase_main_pass*/
 			Name "ForwardBase"
-			Tags { "LightMode"="ForwardBase" }
+			Tags {  }
 
 			/*ase_all_modules*/
 			CGPROGRAM

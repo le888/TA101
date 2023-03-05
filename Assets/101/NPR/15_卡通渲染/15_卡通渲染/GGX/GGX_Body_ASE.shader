@@ -52,7 +52,7 @@ Shader "GGX_Body_ASE"
 		Pass
 		{
 			Name "Unlit"
-			Tags { "LightMode"="ForwardBase" }
+			Tags {  }
 			CGPROGRAM
 
 			

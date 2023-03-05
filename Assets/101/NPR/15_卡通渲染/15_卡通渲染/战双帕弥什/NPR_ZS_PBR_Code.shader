@@ -47,7 +47,7 @@ Shader "NPR/NPR_ZS_PBR_Code"
     }
     SubShader
     {
-        Tags { "RenderType"="Opaque" "LightMode"="ForwardBase"}
+        Tags { "RenderType"="Opaque" }
 
         Pass
         {
