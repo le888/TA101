@@ -11,13 +11,13 @@ Shader "Unlit//GGXStrive_Decal"
     {
         Tags
         {
-            "RenderType"="Opaque" "LightMode"="ForwardBase" "Queue" = "Geometry"
+            "RenderType"="Opaque"  "Queue" = "Geometry"
         }
         //"LightMode"="ForwardBase" ForwardBase ��Shader��������ԴӰ��
 
         /*
         //Transparent Setup
-         Tags { "Queue"="Transparent"  "RenderType"="Transparent" "LightMode"="ForwardBase"}
+         Tags { "Queue"="Transparent"  "RenderType"="Transparent" }
          Blend SrcAlpha OneMinusSrcAlpha
         */
 

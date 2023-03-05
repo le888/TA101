@@ -33,7 +33,7 @@ Shader "ZS"
 		Pass
 		{
 			Name "Unlit"
-			Tags { "LightMode"="ForwardBase" }
+			Tags {  }
 			CGPROGRAM
 
 			

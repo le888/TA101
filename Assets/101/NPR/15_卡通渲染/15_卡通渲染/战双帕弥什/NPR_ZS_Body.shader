@@ -50,7 +50,7 @@ Shader "NPR_ZS_Body"
 		Pass
 		{
 			Name "Unlit"
-			Tags { "LightMode"="ForwardBase" }
+			Tags {  }
 			CGPROGRAM
 
 			

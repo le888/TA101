@@ -11,7 +11,7 @@ Shader "Unlit/NPR_Char"
     {
         Tags
         {
-            "RenderType"="Opaque" "LightMode"="ForwardBase" "Queue" = "Geometry"
+            "RenderType"="Opaque"  "Queue" = "Geometry"
         }
         //"LightMode"="ForwardBase" ForwardBase 让Shader接受主光源影响
 

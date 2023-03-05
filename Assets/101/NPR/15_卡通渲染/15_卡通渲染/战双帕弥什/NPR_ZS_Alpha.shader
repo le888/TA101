@@ -22,7 +22,7 @@ Shader "NPR/NPR_ZS_Alpha"
     }
     SubShader
     {
-        Tags { "RenderType"="Transparent" "Queue" = "Transparent" "LightMode"="ForwardBase"}
+        Tags { "RenderType"="Transparent" "Queue" = "Transparent" }
 
         Pass
         {

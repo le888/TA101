@@ -23,7 +23,7 @@ Shader "NPR/NPR_ZS_Face_Code"
     }
     SubShader
     {
-        Tags { "RenderType"="Opaque" "LightMode"="ForwardBase"}
+        Tags { "RenderType"="Opaque" }
 
         Pass
         {

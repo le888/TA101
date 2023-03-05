@@ -10,7 +10,7 @@ Shader "NPR/OutLine"
     {
         Tags
         {
-            "RenderType"="Opaque" "LightMode"="ForwardBase" "Queue" = "Geometry"
+            "RenderType"="Opaque"  "Queue" = "Geometry"
         }
         
         Pass

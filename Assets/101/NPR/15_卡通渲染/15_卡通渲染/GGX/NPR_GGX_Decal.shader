@@ -11,7 +11,7 @@ Shader "NPR/GGX_Decal"
     {
         Tags
         {
-            "RenderType"="Opaque" "LightMode"="ForwardBase" "Queue" = "Geometry"
+            "RenderType"="Opaque"  "Queue" = "Geometry"
         }
         //"LightMode"="ForwardBase" ForwardBase ��Shader��������ԴӰ��
 

@@ -51,7 +51,7 @@ Shader "NPR/GGXStrive_Body"
 
     SubShader
     {
-        Tags { "RenderType"="Opaque" "LightMode"="ForwardBase" }
+        Tags { "RenderType"="Opaque"  }
 
         //base Pass
         Pass

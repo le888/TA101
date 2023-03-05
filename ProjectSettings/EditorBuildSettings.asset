@@ -5,10 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
     path: Assets/101/01_2_Holographic/holographic.unity
     guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 1
-    path: Assets/101/Skin/Standard.unity
-    guid: 1dbeda2994f53d6448b3658abaf680c9
   m_configObjects: {}
