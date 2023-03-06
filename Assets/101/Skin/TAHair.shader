@@ -6,7 +6,7 @@ Shader "TAHair"
     Properties
     {
         _BaseColor("Color", Color) = (1,1,1,1)
-        _BaseColorMap("Base (RGB)", 2D) = "white" {}
+        _BaseMap("Base (RGB)", 2D) = "white" {}
         [Normal]_NormalMap("Normal (RGB)", 2D) = "bump" {}
         //        _MetallicMap("Metallic (R)", 2D) = "white" {}
         _RoughnessMap("Roughness (R)", 2D) = "white" {}
@@ -15,13 +15,12 @@ Shader "TAHair"
         _Shift1("Shift1", Range(0,1)) = 0.5
         _Shift2("Shift2", Range(0,1)) = 0.5
         _SpecularColor1("specularColor1", Color) = (1,1,1,1)
-        _SpecularExponent1("specularExponent1", Range(0,1000)) = 1
+        _SpecularExponent1("specularExponent1", Range(0,1000)) = 800
         _SpecularColor2("specularColor2", Color) = (1,1,1,1)
-        _SpecularExponent2("specularExponent2", Range(0,1000)) = 1
+        _SpecularExponent2("specularExponent2", Range(0,1000)) = 780
         //        _Metallic("Metallic", Range(0,1)) = 0.5
         [Normal]_MacoNormalMap("MacoNormal (RGB)", 2D) = "bump" {}
         _MacoNormalWeight("MacoNormalWeight", Range(0,1)) = 0.5
-        _BRDF("BRDF", 2d) = "white" {}
         _AlphaClip("AlphaClip", Range(0,1)) = 0.014
     }
 
@@ -60,7 +59,7 @@ Shader "TAHair"
             #include "Assets/HLSL/HairComm.hlsl"
             float4 _BaseColor;
             sampler2D _BRDF;
-            sampler2D _BaseColorMap;
+            sampler2D _BaseMap;
             sampler2D _NormalMap;
             // sampler2D _MetallicMap;
             sampler2D _RoughnessMap;
@@ -168,7 +167,7 @@ Shader "TAHair"
                 float nv = saturate(dot(N, V));
 
 
-                float4 albedo = tex2D(_BaseColorMap, data.uv) * _BaseColor;
+                float4 albedo = tex2D(_BaseMap, data.uv) * _BaseColor;
 
                 if (!isFont)
                 {

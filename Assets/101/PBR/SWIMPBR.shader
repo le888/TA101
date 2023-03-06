@@ -134,9 +134,9 @@ Shader "SwimPBR"
                 float3 kD = 1.0 - kS;
                 kD *= 1.0 - _Metallic;
                 float3 nominator   = D * G * F;
-                float denominator = 4.0 * (nl * nv);   
+                float denominator =  (nl * nv);   
                 float3 specular = nominator / max(denominator, 0.001);
-
+                // return specular.xyzz;
 
                 float radiance = light.color* light.distanceAttenuation* light.shadowAttenuation;
                 float3 difuse = albedo / PI ;

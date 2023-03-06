@@ -6,8 +6,8 @@ Shader "TASkinSSSS"
     Properties
     {
         _BaseColor("Color", Color) = (1,1,1,1)
-        _BaseColorMap("Base (RGB)", 2D) = "white" {}
-        [Normal]_NormalMap("Normal (RGB)", 2D) = "bump" {}
+        _BaseMap("Base (RGB)", 2D) = "white" {}
+        [Normal]_BumpMap("Normal (RGB)", 2D) = "bump" {}
         //        _MetallicMap("Metallic (R)", 2D) = "white" {}
         _RoughnessMap("Roughness (R)", 2D) = "white" {}
         _Roughness("Roughness", Range(0,1)) = 0.5
@@ -47,8 +47,8 @@ Shader "TASkinSSSS"
             #include "Assets/HLSL/SkinComm.hlsl"
             float4 _BaseColor;
             sampler2D _BRDF;
-            sampler2D _BaseColorMap;
-            sampler2D _NormalMap;
+            sampler2D _BaseMap;
+            sampler2D _BumpMap;
             // sampler2D _MetallicMap;
             sampler2D _RoughnessMap;
             float _Roughness;
@@ -124,7 +124,7 @@ Shader "TASkinSSSS"
                 float3 B = cross(meshNormal, T);
                 float3x3 TBN = float3x3(T, B, meshNormal);
 
-                float3 normalTS = SafeNormalize(UnpackNormal(tex2D(_NormalMap, data.uv)));
+                float3 normalTS = SafeNormalize(UnpackNormal(tex2D(_BumpMap, data.uv)));
                 float3 detailNormalTS = SafeNormalize(
                     UnpackNormal(tex2D(_MacoNormalMap, data.uv * _MacoNormalMap_ST.xy + _MacoNormalMap_ST.zw)));
                 float3 MacoNormal = SafeNormalize(detailNormalTS);
@@ -174,8 +174,8 @@ Shader "TASkinSSSS"
             #include "Assets/HLSL/SkinComm.hlsl"
             float4 _BaseColor;
             sampler2D _BRDF;
-            sampler2D _BaseColorMap;
-            sampler2D _NormalMap;
+            sampler2D _BaseMap;
+            sampler2D _BumpMap;
             // sampler2D _MetallicMap;
             sampler2D _RoughnessMap;
             float _Roughness;
@@ -255,7 +255,7 @@ Shader "TASkinSSSS"
                 float3 B = cross(meshNormal, T);
                 float3x3 TBN = float3x3(T, B, meshNormal);
 
-                float3 normalTS = SafeNormalize(UnpackNormal(tex2D(_NormalMap, data.uv)));
+                float3 normalTS = SafeNormalize(UnpackNormal(tex2D(_BumpMap, data.uv)));
                 float3 detailNormalTS = SafeNormalize(
                     UnpackNormal(tex2D(_MacoNormalMap, data.uv * _MacoNormalMap_ST.xy + _MacoNormalMap_ST.zw)));
                 float3 MacoNormal = SafeNormalize(detailNormalTS);
@@ -274,7 +274,7 @@ Shader "TASkinSSSS"
 
                 half2 screenUV = data.screenPS.xy / data.screenPS.w;
                 float3 blurColor = tex2D(_DiffuseColor,screenUV).rgb;
-                float3 albedo = (tex2D(_BaseColorMap, data.uv) * _BaseColor).rgb;
+                float3 albedo = (tex2D(_BaseMap, data.uv) * _BaseColor).rgb;
 
                 //diffuse
                 float3 diffuse = albedo * blurColor;

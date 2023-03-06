@@ -5,12 +5,12 @@ Shader "TA/Eye"
     // because the output color is predefined in the fragment shader code.
     Properties
     {
-        _BaseColor("Color", Color) = (1,1,1,1)
-        _BaseColorMap("Base (RGB)", 2D) = "white" {}
-        [Normal]_NormalMap("Normal (RGB)", 2D) = "bump" {}
+        _BaseMapColor("Color", Color) = (1,1,1,1)
+        _BaseMap("Base (RGB)", 2D) = "white" {}
+        [Normal]_BumpMap("Normal (RGB)", 2D) = "bump" {}
         _RoughnessMap("Roughness (R)", 2D) = "white" {}
         _Roughness("Roughness", Range(0,1)) = 1
-        _Mask("Mask", 2D) = "black" {}
+        _Mask("Mask", 2D) = "white" {}
         _CubeMap("CubeMap", Cube) = "white" {}
         _ReflectionCubeRot("_ReflectionCubeRot",float) = 0
         _ReflectionFactor("_ReflectionFactor",vector) = (1,1,1,1)
@@ -44,11 +44,11 @@ Shader "TA/Eye"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/RealtimeLights.hlsl"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/BRDF.hlsl"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/GlobalIllumination.hlsl"
-
-            float4 _BaseColor;
+            #include "Assets/HLSL/PBRComm.hlsl"
+            float4 _BaseMapColor;
             sampler2D _BRDF;
-            sampler2D _BaseColorMap;
-            sampler2D _NormalMap;
+            sampler2D _BaseMap;
+            sampler2D _BumpMap;
             sampler2D _RoughnessMap;
             float _Roughness;
             sampler2D _Mask;
@@ -58,213 +58,8 @@ Shader "TA/Eye"
             float _OnlySpecular;
             float _DisableSpecular;
 
-
-            /////////////////DFG/////////////////////
-
-            //D
-            float D_DistributionGGX(float3 N, float3 H, float Roughness)
-            {
-                // outBRDFData.roughness           = max(PerceptualRoughnessToRoughness(outBRDFData.perceptualRoughness), HALF_MIN_SQRT);
-                //  outBRDFData.roughness2          = max(outBRDFData.roughness * outBRDFData.roughness, HALF_MIN);
-
-                float a = max(Roughness * Roughness,HALF_MIN_SQRT);
-                float a2 = max(a * a,HALF_MIN);
-                float NH = saturate(dot(N, H));
-                float NH2 = NH * NH;
-                float nominator = a2;
-                float denominator = (NH2 * (a2 - 1.0) + 1.0);
-                denominator = PI * denominator * denominator;
-                return nominator / max(denominator, 0.001); //防止分母为0
-            }
-
-            float DistributionGGX(float3 N, float3 H, float roughness)
-            {
-                float a = roughness * roughness;
-                float a2 = a * a;
-                float NdotH = max(dot(N, H), 0.0);
-                float NdotH2 = NdotH * NdotH;
-
-                float nom = a2;
-                float denom = (NdotH2 * (a2 - 1.0) + 1.0);
-                denom = PI * denom * denom;
-
-                return nom / denom;
-            }
-
-            //Trowbridge-Reitz GGX
-            float D_GGX(float3 N, float3 H, float Roughness)
-            {
-                float a = max(0.001, Roughness * Roughness);
-                float a2 = a * a;
-                float NdotH = saturate(dot(N, H));
-                float NdotH2 = NdotH * NdotH;
-                float nom = a2;
-                float denom = (NdotH2 * (a2 - 1.0) + 1.0);
-                denom = PI * denom * denom;
-                return nom / denom;
-            }
-
-            //Schlick Fresnel
-            float3 F_Schlickss(float3 F0, float3 N, float3 V)
-            {
-                float VdotH = saturate(dot(V, N));
-                return F0 + (1.0 - F0) * pow(1.0 - VdotH, 5.0);
-            }
-
-            //////////////////////////////////////////////////benckman///////////////////////////////////////////
-            float PHBeckmann(float ndoth, float m)
-            {
-                float alpha = acos(ndoth);
-                float ta = tan(alpha);
-                float val = 1.0 / (m * m * pow(ndoth, 4.0)) * exp(-(ta * ta) / (m * m));
-                return val;
-            } // Render a screen-aligned quad to precompute a 512x512 texture.
-            float KSTextureCompute(float2 tex : TEXCOORD0)
-            {
-                // Scale the value to fit within [0,1] – invert upon lookup.
-                return 0.5 * pow(PHBeckmann(tex.x, tex.y), 0.1);
-            }
-
-
-            //Schlick Fresnel
-            float3 fresnelReflectance(float3 N, float3 V, float3 F0)
-            {
-                float VdotH = saturate(dot(V, N));
-                return F0 + (1.0 - F0) * pow(1.0 - VdotH, 5.0);
-            }
-
-            float KS_Skin_Specular(
-                float3 N, // Bumped surface normal
-                float3 L, // Points to light
-                float3 V, // Points to eye
-                float m, // Roughness
-                float rho_s, // Specular brightness
-                float F
-                //sampler2D beckmannTex
-            )
-            {
-                float result = 0.0;
-                float ndotl = dot(N, L);
-                if (ndotl > 0.0)
-                {
-                    float3 h = L + V; // Unnormalized half-way vector
-                    float3 H = normalize(h);
-
-                    float ndoth = saturate(dot(N, H));
-                    // float PH = pow(2.0 * tex2D(beckmannTex, float2(ndoth, m)), 10.0);
-                    float PH = pow(2.0 * KSTextureCompute(float2(ndoth, m)), 10.0);
-                    // float F = fresnelReflectance(N, V, 0.028);
-                    float frSpec = max(PH * F / dot(h, h), 0);
-                    result = ndotl * rho_s * frSpec; // BRDF * dot(N,L) * rho_s
-                }
-                return result;
-            }
-
-            //////////////////////////////////////////////////benckman end///////////////////////////////////////////
-
-            float3 fresnelSchlickRoughness(float cosTheta, float3 F0, float roughness)
-            {
-                float r = 1.0 - roughness;
-                return F0 + (max(r.xxx, F0) - F0) * pow(1.0 - cosTheta, 5.0);
-            }
-
-
-            //UE4 Black Ops II modify version
-            float2 EnvBRDFApprox(float Roughness, float NV)
-            {
-                // [ Lazarov 2013, "Getting More Physical in Call of Duty: Black Ops II" ]
-                // Adaptation to fit our G term.
-                const float4 c0 = {-1, -0.0275, -0.572, 0.022};
-                const float4 c1 = {1, 0.0425, 1.04, -0.04};
-                float4 r = Roughness * c0 + c1;
-                float a004 = min(r.x * r.x, exp2(-9.28 * NV)) * r.x + r.y;
-                float2 AB = float2(-1.04, 1.04) * a004 + r.zw;
-                return AB;
-            }
-
-            float GeometrySchlickGGX(float NdotV, float roughness)
-            {
-                float r = (roughness + 1.0);
-                float k = (r * r) / 8.0;
-
-                float nom = NdotV;
-                float denom = NdotV * (1.0 - k) + k;
-
-                return nom / denom;
-            }
-
-            float GeometrySmith(float3 N, float3 V, float3 L, float roughness)
-            {
-                float NdotV = max(dot(N, V), 0.0);
-                float NdotL = max(dot(N, L), 0.0);
-                float ggx1 = GeometrySchlickGGX(NdotV, roughness);
-                float ggx2 = GeometrySchlickGGX(NdotL, roughness);
-
-                return ggx1 * ggx2;
-            }
-
-
-            /////////////////
-            float GeometrySchlickGGXInderect(float NdotV, float roughness)
-            {
-                float a = roughness;
-                float k = (a * a) / 2.0;
-
-                float nom = NdotV;
-                float denom = NdotV * (1.0 - k) + k;
-
-                return nom / denom;
-            }
-
-            // ----------------------------------------------------------------------------
-            float GeometrySmithInderect(float N, float V, float L, float roughness)
-            {
-                float NdotV = max(dot(N, V), 0.0);
-                float NdotL = max(dot(N, L), 0.0);
-                float ggx2 = GeometrySchlickGGXInderect(NdotV, roughness);
-                float ggx1 = GeometrySchlickGGXInderect(NdotL, roughness);
-
-                return ggx1 * ggx2;
-            }
-
-
-            float3 PreIntegratedSkinWithCurveApprox(half NdotL, half curvature)
-            {
-                // NdotL = mad(NdotL, 0.5, 0.5); // map to 0 to 1 range
-                float curva = (1.0 / mad(curvature, 0.5 - 0.0625, 0.0625) - 2.0) / (16.0 - 2.0);
-                // curvature is within [0, 1] remap to normalized r from 2 to 16
-                float oneMinusCurva = 1.0 - curva;
-                float3 curve0;
-                {
-                    float3 rangeMin = float3(0.0, 0.3, 0.3);
-                    float3 rangeMax = float3(1.0, 0.7, 0.7);
-                    float3 offset = float3(0.0, 0.06, 0.06);
-                    float3 t = saturate(mad(NdotL, 1.0 / (rangeMax - rangeMin),
-                                            (offset + rangeMin) / (rangeMin - rangeMax)));
-                    float3 lowerLine = (t * t) * float3(0.65, 0.5, 0.9);
-                    lowerLine.r += 0.045;
-                    lowerLine.b *= t.b;
-                    float3 m = float3(1.75, 2.0, 1.97);
-                    float3 upperLine = mad(NdotL, m, float3(0.99, 0.99, 0.99) - m);
-                    upperLine = saturate(upperLine);
-                    float3 lerpMin = float3(0.0, 0.35, 0.35);
-                    float3 lerpMax = float3(1.0, 0.7, 0.6);
-                    float3 lerpT = saturate(mad(NdotL, 1.0 / (lerpMax - lerpMin), lerpMin / (lerpMin - lerpMax)));
-                    curve0 = lerp(lowerLine, upperLine, lerpT * lerpT);
-                }
-                float3 curve1;
-                {
-                    float3 m = float3(1.95, 2.0, 2.0);
-                    float3 upperLine = mad(NdotL, m, float3(0.99, 0.99, 1.0) - m);
-                    curve1 = saturate(upperLine);
-                }
-                float oneMinusCurva2 = oneMinusCurva * oneMinusCurva;
-                float3 brdf = lerp(curve0, curve1, mad(oneMinusCurva2, -1.0 * oneMinusCurva2, 1.0));
-                return brdf;
-            }
-
-
-            /////////////////////////////
+    
+           
 
             float3 Erot(float3 p, float3 ax, float angle)
             {
@@ -336,7 +131,7 @@ Shader "TA/Eye"
                 float3 B = cross(meshNormal, T);
                 float3x3 TBN = float3x3(T, B, meshNormal);
 
-                float3 normalTS = SafeNormalize(UnpackNormal(tex2D(_NormalMap, data.uv)));
+                float3 normalTS = SafeNormalize(UnpackNormal(tex2D(_BumpMap, data.uv)));
 
                 float3 N = mul(normalTS, TBN);
                 // return  N.xyzz;
@@ -349,7 +144,7 @@ Shader "TA/Eye"
                 // /////直接光照////////////////
                 // ////diffuse
                 //
-                float3 albedo = tex2D(_BaseColorMap, data.uv) * _BaseColor.rgb;
+                float3 albedo = tex2D(_BaseMap, data.uv) * _BaseMapColor.rgb;
                 float mask = tex2D(_Mask, data.uv);
 
                 // return finalColor.xyzz;
