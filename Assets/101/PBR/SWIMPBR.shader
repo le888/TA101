@@ -134,7 +134,7 @@ Shader "SwimPBR"
                 float3 kD = 1.0 - kS;
                 kD *= 1.0 - _Metallic;
                 float3 nominator   = D * G * F;
-                float denominator =  (nl * nv);   
+                float denominator = 4.0 * (nl * nv);   
                 float3 specular = nominator / max(denominator, 0.001);
                 // return specular.xyzz;
 

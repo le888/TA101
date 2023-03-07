@@ -97,7 +97,8 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 02e10165df713444195a483ba5655463,
+    type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -268,7 +269,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 3a59fedacb7434d4d90cf3578ea43b4d,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.99942094
+      value: 0.99417925
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3a59fedacb7434d4d90cf3578ea43b4d,
         type: 3}
@@ -278,7 +279,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 3a59fedacb7434d4d90cf3578ea43b4d,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.034027316
+      value: -0.10773913
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3a59fedacb7434d4d90cf3578ea43b4d,
         type: 3}
@@ -293,7 +294,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 3a59fedacb7434d4d90cf3578ea43b4d,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 3.9
+      value: -12.37
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3a59fedacb7434d4d90cf3578ea43b4d,
         type: 3}
@@ -358,7 +359,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 3a59fedacb7434d4d90cf3578ea43b4d,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7418558021815013244, guid: 3a59fedacb7434d4d90cf3578ea43b4d,
         type: 3}
@@ -576,7 +577,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 3a59fedacb7434d4d90cf3578ea43b4d,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7418558021815013244, guid: 3a59fedacb7434d4d90cf3578ea43b4d,
         type: 3}

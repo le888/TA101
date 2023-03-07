@@ -118,6 +118,7 @@
      <Folder Include="Assets\101\NPR\15_卡通渲染\15_卡通渲染\Models\罪恶装备Strive\Hero3" />
      <Folder Include="Assets\101\NPR\15_卡通渲染\15_卡通渲染\Models\战双帕弥什\R2KalieninaMd019131\Materials" />
      <Folder Include="Assets\101\PBR\clothTest\textures\cloth\High_Heels" />
+     <Folder Include="Assets\101\NPR\ZS\R3LuxiyaMd010011 #138193" />
      <Folder Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Material Templates" />
      <None Include="Assets\101\NPR\15_卡通渲染\15_卡通渲染\战双帕弥什\NPR_ZS_Eye_Code.shader" />
      <Folder Include="Assets\101\TestOne\Universe" />
@@ -137,7 +138,9 @@
      <None Include="Assets\101\NPR\15_卡通渲染\15_卡通渲染\战双帕弥什\NPR_ZS_Alpha.shader" />
      <Folder Include="Assets\101\NPR\15_卡通渲染\15_卡通渲染\罪恶装备Strive" />
      <Folder Include="Assets\101\Skin\CC4\CC4Custom\textures\1\1" />
+     <Folder Include="Assets\101\NPR\ZS" />
      <Folder Include="Assets\101\NPR\15_卡通渲染\15_卡通渲染\Models\战双帕弥什\R1LifuMd019011 #434292" />
+     <Folder Include="Assets\101\Skin\CC4\1" />
      <Folder Include="Assets\101\Skin\CC4\CC4Custom\textures\1\1\CC_Base_Body\Std_Skin_Arm" />
      <Folder Include="Assets\101\PBR\clothTest\cloth.fbm" />
      <Folder Include="Assets\101\NPR\15_卡通渲染\15_卡通渲染\Models\战双帕弥什\R3DubianMd010031\Materials" />
@@ -186,6 +189,7 @@
      <Folder Include="Assets\101\NPR\15_卡通渲染\15_卡通渲染\Models\罪恶装备" />
      <Folder Include="Assets\101\PBR\clothTest\textures\cloth\CC_Base_Teeth\CC_Base_Teeth\Std_Upper_Teeth" />
      <Folder Include="Assets\101\NPR\15_卡通渲染\15_卡通渲染\Models\战双帕弥什\R1LuxiyaMd019011 #612291" />
+     <Folder Include="Assets\101\NPR\ZS\R3LuxiyaMd010011 #138193\Materials" />
      <Folder Include="Assets\101\Skin\CC4" />
      <None Include="Assets\101\Skin\SSSS\TASkinSSSS.shader" />
      <Folder Include="Assets\101\PBR\Cerberus_by_Andrew_Maximov\Textures" />
