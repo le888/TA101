@@ -2,14 +2,18 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!21 &2100000
 Material:
-  serializedVersion: 6
+  serializedVersion: 8
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: NPR_ZS_Body
   m_Shader: {fileID: 4800000, guid: f4525e058ef2a494db262bb3bc892618, type: 3}
-  m_ShaderKeywords: _KEYWORD0_BASECOLOR
+  m_ValidKeywords:
+  - _DEBUG_BASECOLOR
+  - _TYPE_CLOTH
+  m_InvalidKeywords:
+  - _KEYWORD0_BASECOLOR
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -23,13 +27,52 @@ Material:
         m_Texture: {fileID: 2800000, guid: 7b29649c5896eea49bb1a49c4a19b064, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _FaceLightMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FaceRamp:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _HairLightMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _LightMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SkinRamp:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _texcoord:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    m_Ints: []
     m_Floats:
+    - _BrightIntensity: 1
+    - _DarkIntensity: 0.5
+    - _Debug: 0
+    - _HairRampOffset: 0
+    - _HairSpecularExponent: 4
+    - _HairSpecularScale: 1
     - _Keyword0: 0
     - _OulineScale: 0.1
+    - _RampOffset: 0
+    - _SpecularExp: 0
+    - _SpecularScale: 1
+    - _Type: 0
     m_Colors:
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []

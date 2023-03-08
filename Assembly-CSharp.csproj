@@ -105,6 +105,7 @@
      <Folder Include="Assets\101\PBR\clothTest\textures\cloth\Rolled_sleeves_shirt\Rolled_sleeves_shirt\Rolled_sleeves_shirt" />
      <None Include="Assets\101\PBR\ImageBRDFLut.shader" />
      <Folder Include="Assets\101\Skin\NV3\textures" />
+     <None Include="Assets\101\NPR\ZS\TA_NPR_ZS_Skin.shader" />
      <None Include="Assets\HLSL\PBRComm.hlsl" />
      <Folder Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Material Templates\Amplify\Tessellation" />
      <Folder Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders" />
@@ -208,6 +209,7 @@
      <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\RL_Amplify_CorneaShaderParallax_Baked_URP.shader" />
      <Folder Include="Assets\101\Skin\CC4\CC4Custom\textures\1\cc_base_tearline" />
      <Folder Include="Assets\101\Skin\CC4\CC4Custom\textures\1\long_wavy_ponytail\Long_wavy_ponytail\Hair_Transparency" />
+     <None Include="Assets\101\NPR\ZS\R3LuxiyaMd010011 #138193\New Amplify Shader.shader" />
      <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\Tessellation\RL_Amplify_Lit_Opaque_URP_Tessellation.shader" />
      <Folder Include="Assets\101\NPR\15_卡通渲染\15_卡通渲染\Models\碧蓝幻想\Hero2" />
      <None Include="Assets\101\NPR\15_卡通渲染\NPR特性\NPRFeature.shader" />
@@ -368,6 +370,7 @@
      <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\Tessellation\RL_Amplify_HairShader_Coverage_URP_Tessellation.shader" />
      <None Include="Assets\101\Skin\orenNayarDiffuse.shader" />
      <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\Tessellation\RL_Amplify_TeethShader_URP_Tessellation.shader" />
+     <Folder Include="Assets\101\NPR\ZS\ZS" />
      <Folder Include="Assets\101\PBR\clothTest\textures\cloth\cloth\CC_Base_Tongue\Std_Tongue" />
      <None Include="Assets\101\Skin\testtt.shader" />
      <None Include="Assets\101\Skin\Eyelashes.shader" />
