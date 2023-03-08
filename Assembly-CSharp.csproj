@@ -230,6 +230,7 @@
      <Folder Include="Assets\101\NPR\15_卡通渲染\15_卡通渲染\Models\碧蓝幻想\Hero1\Materials" />
      <Folder Include="Assets\101\PBR\clothTest\textures\cloth\Knee_length_skirt\Knee_length_skirt" />
      <Folder Include="Assets\101\PBR\clothTest\textures\cloth\CC_Base_TearLine" />
+     <Folder Include="Assets\101\NPR\ZS\R2LuxiyaMd010011 #1038979\Materials" />
      <Folder Include="Assets\101\PBR\clothTest\textures\cloth\CC_Base_EyeOcclusion" />
      <Folder Include="Assets\101\Skin\CC4\CC4Custom\textures\1\1\CC_Base_Body" />
      <Folder Include="Assets\101\PBR\clothTest\textures\cloth\CC_Base_Teeth\CC_Base_Teeth\Std_Lower_Teeth" />
@@ -290,6 +291,7 @@
      <Folder Include="Assets\101\PBR\PBR" />
      <None Include="Assets\101\Skin\TearShader.shader" />
      <Folder Include="Assets\101\NPR\NPR" />
+     <Folder Include="Assets\101\NPR\ZS\R2LuxiyaMd010011 #1038979" />
      <None Include="Assets\101\PBR\SWIMPBR.shader" />
      <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\RL_Amplify_HairShader_Baked_URP.shader" />
      <Folder Include="Assets\101\Skin\CC4\CC4Custom\textures\1\cc_base_eyeocclusion\CC_Base_EyeOcclusion\Std_Eye_Occlusion_L" />

@@ -13,6 +13,7 @@ Material:
   m_InvalidKeywords:
   - _AODICHOTOMY_ON
   - _NORMALMAP
+  - _USEBRIGHT2_ON
   - _USEGGX_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -104,6 +105,8 @@ Material:
     - _AODichotomy: 1
     - _AlphaClip: 0
     - _Blend: 0
+    - _Bright2Intensity: 0.786
+    - _BrightIntensity: 0
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
@@ -111,6 +114,7 @@ Material:
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
+    - _DralkIntensity: 0.7
     - _DstBlend: 0
     - _EnvironmentReflections: 1
     - _GlossMapScale: 0
@@ -127,12 +131,16 @@ Material:
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _StepValue: 0.5
+    - _Step2Value: 0.879
+    - _StepValue: 0.551
     - _Surface: 0
+    - _UseBright2: 1
     - _UseGGX: 1
     - _UseRamp: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
+    - _brightColorIntensity: 1
+    - _brightIntensity: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _BrightColor: {r: 1, g: 1, b: 1, a: 1}

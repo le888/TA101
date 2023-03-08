@@ -7,9 +7,14 @@ Shader "TA_NPR_ZS_Skin"
     {
         _BaseColor("Color", Color) = (1,1,1,1)
         [MainTexture]_BaseMap("Base (RGB)", 2D) = "white" {}
-        _StepValue("StepValue", Range(0,1)) = 0.5
+        _StepValue("StepValue", Range(-1,1)) = 0.5
+        _Step2Value("Step2Value", Range(-1,1)) = 0.5
         _DralkColor("DralkColor", Color) = (0.7,0.7,0.7,1)
         _BrightColor("BrightColor", Color) = (1,1,1,1)
+//        _DralkIntensity("DralkColorIntensity", Range(0,1)) = 0.7
+//        _brightIntensity("brightColorIntensity", Range(0,1)) = 1
+        [Toggle]_UseBright2("UseBright2",float) = 0
+        _Bright2Intensity("Bright2Intensity", Range(0,1)) = 0
         [Normal]_BumpMap("Normal (RGB)", 2D) = "bump" {}
         [Toggle]_AODichotomy("AODichotomy",float) = 1
         _AOMap("Ao (R)", 2D) = "white" {}
@@ -162,6 +167,7 @@ Shader "TA_NPR_ZS_Skin"
             sampler2D _BRDF;
             sampler2D _BaseMap;
             float _StepValue;
+            float _Step2Value;
             float4 _DralkColor;
             float4 _BrightColor;
             sampler2D _BumpMap;
@@ -174,7 +180,10 @@ Shader "TA_NPR_ZS_Skin"
             sampler2D _PBRComm;
             float _UseRamp;
             sampler2D _RampMap;
-
+            float _BrightIntensity;
+            float _DrakIntensity;
+            float _Bright2Intensity;
+            float _UseBright2;
             /////////////////END DFG/////////////////////
             // This line defines the name of the vertex shader.
             #pragma vertex vert
@@ -252,6 +261,7 @@ Shader "TA_NPR_ZS_Skin"
                 float nl01 = nl * 0.5 + 0.5;
                 float nv = dot(N, V);
                  float4 AOColor = tex2D(_AOMap, data.uv);
+                // return AOColor.b;
                 float lightAtt = light.distanceAttenuation * light.shadowAttenuation * light.color;
                 float4 albedo = tex2D(_BaseMap, data.uv);
 
@@ -263,6 +273,7 @@ Shader "TA_NPR_ZS_Skin"
                 
                 float4 finalColor = albedo * _BaseColor;
                 float nlStepValue = step(_StepValue , nl); //二分光源区域
+                 float nlStep2Value = step(_Step2Value , nl); //二分光源区域
 
                 float ShadowAO = AOColor.g;
                 if (_AODichotomy == 1)
@@ -273,6 +284,13 @@ Shader "TA_NPR_ZS_Skin"
                 // float ShadowAO = 1;
                 // return N.xyzz;
                 finalColor = lerp(finalColor * _DralkColor, finalColor * _BrightColor, nlStepValue * ShadowAO);
+                if (_UseBright2 == 1)
+                {
+                    finalColor = lerp(finalColor * _Bright2Intensity,finalColor, nlStep2Value * ShadowAO);
+                }
+                 
+                
+                // return finalColor;
                 finalColor *= lightAtt;
 
 
