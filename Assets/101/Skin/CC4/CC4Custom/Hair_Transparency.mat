@@ -122,7 +122,7 @@ Material:
     - _Parallax: 0.02
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Roughness: 0.6
+    - _Roughness: 0.342
     - _Shift1: 0.5
     - _Shift2: 0.5
     - _Smoothness: 0.14142135

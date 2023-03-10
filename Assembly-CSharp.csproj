@@ -109,6 +109,7 @@
      <None Include="Assets\HLSL\PBRComm.hlsl" />
      <Folder Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Material Templates\Amplify\Tessellation" />
      <Folder Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders" />
+     <Folder Include="Assets\101\Skin\CC4\CC4Custom\Materials" />
      <None Include="Assets\101\Map\red_brick_03_1k.blend\textures\Test.shader" />
      <Folder Include="Assets\101\Skin\NV3\Curvature" />
      <Folder Include="Assets\101\NPR\15_卡通渲染\15_卡通渲染\Models\罪恶装备\2 Dizzy" />
