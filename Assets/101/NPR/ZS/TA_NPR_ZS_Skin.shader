@@ -71,7 +71,7 @@ Shader "TA_NPR_ZS_Skin"
             /////////////////END DFG/////////////////////
             // This line defines the name of the vertex shader.
             #pragma vertex vert
-            // This line defines the name of the fragment shader.
+            // This line defines the name   of the fragment shader.
             #pragma fragment frag
 
             // The Core.hlsl file contains definitions of frequently used HLSL
@@ -114,10 +114,25 @@ Shader "TA_NPR_ZS_Skin"
             {
                 // Declaring the output object (OUT) with the Varyings struct.
                 Varyings OUT;
-                float3 position = IN.positionOS.xyz+IN.normalOS*0.0001*_OutLineSize* IN.Color.b;
-                OUT.positionHCS = TransformObjectToHClip(position);
-                OUT.normalWS = TransformObjectToWorldNormal(IN.normalOS);
+               
 
+                ////////////位置和色相机距离
+                OUT.normalWS = TransformObjectToWorldNormal(IN.normalOS);
+                float3 normalHCS = TransformWorldToHClipDir(OUT.normalWS,true);
+                float4 position = TransformObjectToHClip(IN.positionOS);
+                float range = position.z/position.w;
+                float rangeindex = lerp(_OutLineSize*10,0,range);
+                float4 screenParam = GetScaledScreenParams();
+                float asp = screenParam.x/screenParam.y;
+                position.xyz += normalHCS * 0.01  * _OutLineSize  * IN.Color.b * float3(1,asp,1);//IN.positionOS.xyz+IN.normalOS*0.0001*_OutLineSize* IN.Color.b;
+                OUT.positionHCS = position;//TransformObjectToHClip(position);
+
+                
+                ////////////////gour1/////////////////////
+                // float3 position = IN.positionOS.xyz+IN.normalOS*0.0001*_OutLineSize* IN.Color.b;
+                // OUT.positionHCS = TransformObjectToHClip(position);
+                ////////////////
+                
                 float3 positionWS = TransformObjectToWorld(position);
                 OUT.positionWS = positionWS;
                 OUT.tangentWS = TransformObjectToWorldDir(IN.tangentOS);
@@ -144,7 +159,7 @@ Shader "TA_NPR_ZS_Skin"
                 float3 H = SafeNormalize(L + V);
                 float nl = dot(N, L);
                 float nv = dot(N, V);
-               
+
                 return _OutLineColor;
             }
             ENDHLSL

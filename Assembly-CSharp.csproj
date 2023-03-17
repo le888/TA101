@@ -58,6 +58,7 @@
      <Folder Include="Assets\101\NPR\15_卡通渲染\15_卡通渲染\Models\罪恶装备Strive\@HeroTemp" />
      <Folder Include="Assets\101\01_1_Dissolve\Modle" />
      <None Include="Assets\101\NPR\15_卡通渲染\15_卡通渲染\GBVS\NPR_GBVS_Body.shader" />
+     <Folder Include="Assets\101\Glass\Materials" />
      <Folder Include="Assets\101\PBR\clothTest\textures\cloth\CC_Base_TearLine\CC_Base_TearLine\Std_Tearline_R" />
      <Folder Include="Assets\Settings" />
      <Folder Include="Assets\101\PBR\clothTest\textures\cloth\CC_Base_EyeOcclusion\CC_Base_EyeOcclusion\Std_Eye_Occlusion_R" />
@@ -106,6 +107,7 @@
      <None Include="Assets\101\PBR\ImageBRDFLut.shader" />
      <Folder Include="Assets\101\Skin\NV3\textures" />
      <None Include="Assets\101\NPR\ZS\TA_NPR_ZS_Skin.shader" />
+     <Folder Include="Assets\101\Ant\ANT_BLK\Materials" />
      <None Include="Assets\HLSL\PBRComm.hlsl" />
      <Folder Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Material Templates\Amplify\Tessellation" />
      <Folder Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders" />
@@ -196,6 +198,9 @@
      <None Include="Assets\101\Skin\SSSS\TASkinSSSS.shader" />
      <Folder Include="Assets\101\PBR\Cerberus_by_Andrew_Maximov\Textures" />
      <Folder Include="Assets\101\PBR\clothTest\textures\cloth\CC_Base_Teeth" />
+     <Folder Include="Assets\101\Ant\ANT_BLK" />
+     <Folder Include="Assets\101\NPR\Blender\Materials" />
+     <None Include="Assets\101\PBR\PBRCloth.shader" />
      <Folder Include="Assets\101\NPR\15_卡通渲染\NPR特性" />
      <Folder Include="Assets\101\Map" />
      <Folder Include="Assets\101\Skin\Tifa\Textures\Variation" />
@@ -227,6 +232,7 @@
      <Folder Include="Assets\101\02_Shield\Shield" />
      <Folder Include="Assets\101\NPR\15_卡通渲染\15_卡通渲染\Models\战双帕弥什\R2LuxiyaMd010021" />
      <Folder Include="Assets\101\TestOne\rock_moss_set_01_1k.blend\textures" />
+     <Folder Include="Assets\101\Glass" />
      <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\RL_Amplify_Lit_SSS_URP.shader" />
      <Folder Include="Assets\101\NPR\15_卡通渲染\15_卡通渲染\Models\碧蓝幻想\Hero1\Materials" />
      <Folder Include="Assets\101\PBR\clothTest\textures\cloth\Knee_length_skirt\Knee_length_skirt" />
@@ -264,6 +270,8 @@
      <Folder Include="Assets\101\NPR\15_卡通渲染\15_卡通渲染\GBVS" />
      <Folder Include="Assets\101\Skin\CC4\CC4Custom\textures\1\cc_base_eye" />
      <Folder Include="Assets\TutorialInfo\Scripts" />
+     <Folder Include="Assets\101\NPR\Blender" />
+     <Folder Include="Assets\101\Ant" />
      <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\Tessellation\RL_Amplify_HairShader_1st_Pass_Baked_URP_Tessellation.shader" />
      <Folder Include="Assets\101\PBR\clothTest\textures\cloth\Side_part_wavy\Side_part_wavy" />
      <Folder Include="Assets\TutorialInfo\Icons" />
@@ -376,6 +384,7 @@
      <Folder Include="Assets\101\NPR\ZS\ZS" />
      <Folder Include="Assets\101\PBR\clothTest\textures\cloth\cloth\CC_Base_Tongue\Std_Tongue" />
      <None Include="Assets\101\Skin\testtt.shader" />
+     <None Include="Assets\101\Glass\TAPBRGlass.shader" />
      <None Include="Assets\101\Skin\Eyelashes.shader" />
      <None Include="Assets\101\Skin\TASkin.shader" />
      <Folder Include="Assets\101\Skin\CC4\CC4Custom\textures\1\underwear_bottoms" />
@@ -1030,12 +1039,6 @@
      <Reference Include="System.Xml.Serialization">
      <HintPath>C:\Program Files\Unity\Hub\Editor\2021.3.11f1c2\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.Xml.Serialization.dll</HintPath>
      </Reference>
-     <Reference Include="Unity.VisualScripting.Flow.Editor">
-     <HintPath>E:\TA101\Library\ScriptAssemblies\Unity.VisualScripting.Flow.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.VisualEffectGraph.Editor">
-     <HintPath>E:\TA101\Library\ScriptAssemblies\Unity.VisualEffectGraph.Editor.dll</HintPath>
-     </Reference>
      <Reference Include="Unity.Recorder.Editor">
      <HintPath>E:\TA101\Library\ScriptAssemblies\Unity.Recorder.Editor.dll</HintPath>
      </Reference>
@@ -1044,6 +1047,57 @@
      </Reference>
      <Reference Include="Unity.RenderPipelines.Universal.Shaders">
      <HintPath>E:\TA101\Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Shaders.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.TextMeshPro.Editor">
+     <HintPath>E:\TA101\Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Formats.Fbx.Editor">
+     <HintPath>E:\TA101\Library\ScriptAssemblies\Unity.Formats.Fbx.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.VisualScripting.State.Editor">
+     <HintPath>E:\TA101\Library\ScriptAssemblies\Unity.VisualScripting.State.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Searcher.Editor">
+     <HintPath>E:\TA101\Library\ScriptAssemblies\Unity.Searcher.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.VisualScripting.SettingsProvider.Editor">
+     <HintPath>E:\TA101\Library\ScriptAssemblies\Unity.VisualScripting.SettingsProvider.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="UnityEditor.UI">
+     <HintPath>E:\TA101\Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Rider.Editor">
+     <HintPath>E:\TA101\Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.RenderPipelines.Core.ShaderLibrary">
+     <HintPath>E:\TA101\Library\ScriptAssemblies\Unity.RenderPipelines.Core.ShaderLibrary.dll</HintPath>
+     </Reference>
+     <Reference Include="UnityEngine.UI">
+     <HintPath>E:\TA101\Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
+     </Reference>
+     <Reference Include="Autodesk.Fbx">
+     <HintPath>E:\TA101\Library\ScriptAssemblies\Autodesk.Fbx.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.ShaderGraph.Editor">
+     <HintPath>E:\TA101\Library\ScriptAssemblies\Unity.ShaderGraph.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Formats.Fbx.Runtime">
+     <HintPath>E:\TA101\Library\ScriptAssemblies\Unity.Formats.Fbx.Runtime.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.RenderPipeline.Universal.ShaderLibrary">
+     <HintPath>E:\TA101\Library\ScriptAssemblies\Unity.RenderPipeline.Universal.ShaderLibrary.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Mathematics.Editor">
+     <HintPath>E:\TA101\Library\ScriptAssemblies\Unity.Mathematics.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Recorder">
+     <HintPath>E:\TA101\Library\ScriptAssemblies\Unity.Recorder.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.VisualScripting.Flow.Editor">
+     <HintPath>E:\TA101\Library\ScriptAssemblies\Unity.VisualScripting.Flow.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.VisualEffectGraph.Editor">
+     <HintPath>E:\TA101\Library\ScriptAssemblies\Unity.VisualEffectGraph.Editor.dll</HintPath>
      </Reference>
      <Reference Include="Unity.Recorder.Base">
      <HintPath>E:\TA101\Library\ScriptAssemblies\Unity.Recorder.Base.dll</HintPath>
@@ -1054,11 +1108,11 @@
      <Reference Include="PPv2URPConverters">
      <HintPath>E:\TA101\Library\ScriptAssemblies\PPv2URPConverters.dll</HintPath>
      </Reference>
-     <Reference Include="Unity.TextMeshPro.Editor">
-     <HintPath>E:\TA101\Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll</HintPath>
-     </Reference>
      <Reference Include="Unity.VisualStudio.Editor">
      <HintPath>E:\TA101\Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Autodesk.Fbx.Editor">
+     <HintPath>E:\TA101\Library\ScriptAssemblies\Autodesk.Fbx.Editor.dll</HintPath>
      </Reference>
      <Reference Include="Unity.VisualEffectGraph.Runtime">
      <HintPath>E:\TA101\Library\ScriptAssemblies\Unity.VisualEffectGraph.Runtime.dll</HintPath>
@@ -1072,50 +1126,26 @@
      <Reference Include="Unity.TextMeshPro">
      <HintPath>E:\TA101\Library\ScriptAssemblies\Unity.TextMeshPro.dll</HintPath>
      </Reference>
-     <Reference Include="Unity.VisualScripting.State.Editor">
-     <HintPath>E:\TA101\Library\ScriptAssemblies\Unity.VisualScripting.State.Editor.dll</HintPath>
-     </Reference>
      <Reference Include="Unity.Burst.Editor">
      <HintPath>E:\TA101\Library\ScriptAssemblies\Unity.Burst.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.Searcher.Editor">
-     <HintPath>E:\TA101\Library\ScriptAssemblies\Unity.Searcher.Editor.dll</HintPath>
      </Reference>
      <Reference Include="Unity.RenderPipelines.Core.Runtime">
      <HintPath>E:\TA101\Library\ScriptAssemblies\Unity.RenderPipelines.Core.Runtime.dll</HintPath>
      </Reference>
-     <Reference Include="Unity.VisualScripting.SettingsProvider.Editor">
-     <HintPath>E:\TA101\Library\ScriptAssemblies\Unity.VisualScripting.SettingsProvider.Editor.dll</HintPath>
-     </Reference>
      <Reference Include="Unity.VisualScripting.Flow">
      <HintPath>E:\TA101\Library\ScriptAssemblies\Unity.VisualScripting.Flow.dll</HintPath>
-     </Reference>
-     <Reference Include="UnityEditor.UI">
-     <HintPath>E:\TA101\Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
      </Reference>
      <Reference Include="Unity.PlasticSCM.Editor">
      <HintPath>E:\TA101\Library\ScriptAssemblies\Unity.PlasticSCM.Editor.dll</HintPath>
      </Reference>
-     <Reference Include="Unity.Rider.Editor">
-     <HintPath>E:\TA101\Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.RenderPipelines.Core.ShaderLibrary">
-     <HintPath>E:\TA101\Library\ScriptAssemblies\Unity.RenderPipelines.Core.ShaderLibrary.dll</HintPath>
-     </Reference>
-     <Reference Include="UnityEngine.UI">
-     <HintPath>E:\TA101\Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
+     <Reference Include="Unity.Services.Core">
+     <HintPath>E:\TA101\Library\ScriptAssemblies\Unity.Services.Core.dll</HintPath>
      </Reference>
      <Reference Include="Unity.VisualScripting.Core">
      <HintPath>E:\TA101\Library\ScriptAssemblies\Unity.VisualScripting.Core.dll</HintPath>
      </Reference>
      <Reference Include="Unity.Mathematics">
      <HintPath>E:\TA101\Library\ScriptAssemblies\Unity.Mathematics.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.ShaderGraph.Editor">
-     <HintPath>E:\TA101\Library\ScriptAssemblies\Unity.ShaderGraph.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.Services.Core">
-     <HintPath>E:\TA101\Library\ScriptAssemblies\Unity.Services.Core.dll</HintPath>
      </Reference>
      <Reference Include="Unity.Services.Core.Analytics">
      <HintPath>E:\TA101\Library\ScriptAssemblies\Unity.Services.Core.Analytics.dll</HintPath>
@@ -1135,14 +1165,8 @@
      <Reference Include="Unity.Timeline.Editor">
      <HintPath>E:\TA101\Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
      </Reference>
-     <Reference Include="Unity.RenderPipeline.Universal.ShaderLibrary">
-     <HintPath>E:\TA101\Library\ScriptAssemblies\Unity.RenderPipeline.Universal.ShaderLibrary.dll</HintPath>
-     </Reference>
      <Reference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary">
      <HintPath>E:\TA101\Library\ScriptAssemblies\Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.Mathematics.Editor">
-     <HintPath>E:\TA101\Library\ScriptAssemblies\Unity.Mathematics.Editor.dll</HintPath>
      </Reference>
      <Reference Include="Unity.RenderPipelines.Core.Editor">
      <HintPath>E:\TA101\Library\ScriptAssemblies\Unity.RenderPipelines.Core.Editor.dll</HintPath>
@@ -1150,22 +1174,19 @@
      <Reference Include="Unity.VisualScripting.State">
      <HintPath>E:\TA101\Library\ScriptAssemblies\Unity.VisualScripting.State.dll</HintPath>
      </Reference>
-     <Reference Include="Unity.Recorder">
-     <HintPath>E:\TA101\Library\ScriptAssemblies\Unity.Recorder.dll</HintPath>
-     </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
       <Project>{792ae66c-fc2b-64b3-99fb-f76d9a8b077a}</Project>
       <Name>Assembly-CSharp-firstpass</Name>
     </ProjectReference>
-    <ProjectReference Include="AmplifyShaderEditor.csproj">
-      <Project>{026e4baf-68b2-465b-45dc-6ee7334e4c75}</Project>
-      <Name>AmplifyShaderEditor</Name>
-    </ProjectReference>
     <ProjectReference Include="soupday.cc3_unity_tools.runtime.csproj">
       <Project>{417a649c-2ca5-7193-a48f-a024a9c93719}</Project>
       <Name>soupday.cc3_unity_tools.runtime</Name>
+    </ProjectReference>
+    <ProjectReference Include="AmplifyShaderEditor.csproj">
+      <Project>{026e4baf-68b2-465b-45dc-6ee7334e4c75}</Project>
+      <Name>AmplifyShaderEditor</Name>
     </ProjectReference>
     <ProjectReference Include="soupday.cc3_unity_tools.editor.csproj">
       <Project>{1dce22d6-4cd2-937c-7e06-155f7c45faf3}</Project>

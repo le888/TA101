@@ -23,7 +23,8 @@ Material:
   m_Name: R3Luxiya01001Face 1
   m_Shader: {fileID: 4800000, guid: 13c34b4ee06177248ab5c1c9b15f4ae3, type: 3}
   m_ValidKeywords: []
-  m_InvalidKeywords: []
+  m_InvalidKeywords:
+  - _AODICHOTOMY_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -93,6 +94,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _RampMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _RoughnessMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -115,8 +120,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _AODichotomy: 1
     - _AlphaClip: 0
     - _Blend: 0
+    - _Bright2Intensity: 1
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
@@ -132,18 +139,21 @@ Material:
     - _MacoNormalWeight: 0.5
     - _Metallic: 0
     - _OcclusionStrength: 1
-    - _OutLineSize: 0.22
+    - _OutLineSize: 0.447
     - _Parallax: 0.005
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Roughness: 0.5
+    - _Roughness: 1
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _StepValue: 0.594
+    - _Step2Value: 0.88
+    - _StepValue: 0.34
     - _Surface: 0
+    - _UseBright2: 0
     - _UseGGX: 0
+    - _UseRamp: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
     - _outLineSize: 0.5

@@ -5,8 +5,8 @@ Shader "SwimPBR"
     // because the output color is predefined in the fragment shader code.
     Properties {
         _BaseColor("Color", Color) = (1,1,1,1)
-        _BaseColorMap("Base (RGB)", 2D) = "white" {}
-        [Normal]_NormalMap("Normal (RGB)", 2D) = "bump" {}
+        _BaseMap("Base (RGB)", 2D) = "white" {}
+        [Normal]_BumpMap("Normal (RGB)", 2D) = "bump" {}
         _MetallicMap("Metallic (R)", 2D) = "white" {}
         _RoughnessMap("Roughness (R)", 2D) = "white" {}
         _Roughness("Roughness", Range(0,1)) = 0.5
@@ -36,8 +36,8 @@ Shader "SwimPBR"
             #include "Assets/HLSL/PBRComm.hlsl"
             float4 _BaseColor;
             sampler2D _BRDF;
-            sampler2D _BaseColorMap;
-            sampler2D _NormalMap;
+            sampler2D _BaseMap;
+            sampler2D _BumpMap;
             sampler2D _MetallicMap;
             sampler2D _RoughnessMap;
             float _Roughness;
@@ -101,23 +101,23 @@ Shader "SwimPBR"
             half4 frag(Varyings data) : SV_Target
             {
                 Light light = GetMainLight();
-                float3 l = SafeNormalize(light.direction);
+                float3 L = SafeNormalize(light.direction);
                 float3 N = SafeNormalize(data.normalWS);
                 float3 T = SafeNormalize(data.tangentWS);
                 float3 B = cross(N, T);
                 float3x3 TBN = float3x3(T, B, N);
                 
-                float3 n = SafeNormalize(UnpackNormal(tex2D(_NormalMap,data.uv)));
+                float3 n = SafeNormalize(UnpackNormal(tex2D(_BumpMap,data.uv)));
                 n = mul(n,TBN);
                 // return  n.xyzz;
-                float3 v = SafeNormalize(_WorldSpaceCameraPos.xyz - data.positionWS);
-                float3 h = SafeNormalize(l + v);
-                float nv = saturate(dot(n, v));
-                float nl = saturate(dot(n, l));
+                float3 V = SafeNormalize(_WorldSpaceCameraPos.xyz - data.positionWS);
+                float3 H = SafeNormalize(L + V);
+                float nv = saturate(dot(n, V));
+                float nl = saturate(dot(n, L));
                 // /////直接光照////////////////
                 // ////diffuse
                 //
-                float3 albedo = tex2D(_BaseColorMap,data.uv) * _BaseColor.rgb;
+                float3 albedo = tex2D(_BaseMap,data.uv) * _BaseColor.rgb;
                 
                  
                 half3 F0 = half3(0.04, 0.04, 0.04);
@@ -126,9 +126,9 @@ Shader "SwimPBR"
 
                 half Roughness = tex2D(_RoughnessMap,data.uv) * _Roughness;
                 //cook-torrance brdf
-                float D = D_GGX(n,h,Roughness);
-                float G = GeometrySmith(n, v, l, Roughness);
-                float3 F = F_Schlickss(F0,n,v);
+                float D = D_GGX(n,H,Roughness);
+                float G = GeometrySmith(n, V, L, Roughness);
+                float3 F = F_Schlickss(F0,n,V);
                 // return F.xyzz;
                 float3 kS = F;
                 float3 kD = 1.0 - kS;
@@ -140,6 +140,7 @@ Shader "SwimPBR"
 
                 float radiance = light.color* light.distanceAttenuation* light.shadowAttenuation;
                 float3 difuse = albedo / PI ;
+                // return difuse.xyzz;
                  // float3 difuse = albedo;
                 float4 directColor = float4((kD * difuse + specular) * nl * radiance, 1.0);
                 // return directColor;
@@ -151,8 +152,8 @@ Shader "SwimPBR"
                 half3 inDiffuse = SampleSH(n) * albedo * inKD;///PI;
                 // return  inDiffuse.xyzz;
                 //间接高光，split sum approximation   一部分和diffuse一样加了对环境贴图卷积，不过这次用粗糙度区分了mipmap
-                 half mip = PerceptualRoughnessToMipmapLevel(Roughness);
-                 half3 reflectVector = reflect(-v, n);
+                 half mip = PerceptualRoughnessToMipmapLevel(Roughness);//unity 最大值7层mipmap
+                 half3 reflectVector = reflect(-V, n);
                  half4 encodedIrradiance = half4(SAMPLE_TEXTURECUBE_LOD(unity_SpecCube0, samplerunity_SpecCube0, reflectVector, mip));
                  real3 inspecPart1 = DecodeHDREnvironment(encodedIrradiance, unity_SpecCube0_HDR);
                  float2 brdf = tex2D(_BRDF, float2(nv, Roughness)).rg;

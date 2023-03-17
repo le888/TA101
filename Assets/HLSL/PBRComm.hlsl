@@ -59,6 +59,14 @@ float D_GGXAniso(float ax, float ay, float NoH, float3 H, float3 X, float3 Y)
     return 1 / (PI * ax * ay * d * d);
 }
 
+float D_Charlie_C(float roughness, float NoH) {
+    // Estevez and Kulla 2017, "Production Friendly Microfacet Sheen BRDF"
+    float invAlpha  = 1.0 / roughness;
+    float cos2h = NoH * NoH;
+    float sin2h = max(1.0 - cos2h, 0.0078125); // 2^(-14/2), so sin2h^2 > 0 in fp16
+    return (2.0 + invAlpha) * pow(sin2h, invAlpha * 0.5) / (2.0 * PI);
+}
+
 //Schlick Fresnel
 float3 F_Schlickss(float3 F0, float3 N, float3 V)
 {
