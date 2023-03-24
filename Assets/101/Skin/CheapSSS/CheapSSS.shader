@@ -1,5 +1,5 @@
 // This shader fills the mesh shape with a color predefined in the code.
-Shader "SwimPBR"
+Shader "TA/CheapSSS"
 {
     // The properties block of the Unity shader. In this example this block is empty
     // because the output color is predefined in the fragment shader code.
@@ -13,6 +13,17 @@ Shader "SwimPBR"
         _Roughness("Roughness", Range(0,1)) = 0.5
         _Metallic("Metallic", Range(0,1)) = 0.5
         _BRDF("BRDF", 2d) = "white" {}
+        _CubeMap("CubeMap", cube) = "white" {}
+        _cubePower("cubePower", Range(0,100)) = 1
+        _powerScale("cubePowerScale", Range(0,10)) = 1
+
+        [space(10)]
+        [Header(BackLight)]
+        _backB("backB", Range(0,2)) = 0.5
+        _backPower("backPower", Range(0.01,10)) = 5
+        _backScale("backScale", Range(0,10)) = 1
+        _backColor("backColor", Color) = (1,1,1,1)
+        _backThickMap("backMap", 2D) = "white" {}
     }
 
     // The SubShader block containing the Shader code.
@@ -22,10 +33,12 @@ Shader "SwimPBR"
         // a pass is executed.
         Tags
         {
-            "RenderType" = "Opaque" "RenderPipeline" = "UniversalPipeline"
+            "RenderType" = "Transparent" "Queue" = "Transparent" "RenderPipeline" = "UniversalPipeline"
         }
+        Blend SrcAlpha OneMinusSrcAlpha
         Pass
         {
+            //            ZWrite Off
             // The HLSL code block. Unity SRP uses the HLSL language.
             HLSLPROGRAM
             #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/EntityLighting.hlsl"
@@ -42,6 +55,14 @@ Shader "SwimPBR"
             sampler2D _RoughnessMap;
             float _Roughness;
             float _Metallic;
+            samplerCUBE _CubeMap;
+            float _cubePower;
+            float _powerScale;
+            float _backB;
+            float _backPower;
+            float _backScale;
+            float4 _backColor;
+            sampler2D _backThickMap;
             //Physically based Shading
 
             // This line defines the name of the vertex shader.
@@ -117,7 +138,8 @@ Shader "SwimPBR"
                 // /////直接光照////////////////
                 // ////diffuse
                 //
-                float3 albedo = tex2D(_BaseMap, data.uv) * _BaseColor.rgb;
+                float4 diffuse = tex2D(_BaseMap, data.uv) * _BaseColor;
+                float3 albedo = diffuse.rgb;
 
 
                 half3 F0 = half3(0.04, 0.04, 0.04);
@@ -125,31 +147,31 @@ Shader "SwimPBR"
                 F0 = lerp(F0, albedo, _Metallic);
 
                 half Roughness = tex2D(_RoughnessMap, data.uv) * _Roughness;
+                //cook-torrance brdf
+                float D = D_GGX(n, H, Roughness);
+                float G = GeometrySmith(n, V, L, Roughness);
+                float3 F = F_Schlickss(F0, n, V);
+                // return F.xyzz;
+                float3 kS = F;
+                float3 kD = 1.0 - kS;
+                kD *= 1.0 - _Metallic;
+                float3 nominator = D * G * F;
+                float denominator = 4.0 * (nl * nv);
+                float3 specular = nominator / max(denominator, 0.001);
+                // return specular.xyzz;
 
-                float3 radiance = light.color * light.distanceAttenuation * light.shadowAttenuation;
-                float3 directColor = DirectCookTorranceBRDF(n, V, L, F0, Roughness, _Metallic, albedo, radiance);
-
-                // #if defined(_ADDITIONAL_LIGHTS)
-                uint pixelLightCount = GetAdditionalLightsCount();
-                uint meshRenderingLayers = GetMeshRenderingLightLayer();
-                LIGHT_LOOP_BEGIN(pixelLightCount)
-                    Light light = GetAdditionalLight(lightIndex, data.positionWS, half4(1,1,1,1));//unityFunction
-                    if (IsMatchingLightLayer(light.layerMask, meshRenderingLayers))
-                    {
-                        float3 radiance = light.color * light.distanceAttenuation * light.shadowAttenuation;
-                        directColor += DirectCookTorranceBRDF(n, V, light.direction, F0, Roughness, _Metallic, albedo, radiance);
-                    }
-                LIGHT_LOOP_END
-                // #endif
-                
-
+                float radiance = light.color * light.distanceAttenuation * light.shadowAttenuation;
+                float3 difuse = albedo / PI;
+                // return difuse.xyzz;
+                // float3 difuse = albedo;
+                float4 directColor = float4((kD * difuse + specular) * nl * radiance, 1.0);
+                // return directColor;
 
                 //间接光照,SampleSH 球谐函数/////////////////////////////////////////////////////////////////////////////
-                half3 F = fresnelSchlickRoughness(nv, F0, Roughness);
-                half3 kS = F;
-                half3 KD = 1 - kS;
-                KD *= 1 - _Metallic;
-                half3 diffuse = SampleSH(n) * albedo;
+                half3 inKs = fresnelSchlickRoughness(nv, F0, Roughness);
+                half3 inKD = 1 - inKs;
+                inKD *= 1 - _Metallic;
+                half3 inDiffuse = SampleSH(n) * inKD; ///PI;
                 // return  inDiffuse.xyzz;
                 //间接高光，split sum approximation   一部分和diffuse一样加了对环境贴图卷积，不过这次用粗糙度区分了mipmap
                 half mip = PerceptualRoughnessToMipmapLevel(Roughness); //unity 最大值7层mipmap
@@ -159,11 +181,32 @@ Shader "SwimPBR"
                 real3 inspecPart1 = DecodeHDREnvironment(encodedIrradiance, unity_SpecCube0_HDR);
                 // float2 brdf = tex2D(_BRDF, float2(nv, Roughness)).rg;
                 float2 brdf = EnvBRDFApprox(Roughness, nv);
-                half3 inspectPart2 = (F * brdf.x + brdf.y);
-                half3 specular = inspecPart1 * inspectPart2;
-                float3 ambient = (diffuse * KD + specular);
+                half3 inspectPart2 = (inKs * brdf.x + brdf.y);
+                half3 inspect = inspecPart1 * inspectPart2;
+                float3 ambient = (inDiffuse + inspect) * albedo;
                 float3 finalColor = ambient + directColor.xyz;
-                return (finalColor).xyzz;;
+
+                // return V.xyzz;
+                // return float4(N.xyz,1);
+                float3 reView = reflectVector; //reflect(V,N);
+                float4 cubeColor = texCUBE(_CubeMap, reView);
+                cubeColor = pow(cubeColor, _cubePower) * _powerScale;
+                // return F.xxxx;
+                finalColor.rgb += cubeColor * F;
+                // return cubeColor;
+                // return float4(ambient.xyz,1);
+                // return diffuse;
+
+                //背光计算
+                float4 backThickMap = tex2D(_backThickMap, data.uv);
+                float3 backLightDir = SafeNormalize(L + N * _backB);
+                float bNV = saturate(dot(V,-backLightDir));
+                float fLTDot = pow(bNV, _backPower) * _backScale;
+                float fLT = (fLTDot+inDiffuse) * light.distanceAttenuation * light.shadowAttenuation * backThickMap.r;
+                float3 BlightColor = fLT * albedo * light.color;
+                
+                return float4(BlightColor.rgb, diffuse.a);;
+                return float4(finalColor.rgb, diffuse.a);
             }
             ENDHLSL
         }

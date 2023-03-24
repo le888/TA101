@@ -59,15 +59,16 @@ float D_GGXAniso(float ax, float ay, float NoH, float3 H, float3 X, float3 Y)
     return 1 / (PI * ax * ay * d * d);
 }
 
-float D_Charlie_C(float roughness, float NoH) {
+float D_Charlie_C(float roughness, float NoH)
+{
     // Estevez and Kulla 2017, "Production Friendly Microfacet Sheen BRDF"
-    float invAlpha  = 1.0 / roughness;
+    float invAlpha = 1.0 / roughness;
     float cos2h = NoH * NoH;
     float sin2h = max(1.0 - cos2h, 0.0078125); // 2^(-14/2), so sin2h^2 > 0 in fp16
     return (2.0 + invAlpha) * pow(sin2h, invAlpha * 0.5) / (2.0 * PI);
 }
 
-//Schlick Fresnel
+//Schlick Fresnel direct
 float3 F_Schlickss(float3 F0, float3 N, float3 V)
 {
     float VdotH = saturate(dot(V, N));
@@ -135,6 +136,33 @@ float GeometrySmithInderect(float N, float V, float L, float roughness)
     float ggx1 = GeometrySchlickGGXInderect(NdotL, roughness);
 
     return ggx1 * ggx2;
+}
+
+//Cook-Torrance BRDF
+float3 DirectCookTorranceBRDF(float3 N, float3 V, float3 L, float3 F0, float roughness, float metallic, float3 albedo,
+                              float3 lightRadiance)
+{
+    float3 H = normalize(V + L);
+    float NdotL = max(dot(N, L), 0.0);
+    float NdotV = max(dot(N, V), 0.0);
+    float NdotH = max(dot(N, H), 0.0);
+    float VdotH = max(dot(V, H), 0.0);
+
+    float3 F = F_Schlickss(VdotH, F0, roughness);
+    float G = GeometrySmith(N, V, L, roughness);
+    float D = D_GGX(N, H, roughness);
+
+    float3 nominator = F * G * D;
+    float denominator = 4.0 * (NdotL * NdotV) + 0.001;//防止分母为0
+    float3 specular = nominator / denominator; 
+
+    float3 kS = F;
+    float3 kD = 1.0 - kS;
+    kD *= 1.0 - metallic;
+
+    float3 irradiance = NdotL * albedo;
+    float3 diffuse = irradiance * kD / PI;
+    return (diffuse + specular) * lightRadiance * NdotL;
 }
 
 #endif

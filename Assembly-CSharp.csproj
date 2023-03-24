@@ -42,6 +42,7 @@
   </PropertyGroup>
   <ItemGroup>
      <Compile Include="Assets\101\NPR\15_卡通渲染\15_卡通渲染\Script\HeroRotate.cs" />
+     <Compile Include="Assets\101\RayMarching\RayMarching.cs" />
      <Compile Include="Assets\101\NPR\15_卡通渲染\15_卡通渲染\Script\NPRUtility.cs" />
      <Compile Include="Assets\101\02_Shield\Detection.cs" />
      <Compile Include="Assets\101\TestOne\InstanceTest.cs" />
@@ -107,7 +108,6 @@
      <None Include="Assets\101\PBR\ImageBRDFLut.shader" />
      <Folder Include="Assets\101\Skin\NV3\textures" />
      <None Include="Assets\101\NPR\ZS\TA_NPR_ZS_Skin.shader" />
-     <Folder Include="Assets\101\Ant\ANT_BLK\Materials" />
      <None Include="Assets\HLSL\PBRComm.hlsl" />
      <Folder Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Material Templates\Amplify\Tessellation" />
      <Folder Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders" />
@@ -181,6 +181,7 @@
      <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\RL_Amplify_HairShader_1st_Pass_Variants_URP.shader" />
      <Folder Include="Assets\101\Skin\CC4\CC4Custom\textures\1\cc_base_tearline\CC_Base_TearLine" />
      <Folder Include="Assets\101\NPR\15_卡通渲染\15_卡通渲染\Models\战双帕弥什\Mb1BraveMd010011" />
+     <Folder Include="Assets\101\RayMarching" />
      <Folder Include="Assets\101\Skin\CC4\CC4Custom\textures\1\1\CC_Base_Body\Std_Skin_Leg" />
      <Folder Include="Packages\cc_unity_tools_URP-1.4.3.URP12\Packages" />
      <Folder Include="Assets\101\PBR\clothTest\textures\cloth\Side_part_wavy\Side_part_wavy\Hair_Transparency" />
@@ -194,13 +195,14 @@
      <Folder Include="Assets\101\PBR\clothTest\textures\cloth\CC_Base_Teeth\CC_Base_Teeth\Std_Upper_Teeth" />
      <Folder Include="Assets\101\NPR\15_卡通渲染\15_卡通渲染\Models\战双帕弥什\R1LuxiyaMd019011 #612291" />
      <Folder Include="Assets\101\NPR\ZS\R3LuxiyaMd010011 #138193\Materials" />
+     <None Include="Assets\101\RayMarching\RayMarchingBox.shader" />
      <Folder Include="Assets\101\Skin\CC4" />
      <None Include="Assets\101\Skin\SSSS\TASkinSSSS.shader" />
      <Folder Include="Assets\101\PBR\Cerberus_by_Andrew_Maximov\Textures" />
      <Folder Include="Assets\101\PBR\clothTest\textures\cloth\CC_Base_Teeth" />
-     <Folder Include="Assets\101\Ant\ANT_BLK" />
      <Folder Include="Assets\101\NPR\Blender\Materials" />
      <None Include="Assets\101\PBR\PBRCloth.shader" />
+     <None Include="Assets\101\Skin\CheapSSS\CheapSSS.shader" />
      <Folder Include="Assets\101\NPR\15_卡通渲染\NPR特性" />
      <Folder Include="Assets\101\Map" />
      <Folder Include="Assets\101\Skin\Tifa\Textures\Variation" />
@@ -271,7 +273,6 @@
      <Folder Include="Assets\101\Skin\CC4\CC4Custom\textures\1\cc_base_eye" />
      <Folder Include="Assets\TutorialInfo\Scripts" />
      <Folder Include="Assets\101\NPR\Blender" />
-     <Folder Include="Assets\101\Ant" />
      <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\Tessellation\RL_Amplify_HairShader_1st_Pass_Baked_URP_Tessellation.shader" />
      <Folder Include="Assets\101\PBR\clothTest\textures\cloth\Side_part_wavy\Side_part_wavy" />
      <Folder Include="Assets\TutorialInfo\Icons" />
@@ -354,6 +355,7 @@
      <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\Tessellation\RL_Amplify_HairShader_1st_Pass_Variants_URP_Tessellation.shader" />
      <Folder Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Preview Scene" />
      <Folder Include="Assets\101\PBR\clothTest\textures\cloth\Side_part_wavy\Side_part_wavy\Scalp_Transparency" />
+     <Folder Include="Assets\101\Skin\CheapSSS" />
      <Folder Include="Assets\101\TestOne\rock_moss_set_01_1k.blend" />
      <None Include="Packages\cc_unity_tools_URP-1.4.3.URP12\URP\Shaders\Amplify\Tessellation\RL_Amplify_Lit_SSS_URP_Tessellation.shader" />
      <Folder Include="Assets\101\NPR\15_卡通渲染\15_卡通渲染\Models\战双帕弥什\R1LuxiyaMd010031 #1005662" />
