@@ -12,7 +12,7 @@ Shader "TA/CheapSSS"
         _RoughnessMap("Roughness (R)", 2D) = "white" {}
         _Roughness("Roughness", Range(0,1)) = 0.5
         _Metallic("Metallic", Range(0,1)) = 0.5
-        _BRDF("BRDF", 2d) = "white" {}
+//        _BRDF("BRDF", 2d) = "white" {}
         _CubeMap("CubeMap", cube) = "white" {}
         _cubePower("cubePower", Range(0,100)) = 1
         _powerScale("cubePowerScale", Range(0,10)) = 1
@@ -23,7 +23,7 @@ Shader "TA/CheapSSS"
         _backPower("backPower", Range(0.01,10)) = 5
         _backScale("backScale", Range(0,10)) = 1
         _backColor("backColor", Color) = (1,1,1,1)
-        _backThickMap("backMap", 2D) = "white" {}
+        _backThickMap("backThickMap", 2D) = "white" {}
     }
 
     // The SubShader block containing the Shader code.
@@ -47,6 +47,7 @@ Shader "TA/CheapSSS"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/BRDF.hlsl"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/GlobalIllumination.hlsl"
             #include "Assets/HLSL/PBRComm.hlsl"
+            #include "Assets/HLSL/LightComm.hlsl"
             float4 _BaseColor;
             sampler2D _BRDF;
             sampler2D _BaseMap;
@@ -141,31 +142,14 @@ Shader "TA/CheapSSS"
                 float4 diffuse = tex2D(_BaseMap, data.uv) * _BaseColor;
                 float3 albedo = diffuse.rgb;
 
-
                 half3 F0 = half3(0.04, 0.04, 0.04);
                 _Metallic = tex2D(_MetallicMap, data.uv) * _Metallic;
                 F0 = lerp(F0, albedo, _Metallic);
 
-                half Roughness = tex2D(_RoughnessMap, data.uv) * _Roughness;
-                //cook-torrance brdf
-                float D = D_GGX(n, H, Roughness);
-                float G = GeometrySmith(n, V, L, Roughness);
-                float3 F = F_Schlickss(F0, n, V);
-                // return F.xyzz;
-                float3 kS = F;
-                float3 kD = 1.0 - kS;
-                kD *= 1.0 - _Metallic;
-                float3 nominator = D * G * F;
-                float denominator = 4.0 * (nl * nv);
-                float3 specular = nominator / max(denominator, 0.001);
-                // return specular.xyzz;
-
-                float radiance = light.color * light.distanceAttenuation * light.shadowAttenuation;
-                float3 difuse = albedo / PI;
-                // return difuse.xyzz;
-                // float3 difuse = albedo;
-                float4 directColor = float4((kD * difuse + specular) * nl * radiance, 1.0);
-                // return directColor;
+                half Roughness = tex2D(_RoughnessMap, data.uv) * max(_Roughness,0.1f);
+                float3 radiance = light.color * light.distanceAttenuation * light.shadowAttenuation;
+                float3 directColor = DirectCookTorranceBRDF(n, V, L, F0, Roughness, _Metallic, albedo, radiance);
+     
 
                 //间接光照,SampleSH 球谐函数/////////////////////////////////////////////////////////////////////////////
                 half3 inKs = fresnelSchlickRoughness(nv, F0, Roughness);
@@ -184,6 +168,7 @@ Shader "TA/CheapSSS"
                 half3 inspectPart2 = (inKs * brdf.x + brdf.y);
                 half3 inspect = inspecPart1 * inspectPart2;
                 float3 ambient = (inDiffuse + inspect) * albedo;
+                // float3 ambient = ( inspect) * albedo;
                 float3 finalColor = ambient + directColor.xyz;
 
                 // return V.xyzz;
@@ -192,23 +177,72 @@ Shader "TA/CheapSSS"
                 float4 cubeColor = texCUBE(_CubeMap, reView);
                 cubeColor = pow(cubeColor, _cubePower) * _powerScale;
                 // return F.xxxx;
-                finalColor.rgb += cubeColor * F;
+                finalColor.rgb += cubeColor;
                 // return cubeColor;
                 // return float4(ambient.xyz,1);
                 // return diffuse;
 
                 //背光计算
                 float4 backThickMap = tex2D(_backThickMap, data.uv);
-                float3 backLightDir = SafeNormalize(L + N * _backB);
-                float bNV = saturate(dot(V,-backLightDir));
-                float fLTDot = pow(bNV, _backPower) * _backScale;
-                float fLT = (fLTDot+inDiffuse) * light.distanceAttenuation * light.shadowAttenuation * backThickMap.r;
-                float3 BlightColor = fLT * albedo * light.color;
+                float3 BlightColor  = BackLight(backThickMap.r,L,N,V,albedo,inDiffuse,_backB,_backPower,_backScale,radiance);
+                finalColor.rgb += BlightColor;
+
+                //addlight
+                // #if defined(_ADDITIONAL_LIGHTS)
+                uint pixelLightCount = GetAdditionalLightsCount();
+                uint meshRenderingLayers = GetMeshRenderingLightLayer();
+                LIGHT_LOOP_BEGIN(pixelLightCount)
+                    Light light = GetAdditionalLight(lightIndex, data.positionWS, half4(1,1,1,1));//unityFunction
+                    if (IsMatchingLightLayer(light.layerMask, meshRenderingLayers))
+                    {
+                        float3 radiance = light.color * light.distanceAttenuation * light.shadowAttenuation;
+                        finalColor += BackLight(backThickMap.r,L,N,V,albedo,inDiffuse,_backB,_backPower,_backScale,radiance);
+                        finalColor += DirectCookTorranceBRDF(n, V, L, F0, Roughness, _Metallic, albedo, radiance);
+                    }
+                LIGHT_LOOP_END
+                // #endif
                 
-                return float4(BlightColor.rgb, diffuse.a);;
+            
                 return float4(finalColor.rgb, diffuse.a);
             }
             ENDHLSL
         }
+//        Pass
+//        {
+//            Name "ShadowCaster"
+//            Tags{"LightMode" = "ShadowCaster"}
+//
+//            ZWrite On
+//            ZTest LEqual
+//            ColorMask 0
+//            Cull[_Cull]
+//
+//            HLSLPROGRAM
+//            #pragma only_renderers gles gles3 glcore d3d11
+//            #pragma target 2.0
+//
+//            //--------------------------------------
+//            // GPU Instancing
+//            #pragma multi_compile_instancing
+//
+//            // -------------------------------------
+//            // Material Keywords
+//            #pragma shader_feature_local_fragment _ALPHATEST_ON
+//            #pragma shader_feature_local_fragment _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
+//
+//            // -------------------------------------
+//            // Universal Pipeline keywords
+//
+//            // This is used during shadow map generation to differentiate between directional and punctual light shadows, as they use different formulas to apply Normal Bias
+//            #pragma multi_compile_vertex _ _CASTING_PUNCTUAL_LIGHT_SHADOW
+//
+//            #pragma vertex ShadowPassVertex
+//            #pragma fragment ShadowPassFragment
+//
+//            #include "Packages/com.unity.render-pipelines.universal/Shaders/LitInput.hlsl"
+//            #include "Packages/com.unity.render-pipelines.universal/Shaders/ShadowCasterPass.hlsl"
+//            ENDHLSL
+//        }
+
     }
 }
