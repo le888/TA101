@@ -142,10 +142,9 @@ Shader "TASkin"
                 curvalue = saturate(curvalue);
                 float curvalueMapValue = tex2D(_CurvatureMap, data.uv).r;
                 float3 lutbrdf = PreIntegratedSkinWithCurveApprox(nl01, curvalue);
-                float3 directLightDiffuse = lutbrdf * light.color * albedo * light.distanceAttenuation * light.
-                    shadowAttenuation;
+                float3 directLightDiffuse = lutbrdf * light.color * albedo * light.distanceAttenuation * light.shadowAttenuation;
                 float F = F_Schlickss(0.028,N, v); //皮肤的高光项，0.028 经验值
-                directLightDiffuse *= (1 - F);
+                directLightDiffuse *=(1 - F);
                 // return F.xxxx;
                 half3 inDiffuse = SampleSH(meshNormal) * albedo;
 

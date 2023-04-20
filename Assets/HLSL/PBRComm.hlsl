@@ -153,8 +153,8 @@ float3 DirectCookTorranceBRDF(float3 N, float3 V, float3 L, float3 F0, float rou
     float D = D_GGX(N, H, roughness);
 
     float3 nominator = F * G * D;
-    float denominator = 4.0 * (NdotL * NdotV) + 0.001;//防止分母为0
-    float3 specular = nominator / denominator; 
+    float denominator = 4.0 * (NdotL * NdotV) + 0.001; //防止分母为0
+    float3 specular = nominator / denominator;
 
     float3 kS = F;
     float3 kD = 1.0 - kS;
@@ -165,4 +165,132 @@ float3 DirectCookTorranceBRDF(float3 N, float3 V, float3 L, float3 F0, float rou
     return (diffuse + specular) * lightRadiance * NdotL;
 }
 
+/**
+ * \brief WaterSSR
+ * \param
+ * \param  
+ * \return
+ */
+
+//screenPixelNdcZ xy: screenPixel z:ndcZ
+void GetScreenInfo(float4 positionCS,out float3 screenPixelNdcZ)
+{
+    positionCS.y *= _ProjectionParams.x;
+    positionCS.xyz /= positionCS.w;//ndc
+    positionCS.xy = positionCS*0.5+0.5;//xy [-1,1] z:[1,0]
+    // return float4( positionCS.xy,0,0);
+    screenPixelNdcZ.xyz = positionCS.xyz;// NDC空间坐标
+}
+
+
+TEXTURE2D(_CameraOpaqueTexture);SAMPLER(sampler_CameraOpaqueTexture);
+TEXTURE2D(_CameraDepthTexture);SAMPLER(sampler_CameraDepthTexture);
+
+float GetDepth(float2 uv)
+{
+    return SAMPLE_TEXTURE2D(_CameraDepthTexture, sampler_CameraDepthTexture, uv).r;
+}
+
+float4 GetSceneColor(float2 uv)
+{
+    return SAMPLE_TEXTURE2D(_CameraOpaqueTexture, sampler_CameraOpaqueTexture,uv);
+}
+
+float4 WaterSSR(float3 positionWS, float3 waterNormal,float3 _PlayerPosition)
+{
+    float3 V = (GetWorldSpaceViewDir(positionWS));
+    float4 positionCS = TransformWorldToHClip(positionWS);
+
+    float SSRLength = 15;
+    float FarSSRLength = 50;
+    float MaxLingearStep = 32;
+
+    float3 reflectDir = reflect(-V, waterNormal);
+    float3 endWS = positionWS + reflectDir * SSRLength;
+    float4 endPositionCS = TransformWorldToHClip(endWS);
+
+    float3 farWS = positionWS + reflectDir * FarSSRLength;
+    float4 farPositionCS = TransformWorldToHClip(farWS);
+
+    float3 begin_ScreenPixelNdcZ, end_ScreenPixelNdcZ, far_ScreenPixelNdcZ;
+
+    GetScreenInfo(positionCS, begin_ScreenPixelNdcZ);
+    GetScreenInfo(endPositionCS, end_ScreenPixelNdcZ);
+    GetScreenInfo(farPositionCS, far_ScreenPixelNdcZ);
+    // return  begin_ScreenPixelNdcZ.z;
+    // return end_ScreenPixelNdcZ.z;
+
+    float3 Step = (end_ScreenPixelNdcZ - begin_ScreenPixelNdcZ) / MaxLingearStep;
+    float3 Ray = begin_ScreenPixelNdcZ;
+    bool isHit = false;
+    float2 hitUV = (float2)0;
+
+    float LastDepth = Ray.z;
+
+    float4 SSRColor = 0;
+    //远处的反射 RayMarch 无法Hit到
+    // float isFar = 1;
+    float isFar = 0;
+
+    float fade = pow(1 - dot(normalize(V), waterNormal), 5); //fresnel
+
+
+    // 最远端在相机视口内
+    UNITY_BRANCH if ((far_ScreenPixelNdcZ).y < 1)
+    {
+        float farDepth = GetDepth(far_ScreenPixelNdcZ.xy);
+
+        farDepth = LinearEyeDepth(farDepth, _ZBufferParams);
+
+        float playViewDepth = mul(unity_WorldToCamera, float4(_PlayerPosition.xyz, 1));
+
+        //如果farDepth与玩家太近，那么丢弃该反射
+        UNITY_BRANCH if (abs(playViewDepth - farDepth) > SSRLength)
+        {
+            // SSRColor =  GetSceneColor(far_ScreenPixelNdcZ.xy)*fade*float4(1,0,0,0);
+            SSRColor = GetSceneColor(far_ScreenPixelNdcZ.xy) * fade;
+        }
+        else
+        {
+            SSRColor.w = 1;
+        }
+    }
+    // return  SSRColor;
+
+
+    float3 lastRay = Ray;
+    UNITY_LOOP
+    for (int n = 1; n < MaxLingearStep; n++)
+    {
+        Ray += Step;
+        //如果测试点跑到 视口外面去了，那么停止for循环
+        UNITY_BRANCH if (Ray.z < 0 || Ray.z > 1 || Ray.x < 0 || Ray.x > 1 || Ray.y < 0 || Ray.y > 1)
+        {
+            break;
+        }
+
+        float Depth = GetDepth(Ray.xy);
+
+        //  上一次深度<Depth<这一次深度
+        // if(Depth + _PerPixelCompareBias >Ray.z && Ray.z <Depth +_PerPixelDepthBias )
+        if (Ray.z < Depth && Depth < LastDepth)
+        {
+            isHit = true;
+            // hitUV = Ray.xy;
+            //插值uv
+            float t = (Depth - Ray.z) / (LastDepth - Ray.z);
+            hitUV = lerp(Ray.xy, lastRay.xy, t);
+            // (Ray.z - lastRay.z)
+            break;
+        }
+        LastDepth = Ray.z;
+        lastRay = Ray;
+    }
+
+    if (isHit)
+    {
+        SSRColor = GetSceneColor(hitUV) * fade;
+    }
+    return SSRColor;
+}
 #endif
