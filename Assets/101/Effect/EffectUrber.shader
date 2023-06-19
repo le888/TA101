@@ -5,6 +5,9 @@ Shader "EffectUrber"
     // because the output color is predefined in the fragment shader code.
     Properties
     {
+        
+        [Enum(Opqua,Tranparent)]_surface("surface",float) = 1//默认是半透明，因为这个是特效
+        //混合模式
         _BaseColor("Color", Color) = (1,1,1,1)
         _BaseMap("Base (RGB)", 2D) = "white" {}
         [Normal]_BumpMap("Normal (RGB)", 2D) = "bump" {}
