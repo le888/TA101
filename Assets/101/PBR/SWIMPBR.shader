@@ -131,7 +131,7 @@ Shader "SwimPBR"
 
                 // #if defined(_ADDITIONAL_LIGHTS)
                 uint pixelLightCount = GetAdditionalLightsCount();
-                uint meshRenderingLayers = GetMeshRenderingLightLayer();
+                uint meshRenderingLayers = GetMeshRenderingLayer();
                 LIGHT_LOOP_BEGIN(pixelLightCount)
                     Light light = GetAdditionalLight(lightIndex, data.positionWS, half4(1,1,1,1));//unityFunction
                     if (IsMatchingLightLayer(light.layerMask, meshRenderingLayers))
