@@ -35,7 +35,6 @@ Shader "SwimPBR"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/GlobalIllumination.hlsl"
             #include "Assets/HLSL/PBRComm.hlsl"
             float4 _BaseColor;
-            sampler2D _BRDF;
             sampler2D _BaseMap;
             sampler2D _BumpMap;
             sampler2D _MetallicMap;

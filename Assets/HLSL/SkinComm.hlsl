@@ -2,6 +2,9 @@
 #define _TASKIN_
 
 #include "PBRComm.hlsl"
+#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Color.hlsl"
+#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/RealtimeLights.hlsl"
+#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/BRDF.hlsl"
 //////////////////////////////////////////////////benckman///////////////////////////////////////////
 float PHBeckmann(float ndoth, float m)
 {
@@ -22,7 +25,7 @@ float KS_Skin_Specular(
     float3 L, // Points to light
     float3 V, // Points to eye
     float m, // Roughness
-    float rho_s// Specular brightness
+    float rho_s // Specular brightness
     //sampler2D beckmannTex
 )
 {
@@ -36,7 +39,7 @@ float KS_Skin_Specular(
         float ndoth = saturate(dot(N, H));
         // float PH = pow(2.0 * tex2D(beckmannTex, float2(ndoth, m)), 10.0);
         float PH = pow(2.0 * KSTextureCompute(float2(ndoth, m)), 10.0);
-        float F = F_Schlickss(0.028,N, V);
+        float F = F_Schlickss(0.028, N, V);
         float frSpec = max(PH * F / dot(h, h), 0);
         result = ndotl * rho_s * frSpec; // BRDF * dot(N,L) * rho_s
     }
@@ -83,4 +86,9 @@ float3 PreIntegratedSkinWithCurveApprox(half NdotL, half curvature)
 }
 
 //////////////////////////////////PreIntegratedSkin////////////////////////////
+
+///////////lut texture///////////////////////////////////////
+
+
+///////////lut texture end///////////////////////////////////////
 #endif

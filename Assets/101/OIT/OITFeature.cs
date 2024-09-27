@@ -19,7 +19,7 @@ public class OITFeature : ScriptableRendererFeature
     {
         public Setting setting;
         private static int ID_DepthPeelingPassCount = Shader.PropertyToID("_DepthPeelingPassCount");
-        private static int ID_MaxDepth = Shader.PropertyToID("_MaxDepth");
+        private static int ID_MaxDepth = Shader.PropertyToID("_MaxDepthTex");
         private Material DepthPeelingBlendMaterial;
         
         private Material GetDepthPeelingBlendMaterial()
