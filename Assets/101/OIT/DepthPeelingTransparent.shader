@@ -19,9 +19,10 @@ Shader "Unlit/DeptPeelingTransparent"
             "RenderType" = "Transparent"
             "Queue"="Transparent"
         }
-
+        
         HLSLINCLUDE
-
+        #pragma target 3.0
+        
         #include "UnityCG.cginc"
 
         float4 _Color;

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using Color = System.Drawing.Color;
+using SystemInfo = UnityEngine.Device.SystemInfo;
 
 public class OITFeature : ScriptableRendererFeature
 {
@@ -94,7 +95,7 @@ public class OITFeature : ScriptableRendererFeature
                     if (i == DepthPeelingPass - 1)
                         pass = 1;
                     
-                    cmd.Blit(colorRTs[i], renderingData.cameraData.renderer.cameraColorTarget, GetDepthPeelingBlendMaterial(), pass);
+                    cmd.Blit(colorRTs[i], renderingData.cameraData.renderer.cameraColorTargetHandle, GetDepthPeelingBlendMaterial(), pass);
                 
                     cmd.ReleaseTemporaryRT(depthRTs[i]);
                     cmd.ReleaseTemporaryRT(colorRTs[i]);
@@ -132,6 +133,12 @@ public class OITFeature : ScriptableRendererFeature
     // This method is called when setting up the renderer once per-camera.
     public override void AddRenderPasses(ScriptableRenderer renderer, ref RenderingData renderingData)
     {
+        //mrt渲染目标支持判断
+        if (SystemInfo.supportedRenderTargetCount <= 1)
+        {
+            Debug.LogWarning("OITFeature need MRT support");
+            return;
+        }
         renderer.EnqueuePass(m_ScriptablePass);
     }
 }
